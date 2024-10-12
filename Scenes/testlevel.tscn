@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cfwivlp8k4egd"]
+[gd_scene load_steps=22 format=3 uid="uid://cfwivlp8k4egd"]
 
 [ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_5t5rk"]
 [ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_3mwhk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/character_body_2d.gd" id="6_tx0wb"]
 [ext_resource type="Script" path="res://Scenes/audio_stream_player_2d.gd" id="7_78lir"]
 [ext_resource type="PackedScene" uid="uid://0avjb5lov1do" path="res://Scenes/placeholder_block.tscn" id="9_sb28j"]
+[ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="10_1nyuf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn32p"]
 atlas = ExtResource("1_5t5rk")
@@ -81,75 +82,77 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llmhv"]
 
-[node name="Node2D" type="Node2D"]
+[node name="testlevel" type="Node2D"]
 
-[node name="KagerouPlaceholder-sheet" type="Sprite2D" parent="."]
+[node name="Music" type="Node" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Music"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="KagerouPlaceholder-sheet" type="Sprite2D" parent="Background"]
 position = Vector2(74, 57)
 texture = ExtResource("1_5t5rk")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Background"]
 position = Vector2(30, 52)
 sprite_frames = SubResource("SpriteFrames_f8cb6")
 autoplay = "default"
 frame_progress = 0.0775554
 script = ExtResource("2_3mwhk")
 
-[node name="MurasaPlaceholder-sheet" type="Sprite2D" parent="."]
+[node name="MurasaPlaceholder-sheet" type="Sprite2D" parent="Background"]
 position = Vector2(59, 89)
 texture = ExtResource("2_5u0ua")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Background"]
 position = Vector2(89, 88)
 sprite_frames = SubResource("SpriteFrames_egqhr")
 autoplay = "default"
 frame_progress = 0.711137
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Foreground" type="Node2D" parent="."]
+position = Vector2(-2, 0)
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
 position = Vector2(121, 232)
 scale = Vector2(500, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
 shape = SubResource("RectangleShape2D_bviki")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
 texture = ExtResource("4_h8b8o")
 
-[node name="PlaceholderMinamitsu2" parent="." instance=ExtResource("5_21q10")]
+[node name="PlaceholderBlock" parent="Foreground" instance=ExtResource("9_sb28j")]
+position = Vector2(343, 216)
+
+[node name="PlaceholderBlock2" parent="Foreground" instance=ExtResource("9_sb28j")]
+position = Vector2(363, 216)
+
+[node name="PlaceholderBlock3" parent="Foreground" instance=ExtResource("9_sb28j")]
+position = Vector2(350, 200)
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="PlaceholderMinamitsu2" parent="Entities" instance=ExtResource("5_21q10")]
 position = Vector2(155, 170)
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="PlaceholderMinamitsu2"]
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Entities/PlaceholderMinamitsu2"]
 stream = ExtResource("6_nm7q8")
 script = ExtResource("7_78lir")
 
-[node name="PlaceholderMinamitsu" parent="." instance=ExtResource("5_21q10")]
-position = Vector2(104, 185)
-
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="PlaceholderMinamitsu"]
-
-[node name="PlaceholderMinamitsu4" parent="." instance=ExtResource("5_21q10")]
-position = Vector2(256, 176)
-
-[node name="PlaceholderMinamitsu3" parent="." instance=ExtResource("5_21q10")]
-position = Vector2(201, 173)
-
-[node name="PlaceholderMinamitsu5" parent="." instance=ExtResource("5_21q10")]
-position = Vector2(53, 183)
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Entities"]
 position = Vector2(304, 178)
 script = ExtResource("6_tx0wb")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Entities/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_dplf7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/CharacterBody2D"]
 shape = SubResource("RectangleShape2D_llmhv")
 
-[node name="PlaceholderBlock" parent="." instance=ExtResource("9_sb28j")]
-position = Vector2(343, 216)
+[node name="Kagerou" parent="." instance=ExtResource("10_1nyuf")]
+position = Vector2(414, 192)
 
-[node name="PlaceholderBlock2" parent="." instance=ExtResource("9_sb28j")]
-position = Vector2(363, 216)
-
-[node name="PlaceholderBlock3" parent="." instance=ExtResource("9_sb28j")]
-position = Vector2(350, 200)
+[node name="HUD" type="CanvasLayer" parent="."]
