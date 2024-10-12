@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0avjb5lov1do"]
 
-[ext_resource type="Script" path="res://placeholder_block.gd" id="1_usva5"]
+[ext_resource type="Script" path="res://Scenes/placeholder_block.gd" id="1_usva5"]
 [ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="2_26185"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfo1v"]
