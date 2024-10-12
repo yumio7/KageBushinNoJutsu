@@ -14,11 +14,29 @@ config/name="KageBushinNoJutsu"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=480
+window/size/viewport_height=270
+window/size/window_width_override=960
+window/size/window_height_override=540
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="KageBushinNoJutsu"
 
+[file_customization]
+
+folder_colors={
+"res://Audio/": "blue",
+"res://Graphics/": "purple",
+"res://Resources/": "orange",
+"res://Scenes/": "green"
+}
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
