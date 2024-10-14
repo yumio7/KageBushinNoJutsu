@@ -19,7 +19,7 @@ var walkDirection = 0												# Keep track of whether controls for walking ar
 
 # Runs once when the character is instantiated
 func _ready() -> void:
-	pass
+	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)
 func _physics_process(delta: float) -> void:
