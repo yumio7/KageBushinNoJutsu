@@ -7,7 +7,7 @@ extends CharacterBody2D
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 50.0			# Base walking Movement speed
 const walkSpeedMax: float = 200.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
-const jumpVelocity: float = -250.0		# Jump velocity. It is negative because in Godot up is negative y.
+const jumpVelocity: float = -200.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 250.0		# Maximum fall velocity. Kagerou cannot fall faster than this.
 const dashVelocity: float = 300.0		# Dash velocity.
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -24,7 +24,7 @@ func _ready() -> void:
 # Runs every physics frame (60fps)
 func _physics_process(delta: float) -> void:
 	
-	print("0-" + str(currentState))
+	print("0-" + str(currentState)) # FOR DEBUGGING: Print the current state before all physics logic executes
 
 	# Dash ability. Sets the state to ability and sets velocity
 	if Input.is_action_just_pressed("Ability") and $Timers/DashCooldown.time_left <= 0:
@@ -44,9 +44,14 @@ func _physics_process(delta: float) -> void:
 			velocity.x += walkDirection * walkSpeed
 		else:
 			velocity.x = move_toward(velocity.x, 0, walkSpeed)
-		# Check if player is inputting jump. If yes, change state to jump and do a one-time change to vertical velocity.
-		if Input.is_action_pressed("Jump") and is_on_floor():
+		# Check if player is inputting jump. Depending on how long they input, their jump height will change
+		if Input.is_action_just_pressed("Jump") and is_on_floor():
+			$Timers/JumpHeightTimer.start()
 			velocity.y = jumpVelocity
+		elif Input.is_action_pressed("Jump") and !is_on_floor() and $Timers/JumpHeightTimer.time_left > 0:
+			velocity.y = jumpVelocity
+		elif Input.is_action_just_released("Jump"):
+			$Timers/JumpHeightTimer.stop() # Edge case in case the player inputs fast enough to jump again
 
 		# Dictate state depending on the physics of the character.
 		if is_on_floor() and velocity.x == 0:
@@ -63,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		3: stateFall(delta)
 		4: stateAbility()
 
-	print("1-" + str(currentState))
+	print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
 	# Flip sprite depending on horizontal velocity
 	if walkDirection > 0:
@@ -89,7 +94,7 @@ func stateFall(delta):
 	applyGravity(delta) # Gravity
 	
 func stateAbility():
-	pass
+	$AnimatedSprite2D.play("Idle") #TODO: When the dash animation is done, set it here
 
 # Function to apply gravity
 func applyGravity(delta):
