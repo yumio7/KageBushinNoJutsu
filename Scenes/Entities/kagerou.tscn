@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://it048b436dos"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/kagerou.gd" id="1_obgcm"]
+[ext_resource type="Texture2D" uid="uid://c5wbii2af6f3k" path="res://Graphics/Kagerou/KagerouWalk.png" id="1_x8jmb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyuek"]
+size = Vector2(13, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clbhm"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad88i"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7kyg"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxcjh"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gko2"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xt1a"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkhxv"]
+atlas = ExtResource("1_x8jmb")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yfwik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clbhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad88i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7kyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxcjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gko2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xt1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkhxv")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Kagerou" type="CharacterBody2D"]
+script = ExtResource("1_obgcm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fyuek")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yfwik")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.481751
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpHeightTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpCoyoteTime" type="Timer" parent="Timers"]
+wait_time = 0.075
+one_shot = true
+
+[node name="DashDuration" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timers/DashDuration" to="." method="_on_dash_duration_timeout"]
