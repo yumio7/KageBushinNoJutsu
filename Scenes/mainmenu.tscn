@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://8jume0xc3djy"]
+[gd_scene load_steps=7 format=3 uid="uid://bml40bdytp3gb"]
 
 [ext_resource type="Texture2D" uid="uid://bdej44ojb18g2" path="res://Graphics/Placeholders/logo.png" id="1_b0pat"]
 [ext_resource type="Script" path="res://Scenes/mainmenu.gd" id="1_esexo"]
@@ -11,8 +11,11 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -20.0
+offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 80
@@ -88,4 +91,7 @@ texture_focused = ExtResource("6_u2gbt")
 ignore_texture_size = true
 stretch_mode = 0
 
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
