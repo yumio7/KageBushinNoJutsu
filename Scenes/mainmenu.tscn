@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://8jume0xc3djy"]
+
+[ext_resource type="Texture2D" uid="uid://bdej44ojb18g2" path="res://Graphics/Placeholders/logo.png" id="1_b0pat"]
+[ext_resource type="Script" path="res://Scenes/mainmenu.gd" id="1_esexo"]
+[ext_resource type="Texture2D" uid="uid://clekrcpdjwfdr" path="res://Graphics/Placeholders/button.png" id="2_cna7s"]
+[ext_resource type="Texture2D" uid="uid://bwrom5pwh4jff" path="res://Graphics/Placeholders/pressed.png" id="4_xr7yu"]
+[ext_resource type="Texture2D" uid="uid://6cf2l48dvf4v" path="res://Graphics/Placeholders/disabled.png" id="5_gu4o0"]
+[ext_resource type="Texture2D" uid="uid://op8rjldao14k" path="res://Graphics/Placeholders/selected.png" id="6_u2gbt"]
+
+[node name="Mainmenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+script = ExtResource("1_esexo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="logo" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 175)
+layout_mode = 2
+texture = ExtResource("1_b0pat")
+expand_mode = 1
+
+[node name="MenuButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="play" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+focus_neighbor_top = NodePath("../credits")
+focus_neighbor_bottom = NodePath("../settings")
+texture_normal = ExtResource("2_cna7s")
+texture_pressed = ExtResource("4_xr7yu")
+texture_disabled = ExtResource("5_gu4o0")
+texture_focused = ExtResource("6_u2gbt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="settings" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+focus_neighbor_top = NodePath("../play")
+focus_neighbor_bottom = NodePath("../quit")
+texture_normal = ExtResource("2_cna7s")
+texture_pressed = ExtResource("4_xr7yu")
+texture_disabled = ExtResource("5_gu4o0")
+texture_focused = ExtResource("6_u2gbt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="quit" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+focus_neighbor_top = NodePath("../settings")
+focus_neighbor_bottom = NodePath("../credits")
+texture_normal = ExtResource("2_cna7s")
+texture_pressed = ExtResource("4_xr7yu")
+texture_disabled = ExtResource("5_gu4o0")
+texture_focused = ExtResource("6_u2gbt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="credits" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(75, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_neighbor_top = NodePath("../quit")
+focus_neighbor_bottom = NodePath("../play")
+texture_normal = ExtResource("2_cna7s")
+texture_pressed = ExtResource("4_xr7yu")
+texture_disabled = ExtResource("5_gu4o0")
+texture_focused = ExtResource("6_u2gbt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
