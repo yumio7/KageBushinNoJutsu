@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2mesxscmgmj3"]
+[gd_scene load_steps=4 format=3 uid="uid://c2mesxscmgmj3"]
 
 [ext_resource type="Texture2D" uid="uid://bdej44ojb18g2" path="res://Graphics/Placeholders/logo.png" id="1_b0pat"]
+[ext_resource type="Script" path="res://Scenes/mainmenu.gd" id="1_esexo"]
 [ext_resource type="Texture2D" uid="uid://clekrcpdjwfdr" path="res://Graphics/Placeholders/button.png" id="2_cna7s"]
 
 [node name="Mainmenu" type="MarginContainer"]
@@ -10,15 +11,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 60
+theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 60
+theme_override_constants/margin_bottom = 40
+script = ExtResource("1_esexo")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="logo" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 175)
@@ -33,20 +36,39 @@ size_flags_vertical = 3
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="play" type="TextureRect" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+[node name="play" type="Button" parent="HBoxContainer/VBoxContainer/MenuButtons"]
 custom_minimum_size = Vector2(175, 50)
 layout_mode = 2
-texture = ExtResource("2_cna7s")
-expand_mode = 1
+focus_neighbor_top = NodePath("../credits")
+focus_neighbor_bottom = NodePath("../settings")
+icon = ExtResource("2_cna7s")
+icon_alignment = 1
+expand_icon = true
 
-[node name="settings" type="TextureRect" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+[node name="settings" type="Button" parent="HBoxContainer/VBoxContainer/MenuButtons"]
 custom_minimum_size = Vector2(175, 50)
 layout_mode = 2
-texture = ExtResource("2_cna7s")
-expand_mode = 1
+focus_neighbor_top = NodePath("../play")
+focus_neighbor_bottom = NodePath("../quit")
+icon = ExtResource("2_cna7s")
+icon_alignment = 1
+expand_icon = true
 
-[node name="quit" type="TextureRect" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+[node name="quit" type="Button" parent="HBoxContainer/VBoxContainer/MenuButtons"]
 custom_minimum_size = Vector2(175, 50)
 layout_mode = 2
-texture = ExtResource("2_cna7s")
-expand_mode = 1
+focus_neighbor_top = NodePath("../settings")
+focus_neighbor_bottom = NodePath("../credits")
+icon = ExtResource("2_cna7s")
+icon_alignment = 1
+expand_icon = true
+
+[node name="credits" type="Button" parent="HBoxContainer/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(75, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_neighbor_top = NodePath("../quit")
+focus_neighbor_bottom = NodePath("../play")
+icon = ExtResource("2_cna7s")
+icon_alignment = 1
+expand_icon = true
