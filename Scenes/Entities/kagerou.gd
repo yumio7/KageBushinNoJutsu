@@ -6,10 +6,10 @@ extends CharacterBody2D
 
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 50.0			# Base walking Movement speed
-const walkSpeedMax: float = 200.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
+const walkSpeedMax: float = 125.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
 const jumpVelocity: float = -175.0		# Jump velocity. It is negative because in Godot up is negative y.
-const fallSpeedMax: float = 250.0		# Maximum fall velocity. Kagerou cannot fall faster than this.
-const dashVelocity: float = 300.0		# Dash velocity.
+const fallSpeedMax: float = 200.0		# Maximum fall velocity. Kagerou cannot fall faster than this.
+const dashVelocity: float = 250.0		# Dash velocity.
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Tracks state of character for different movement behaviours
@@ -25,7 +25,7 @@ func _ready() -> void:
 # Runs every physics frame (60fps)
 func _physics_process(delta: float) -> void:
 	
-	print("0-" + str(currentState)) # FOR DEBUGGING: Print the current state before all physics logic executes
+	#print("0-" + str(currentState)) # FOR DEBUGGING: Print the current state before all physics logic executes
 
 	# Dash ability. Sets the state to ability and sets velocity
 	if Input.is_action_just_pressed("Ability") and $Timers/DashCooldown.time_left <= 0:
@@ -84,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		3: stateFall(delta)
 		4: stateAbility()
 
-	print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
+	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
 	# Flip sprite depending on horizontal velocity
 	if walkDirection > 0:
@@ -99,14 +99,14 @@ func stateIdle():
 	$AnimatedSprite2D.play("Idle")
 	
 func stateWalk():
-	$AnimatedSprite2D.play("Idle") #TODO: When walking animation is done, set it here
+	$AnimatedSprite2D.play("Walk") #TODO: When walking animation is done, set it here
 
 func stateJump(delta):
-	$AnimatedSprite2D.play("Idle") #TODO: When jump animation is done, set it here
+	$AnimatedSprite2D.play("Jump") #TODO: When jump animation is done, set it here
 	applyGravity(delta) # Gravity
 
 func stateFall(delta):
-	$AnimatedSprite2D.play("Idle") #TODO: When fall animation is done, set it here
+	$AnimatedSprite2D.play("Fall") #TODO: When fall animation is done, set it here
 	applyGravity(delta) # Gravity
 	
 func stateAbility():
