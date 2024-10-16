@@ -1,19 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cc22fmnqn5wag"]
+[gd_scene load_steps=8 format=3 uid="uid://cc22fmnqn5wag"]
 
 [ext_resource type="Script" path="res://Scenes/placeholder_minamitsu.gd" id="1_5ayf7"]
 [ext_resource type="Texture2D" uid="uid://ms0a3hxfeg5x" path="res://Graphics/Placeholders/MurasaPlaceholder-Sheet.png" id="2_x02k7"]
 [ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="3_iorrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glpa1"]
-size = Vector2(16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ilti"]
-atlas = ExtResource("2_x02k7")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sm7p8"]
-atlas = ExtResource("2_x02k7")
-region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g75cg"]
 atlas = ExtResource("2_x02k7")
@@ -25,17 +16,6 @@ region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y2jml"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1ilti")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sm7p8")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g75cg")
@@ -56,7 +36,6 @@ shape = SubResource("RectangleShape2D_glpa1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2jml")
-animation = &"Idle"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_iorrn")
