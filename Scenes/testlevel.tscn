@@ -1,12 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://da7o5e0chr15g"]
+[gd_scene load_steps=15 format=3 uid="uid://cfwivlp8k4egd"]
 
 [ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_5t5rk"]
 [ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_3mwhk"]
 [ext_resource type="Texture2D" uid="uid://ms0a3hxfeg5x" path="res://Graphics/Placeholders/MurasaPlaceholder-Sheet.png" id="2_5u0ua"]
 [ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="4_h8b8o"]
-[ext_resource type="PackedScene" uid="uid://cc22fmnqn5wag" path="res://Scenes/placeholder_minamitsu.tscn" id="5_21q10"]
-[ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="6_nm7q8"]
-[ext_resource type="Script" path="res://Scenes/audio_stream_player_2d.gd" id="7_78lir"]
+[ext_resource type="PackedScene" uid="uid://c2jgycsul45yr" path="res://Scenes/Entities/minamitsu.tscn" id="7_1p5t5"]
 [ext_resource type="PackedScene" uid="uid://0avjb5lov1do" path="res://Scenes/placeholder_block.tscn" id="9_sb28j"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="10_1nyuf"]
 
@@ -119,5 +117,8 @@ script = ExtResource("7_78lir")
 
 [node name="Kagerou" parent="." instance=ExtResource("10_1nyuf")]
 position = Vector2(414, 192)
+
+[node name="Minamitsu" parent="." instance=ExtResource("7_1p5t5")]
+position = Vector2(218, 185)
 
 [node name="HUD" type="CanvasLayer" parent="."]

@@ -7,7 +7,7 @@ extends CharacterBody2D
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 50.0			# Base walking Movement speed
 const walkSpeedMax: float = 200.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
-const jumpVelocity: float = -250.0		# Jump velocity. It is negative because in Godot up is negative y.
+const jumpVelocity: float = -175.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 250.0		# Maximum fall velocity. Kagerou cannot fall faster than this.
 const dashVelocity: float = 300.0		# Dash velocity.
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -16,15 +16,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum state {Idle = 0, Walk = 1, Jump = 2, Fall = 3, Ability = 4}	# Define enum for every state
 var currentState: int = state.Idle									# Tracks the current state. By default, it is set to idle.
 var walkDirection = 0												# Keep track of whether controls for walking are being held down
+var previousFloorState = false										# Tracks the previous grounded state of player. Used for Coyote Time
 
 # Runs once when the character is instantiated
 func _ready() -> void:
-	pass
+	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)
 func _physics_process(delta: float) -> void:
 	
-	print("0-" + str(currentState))
+	print("0-" + str(currentState)) # FOR DEBUGGING: Print the current state before all physics logic executes
 
 	# Dash ability. Sets the state to ability and sets velocity
 	if Input.is_action_just_pressed("Ability") and $Timers/DashCooldown.time_left <= 0:
@@ -44,8 +45,28 @@ func _physics_process(delta: float) -> void:
 			velocity.x += walkDirection * walkSpeed
 		else:
 			velocity.x = move_toward(velocity.x, 0, walkSpeed)
-		# Check if player is inputting jump. If yes, change state to jump and do a one-time change to vertical velocity.
-		if Input.is_action_pressed("Jump") and is_on_floor():
+		
+		# Determine if the player can jump with this variable
+		var canJump = false
+		# Determine if coyote time is allowed by comparing previous floor state with current ground state
+		if !is_on_floor() and previousFloorState == true: $Timers/JumpCoyoteTime.start()
+		previousFloorState = is_on_floor() # Update the previous floor state after check
+
+		# Check if player is inputting jump. Depending on how long they input, their jump height will change
+		if Input.is_action_just_pressed("Jump") and is_on_floor(): canJump = true
+		# Jump buffer timer starts when player jumps but is not on floor
+		elif Input.is_action_just_pressed("Jump") and !is_on_floor() and $Timers/JumpCoyoteTime.time_left == 0: $Timers/JumpBuffer.start()
+		# If jump buffer timer is on and player lands, they jump
+		elif Input.is_action_pressed("Jump") and is_on_floor() and $Timers/JumpBuffer.time_left > 0: canJump = true
+		# If coyote time is on and player jumps, they jump
+		elif Input.is_action_just_pressed("Jump") and !is_on_floor() and $Timers/JumpCoyoteTime.time_left > 0: canJump = true
+		# Depending on length of input, jump height increases
+		elif Input.is_action_pressed("Jump") and !is_on_floor() and $Timers/JumpHeightTimer.time_left > 0: velocity.y = jumpVelocity
+		# Edge case in case the player releases&inputs again when JumpHeightTimer is on.
+		elif Input.is_action_just_released("Jump"): $Timers/JumpHeightTimer.stop()
+
+		if canJump == true:
+			$Timers/JumpHeightTimer.start()
 			velocity.y = jumpVelocity
 
 		# Dictate state depending on the physics of the character.
@@ -63,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		3: stateFall(delta)
 		4: stateAbility()
 
-	print("1-" + str(currentState))
+	print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
 	# Flip sprite depending on horizontal velocity
 	if walkDirection > 0:
@@ -89,7 +110,7 @@ func stateFall(delta):
 	applyGravity(delta) # Gravity
 	
 func stateAbility():
-	pass
+	$AnimatedSprite2D.play("Idle") #TODO: When the dash animation is done, set it here
 
 # Function to apply gravity
 func applyGravity(delta):
