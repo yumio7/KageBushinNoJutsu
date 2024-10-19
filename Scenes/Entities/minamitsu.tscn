@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2jgycsul45yr"]
+[gd_scene load_steps=21 format=3 uid="uid://c2jgycsul45yr"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/minamitsu.gd" id="1_7k5ee"]
 [ext_resource type="Texture2D" uid="uid://dmaak3c5rt8hd" path="res://Graphics/Minamitsu/Sprite-0001-Sheet.png" id="2_ghyni"]
+[ext_resource type="Texture2D" uid="uid://b1pvqv5qoee2h" path="res://Graphics/Minamitsu/Walk_minamitsu-Sheet.png" id="3_fjbev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n47jc"]
-size = Vector2(13, 18)
+size = Vector2(13, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nphti"]
 atlas = ExtResource("2_ghyni")
@@ -34,8 +35,50 @@ region = Rect2(120, 0, 24, 24)
 atlas = ExtResource("2_ghyni")
 region = Rect2(144, 0, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_20go5"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl3tq"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n0mg"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jlut"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnl76"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kc68"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv5rp"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsyxv"]
+atlas = ExtResource("3_fjbev")
+region = Rect2(168, 0, 24, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygx4w"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"Ability",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nphti")
@@ -59,20 +102,70 @@ animations = [{
 "texture": SubResource("AtlasTexture_0c4ij")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20go5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl3tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n0mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jlut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnl76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kc68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xv5rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsyxv")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
 }]
 
 [node name="Minamitsu" type="CharacterBody2D"]
 script = ExtResource("1_7k5ee")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 2)
+position = Vector2(1.5, 3.5)
 shape = SubResource("RectangleShape2D_n47jc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ygx4w")
-animation = &"idle"
-autoplay = "idle"
-frame = 6
-frame_progress = 0.945579
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpHeightTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpCoyoteTime" type="Timer" parent="Timers"]
+wait_time = 0.075
+one_shot = true
+
+[node name="AnchorCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
