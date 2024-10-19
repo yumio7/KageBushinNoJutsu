@@ -17,14 +17,21 @@ var currentLine = ""
 
 # Variables for skipping dialogue
 var writing = false
-var skip = false
+#var skip = false
+
+func _ready():
+	dialogueSequence(0)
 
 # Begin dialogue sequence
 func dialogueSequence(desiredComponentIndex):
 	visible = true
-	$Skip.visible = true
+	#$Skip.visible = true
 	var tweenIn = create_tween()
-	tweenIn.tween_property($DialoguePanel, "position", Vector2(0, 680), .2).set_trans(Tween.TRANS_QUAD)
+	var tweenKagIn = create_tween()
+	var tweenMitsuIn = create_tween()
+	tweenIn.tween_property($DialoguePanel, "position", Vector2(0, 0), .2).set_trans(Tween.TRANS_QUAD)
+	tweenKagIn.tween_property($Kag, "position", Vector2(35, 52), .2).set_trans(Tween.TRANS_QUAD)
+	tweenMitsuIn.tween_property($Mitsu, "position", Vector2(300, 52), .2).set_trans(Tween.TRANS_QUAD)
 	activeDialogue = true
 	dialogueIndex = 0
 	usedCompInd = desiredComponentIndex
@@ -35,13 +42,17 @@ func dialogueSequence(desiredComponentIndex):
 	for i in nameTable.size():
 		writeDialogue(nameTable[dialogueIndex], lineTable[dialogueIndex])
 		await proceedDialogue
-		if skip == true: break
+		#if skip == true: break
 	
-	$Skip.visible = false
-	skip = false
+	#$Skip.visible = false
+	#skip = false
 	activeDialogue = false
 	var tweenOut = create_tween()
-	tweenOut.tween_property($DialoguePanel, "position", Vector2(0, 1080), .2).set_trans(Tween.TRANS_QUAD)
+	var tweenKagOut = create_tween()
+	var tweenMitsuOut = create_tween()
+	tweenOut.tween_property($DialoguePanel, "position", Vector2(0, 120), .2).set_trans(Tween.TRANS_QUAD)
+	tweenKagOut.tween_property($Kag, "position", Vector2(-170, 52), .2).set_trans(Tween.TRANS_QUAD)
+	tweenMitsuOut.tween_property($Mitsu, "position", Vector2(500, 52), .2).set_trans(Tween.TRANS_QUAD)
 	tweenOut.tween_callback(invisibleDialogue)
 	endDialogue.emit(usedCompInd)
 	
@@ -59,7 +70,7 @@ func writeDialogue(Dname, _line):
 	writing = true
 
 func _process(_delta):
-	if writing == true and skip == false and currentLine != lineTable[dialogueIndex]:
+	if writing == true and currentLine != lineTable[dialogueIndex]:
 		currentLine = lineTable[dialogueIndex].left(currentLine.length() + 1)
 		$DialoguePanel/Dialogue.text = currentLine
 	elif writing == true and currentLine == lineTable[dialogueIndex]:
@@ -69,23 +80,23 @@ func _process(_delta):
 # Match speaker name to specific sound to use
 func matchSoundLib(Dname):
 	match Dname:
-		"Koseki Bijou":
-			soundToUse = $SoundLib/Biboo
-		"Fuwawa":
-			soundToUse = $SoundLib/Fuwa
-		"Marco Juan":
-			soundToUse = $SoundLib/Moco
-		"Mocojan":
-			soundToUse = $SoundLib/Moco
-		"Mogojan":
-			soundToUse = $SoundLib/Moco
-		"Mococo":
-			soundToUse = $SoundLib/Moco
+		"Minamitsu":
+			soundToUse = $SoundLib/Minamitsu
+		"Kagerou":
+			soundToUse = $SoundLib/Kagerou
+		"Wakasagihime":
+			soundToUse = $SoundLib/Wakasagihime
+		"Nazrin":
+			soundToUse = $SoundLib/Nazrin
+		"Seija":
+			soundToUse = $SoundLib/Seija
+		"Shinmyoumaru":
+			soundToUse = $SoundLib/Shinmyoumaru
 		_:
 			soundToUse = $SoundLib/Default
 
 func _input(event):
-	if event.is_action_released("Slash") and activeDialogue == true:
+	if event.is_action_released("ui_accept") and activeDialogue == true:
 		if writing == true:
 			writing = false
 			$SpeakDelay.stop()
@@ -100,10 +111,10 @@ func _on_speak_delay_timeout():
 	soundToUse.play()
 
 
-func _on_skip_pressed():
-	writing = false
-	$SpeakDelay.stop()
-	skip = true
-	proceedDialogue.emit()
-	$DialoguePanel/Name.text = "Halfpot"
-	$DialoguePanel/Dialogue.text = "Adios"
+# func _on_skip_pressed():
+# 	writing = false
+# 	$SpeakDelay.stop()
+# 	skip = true
+# 	proceedDialogue.emit()
+# 	$DialoguePanel/Name.text = "Halfpot"
+# 	$DialoguePanel/Dialogue.text = "Adios"
