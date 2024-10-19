@@ -103,6 +103,12 @@ position = Vector2(343, 216)
 [node name="PlaceholderBlock2" parent="Foreground" instance=ExtResource("9_sb28j")]
 position = Vector2(363, 216)
 
+[node name="PlaceholderBlock5" parent="Foreground" instance=ExtResource("9_sb28j")]
+position = Vector2(321, 168)
+
+[node name="PlaceholderBlock4" parent="Foreground" instance=ExtResource("9_sb28j")]
+position = Vector2(337, 168)
+
 [node name="PlaceholderBlock3" parent="Foreground" instance=ExtResource("9_sb28j")]
 position = Vector2(350, 200)
 

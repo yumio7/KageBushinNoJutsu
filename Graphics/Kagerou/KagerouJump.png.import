@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsma534ob2ue"
-path="res://.godot/imported/KagerouWalk.png-cd078dfbce79f8604ef7dfc95dba42f6.ctex"
+uid="uid://gohn7q7a24xv"
+path="res://.godot/imported/KagerouJump.png-f0c7a28290cf9234e7b2f6b244fdea05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Kagerou/KagerouWalk.png"
-dest_files=["res://.godot/imported/KagerouWalk.png-cd078dfbce79f8604ef7dfc95dba42f6.ctex"]
+source_file="res://Graphics/Kagerou/KagerouJump.png"
+dest_files=["res://.godot/imported/KagerouJump.png-f0c7a28290cf9234e7b2f6b244fdea05.ctex"]
 
 [params]
 
