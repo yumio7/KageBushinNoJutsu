@@ -1,13 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cfwivlp8k4egd"]
+[gd_scene load_steps=14 format=3 uid="uid://cfwivlp8k4egd"]
 
 [ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_5t5rk"]
 [ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_3mwhk"]
 [ext_resource type="Texture2D" uid="uid://ms0a3hxfeg5x" path="res://Graphics/Placeholders/MurasaPlaceholder-Sheet.png" id="2_5u0ua"]
 [ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="4_h8b8o"]
-[ext_resource type="PackedScene" uid="uid://cc22fmnqn5wag" path="res://Scenes/placeholder_minamitsu.tscn" id="5_21q10"]
-[ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="6_nm7q8"]
-[ext_resource type="Script" path="res://Scenes/character_body_2d.gd" id="6_tx0wb"]
-[ext_resource type="Script" path="res://Scenes/audio_stream_player_2d.gd" id="7_78lir"]
 [ext_resource type="PackedScene" uid="uid://0avjb5lov1do" path="res://Scenes/placeholder_block.tscn" id="9_sb28j"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="10_1nyuf"]
 
@@ -57,30 +53,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bviki"]
 size = Vector2(16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7688g"]
-atlas = ExtResource("2_5u0ua")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u6sf2"]
-atlas = ExtResource("2_5u0ua")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_dplf7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7688g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u6sf2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_llmhv"]
 
 [node name="testlevel" type="Node2D"]
 
@@ -141,24 +113,7 @@ position = Vector2(350, 200)
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="PlaceholderMinamitsu2" parent="Entities" instance=ExtResource("5_21q10")]
-position = Vector2(155, 170)
-
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Entities/PlaceholderMinamitsu2"]
-stream = ExtResource("6_nm7q8")
-script = ExtResource("7_78lir")
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Entities"]
-position = Vector2(291, 186)
-script = ExtResource("6_tx0wb")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Entities/CharacterBody2D"]
-sprite_frames = SubResource("SpriteFrames_dplf7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/CharacterBody2D"]
-shape = SubResource("RectangleShape2D_llmhv")
-
 [node name="Kagerou" parent="." instance=ExtResource("10_1nyuf")]
-position = Vector2(414, 192)
+position = Vector2(319, 144)
 
 [node name="HUD" type="CanvasLayer" parent="."]

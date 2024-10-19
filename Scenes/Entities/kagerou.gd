@@ -95,22 +95,23 @@ func _physics_process(delta: float) -> void:
 	# Character will slide along surfaces when moving
 	move_and_slide()
 
+# Specific behaviours for each state
 func stateIdle():
 	$AnimatedSprite2D.play("Idle")
 	
 func stateWalk():
-	$AnimatedSprite2D.play("Walk") #TODO: When walking animation is done, set it here
+	$AnimatedSprite2D.play("Walk")
 
 func stateJump(delta):
-	$AnimatedSprite2D.play("Jump") #TODO: When jump animation is done, set it here
+	$AnimatedSprite2D.play("Jump")
 	applyGravity(delta) # Gravity
 
 func stateFall(delta):
-	$AnimatedSprite2D.play("Fall") #TODO: When fall animation is done, set it here
+	$AnimatedSprite2D.play("Fall")
 	applyGravity(delta) # Gravity
 	
 func stateAbility():
-	$AnimatedSprite2D.play("Idle") #TODO: When the dash animation is done, set it here
+	$AnimatedSprite2D.play("Dash")
 
 # Function to apply gravity
 func applyGravity(delta):
