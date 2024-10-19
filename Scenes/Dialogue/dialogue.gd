@@ -2,6 +2,7 @@ extends Control
 
 # Signal level to various events
 signal endDialogue
+signal startDialogue
 signal proceedDialogue
 
 # Variables for dialogue behavior
@@ -24,6 +25,7 @@ func _ready():
 
 # Begin dialogue sequence
 func dialogueSequence(desiredComponentIndex):
+	startDialogue.emit()
 	visible = true
 	#$Skip.visible = true
 	var tweenIn = create_tween()
@@ -54,7 +56,7 @@ func dialogueSequence(desiredComponentIndex):
 	tweenKagOut.tween_property($Kag, "position", Vector2(-170, 52), .2).set_trans(Tween.TRANS_QUAD)
 	tweenMitsuOut.tween_property($Mitsu, "position", Vector2(500, 52), .2).set_trans(Tween.TRANS_QUAD)
 	tweenOut.tween_callback(invisibleDialogue)
-	endDialogue.emit(usedCompInd)
+	endDialogue.emit()
 	
 
 func invisibleDialogue():
