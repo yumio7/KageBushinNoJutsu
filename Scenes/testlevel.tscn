@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfwivlp8k4egd"]
+[gd_scene load_steps=17 format=3 uid="uid://dc6m4i47401c"]
 
 [ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_5t5rk"]
 [ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_3mwhk"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/entities.gd" id="6_eg0gn"]
 [ext_resource type="PackedScene" uid="uid://c2jgycsul45yr" path="res://Scenes/Entities/minamitsu.tscn" id="7_1p5t5"]
 [ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="8_bofjh"]
-[ext_resource type="PackedScene" uid="uid://0avjb5lov1do" path="res://Scenes/placeholder_block.tscn" id="9_sb28j"]
+[ext_resource type="PackedScene" uid="uid://c2jvmhxpc10pn" path="res://Scenes/Entities/block.tscn" id="9_m1xtv"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="10_1nyuf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn32p"]
@@ -99,21 +99,6 @@ shape = SubResource("RectangleShape2D_bviki")
 [node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
 texture = ExtResource("4_h8b8o")
 
-[node name="PlaceholderBlock" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(343, 216)
-
-[node name="PlaceholderBlock2" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(363, 216)
-
-[node name="PlaceholderBlock5" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(321, 168)
-
-[node name="PlaceholderBlock4" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(337, 168)
-
-[node name="PlaceholderBlock3" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(350, 200)
-
 [node name="Entities" type="Node2D" parent="."]
 script = ExtResource("6_eg0gn")
 
@@ -126,6 +111,9 @@ position = Vector2(218, 185)
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Dialogue" parent="HUD" instance=ExtResource("8_bofjh")]
+
+[node name="Block" parent="." instance=ExtResource("9_m1xtv")]
+position = Vector2(305, 212)
 
 [connection signal="endDialogue" from="HUD/Dialogue" to="Entities" method="_on_dialogue_end_dialogue"]
 [connection signal="startDialogue" from="HUD/Dialogue" to="Entities" method="_on_dialogue_start_dialogue"]

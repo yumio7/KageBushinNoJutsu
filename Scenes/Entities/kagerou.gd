@@ -83,6 +83,12 @@ func _physics_process(delta: float) -> void:
 		2: stateJump(delta)
 		3: stateFall(delta)
 		4: stateAbility()
+	
+	match currentState:
+		0, 1, 2, 3: set_collision_layer_value(3, false);
+		4: 
+			set_collision_layer_value(3, true);
+			blockCollision(delta);
 
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
@@ -112,6 +118,13 @@ func stateFall(delta):
 	
 func stateAbility():
 	$AnimatedSprite2D.play("Dash")
+
+func blockCollision(delta):
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Block":
+			var collider := collision.get_collider() as Block
+			collider.onCollision(delta)
 
 # Function to apply gravity
 func applyGravity(delta):
