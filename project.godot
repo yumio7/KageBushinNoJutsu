@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[autoload]
+
+Singleton="*res://Resources/Singleton.gd"
+
 [display]
 
 window/size/viewport_width=480

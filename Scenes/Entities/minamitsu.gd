@@ -5,19 +5,20 @@ extends CharacterBody2D
 # Variant jump height depending on how long the jump input is held
 
 # Constants. Assigned values cannot be changed
-const walkSpeed: float = 50.0			# Base walking Movement speed
-const walkSpeedMax: float = 125.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
-const jumpVelocity: float = -200.0		# Jump velocity. It is negative because in Godot up is negative y.
+const walkSpeed: float = 40.0			# Base walking Movement speed
+const walkSpeedMax: float = 100.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
+const jumpVelocity: float = -210.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Minamitsu cannot fall faster than this.
 const anchorVelocity: float = 250.0		# Velocity at which the anchor flies through the air
 const grappleVelocity: float = 250.0	# Velocity at which Minamitsu is pulled to the anchor
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Tracks state of character for different movement behaviours
-enum state {Idle = 0, Walk = 1, Jump = 2, Fall = 3, Ability = 4}	# Define enum for every state
-var currentState: int = state.Idle									# Tracks the current state. By default, it is set to idle.
-var walkDirection = 0												# Keep track of whether controls for walking are being held down
-var previousFloorState = false										# Tracks the previous grounded state of player. Used for Coyote Time
+enum state {Idle = 0, Walk = 1, Jump = 2, Fall = 3, Ability = 4, Pause = 5}	# Define enum for every state
+var currentState: int = state.Idle											# Tracks the current state. By default, it is set to idle.
+var walkDirection = 0														# Keep track of whether controls for walking are being held down
+var previousFloorState = false												# Tracks the previous grounded state of player. Used for Coyote Time
+var tweenSound																# Declare a potential tween which modifies sound
 
 # Runs once when the character is instantiated
 func _ready() -> void:
@@ -29,10 +30,10 @@ func _physics_process(delta: float) -> void:
 	#print("0-" + str(currentState)) # FOR DEBUGGING: Print the current state before all physics logic executes
 
 	# Dash ability. Sets the state to ability and sets velocity
-	if Input.is_action_just_pressed("Ability") and $Timers/AnchorCooldown.time_left <= 0:
+	if currentState != state.Ability and currentState != state.Pause and Input.is_action_just_pressed("Ability") and $Timers/AnchorCooldown.time_left <= 0:
 		pass
 	# If the user is using an ability, lock all other movement
-	if currentState != state.Ability:
+	if currentState != state.Ability and currentState != state.Pause:
 		# Check if player is holding down movement control. Move them if yes.
 		walkDirection = Input.get_axis("Left", "Right")
 		# Track if user is making walking input and moves character in that direction.
@@ -58,9 +59,16 @@ func _physics_process(delta: float) -> void:
 		# Depending on length of input, jump height increases
 		elif Input.is_action_pressed("Jump") and !is_on_floor() and $Timers/JumpHeightTimer.time_left > 0: velocity.y = jumpVelocity
 		# Edge case in case the player releases&inputs again when JumpHeightTimer is on.
-		elif Input.is_action_just_released("Jump"): $Timers/JumpHeightTimer.stop()
+		elif Input.is_action_just_released("Jump") and $Timers/JumpHeightTimer.time_left > 0:
+			$Timers/JumpHeightTimer.stop()
+			tweenSound = create_tween()
+			tweenSound.tween_property($Sounds/JumpSFX, "volume_db", -30, .5)
+			tweenSound.tween_callback(resetJumpSFX)
 
 		if canJump == true:
+			if tweenSound: tweenSound.kill()
+			resetJumpSFX()
+			$Sounds/JumpSFX.play()
 			$Timers/JumpHeightTimer.start()
 			velocity.y = jumpVelocity
 
@@ -78,6 +86,7 @@ func _physics_process(delta: float) -> void:
 		2: stateJump(delta)
 		3: stateFall(delta)
 		4: stateAbility()
+		5: statePause(delta)
 
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
@@ -108,11 +117,21 @@ func stateFall(delta):
 func stateAbility():
 	$AnimatedSprite2D.play("Dash")
 
+# During a paused state, the character will still be affected by gravity and will play an idle animation
+func statePause(delta):
+	$AnimatedSprite2D.play("Idle")
+	applyGravity(delta) # Gravity
+
 # Function to apply gravity
 func applyGravity(delta):
 	# Apply gravity to vertical velocity until max falling speed reached
 	if not is_on_floor() and velocity.y < fallSpeedMax:
 		velocity.y += gravity * delta
+
+# When the player releases jump button and sound volume is tweened out, this function will reset volume
+func resetJumpSFX():
+	$Sounds/JumpSFX.stop()
+	$Sounds/JumpSFX.volume_db = 0.8
 
 func _on_dash_duration_timeout():
 	currentState = state.Idle

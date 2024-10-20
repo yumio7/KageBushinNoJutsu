@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/placeholder_minamitsu.gd" id="1_5ayf7"]
 [ext_resource type="Texture2D" uid="uid://ms0a3hxfeg5x" path="res://Graphics/Placeholders/MurasaPlaceholder-Sheet.png" id="2_x02k7"]
-[ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="3_iorrn"]
+[ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/Placeholder/gabe-bark.mp3" id="3_iorrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glpa1"]
 

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bdlkrwqu8gwex"]
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Foreground" type="Node2D" parent="."]
+
+[node name="TileMapLayers" type="Node2D" parent="Foreground"]
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="ControlledCharacter" type="Node2D" parent="Entities"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
