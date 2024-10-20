@@ -1,22 +1,22 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfwivlp8k4egd"]
+[gd_scene load_steps=18 format=3 uid="uid://dok21rpid5yjj"]
 
-[ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_5t5rk"]
-[ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_3mwhk"]
-[ext_resource type="Texture2D" uid="uid://ms0a3hxfeg5x" path="res://Graphics/Placeholders/MurasaPlaceholder-Sheet.png" id="2_5u0ua"]
-[ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="4_h8b8o"]
-[ext_resource type="Script" path="res://Scenes/entities.gd" id="6_eg0gn"]
-[ext_resource type="PackedScene" uid="uid://c2jgycsul45yr" path="res://Scenes/Entities/minamitsu.tscn" id="7_1p5t5"]
-[ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="8_bofjh"]
-[ext_resource type="PackedScene" uid="uid://0avjb5lov1do" path="res://Scenes/placeholder_block.tscn" id="9_sb28j"]
-[ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="10_1nyuf"]
-[ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="10_fjlak"]
+[ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_jeh6m"]
+[ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_weu3b"]
+[ext_resource type="Texture2D" uid="uid://ms0a3hxfeg5x" path="res://Graphics/Placeholders/MurasaPlaceholder-Sheet.png" id="3_egaq5"]
+[ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="4_odaej"]
+[ext_resource type="PackedScene" uid="uid://c2jvmhxpc10pn" path="res://Scenes/Props/block.tscn" id="5_ki2bb"]
+[ext_resource type="Script" path="res://Scenes/entities.gd" id="6_8pwpu"]
+[ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="7_4kbhi"]
+[ext_resource type="PackedScene" uid="uid://c2jgycsul45yr" path="res://Scenes/Entities/minamitsu.tscn" id="8_17ynt"]
+[ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="9_esybj"]
+[ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="10_n4t0n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn32p"]
-atlas = ExtResource("1_5t5rk")
+atlas = ExtResource("1_jeh6m")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgth0"]
-atlas = ExtResource("1_5t5rk")
+atlas = ExtResource("1_jeh6m")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f8cb6"]
@@ -34,11 +34,11 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ric85"]
-atlas = ExtResource("2_5u0ua")
+atlas = ExtResource("3_egaq5")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aw1q1"]
-atlas = ExtResource("2_5u0ua")
+atlas = ExtResource("3_egaq5")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_egqhr"]
@@ -68,18 +68,18 @@ size = Vector2(16, 16)
 
 [node name="KagerouPlaceholder-sheet" type="Sprite2D" parent="Background"]
 position = Vector2(74, 57)
-texture = ExtResource("1_5t5rk")
+texture = ExtResource("1_jeh6m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Background"]
 position = Vector2(30, 52)
 sprite_frames = SubResource("SpriteFrames_f8cb6")
 autoplay = "default"
 frame_progress = 0.0775554
-script = ExtResource("2_3mwhk")
+script = ExtResource("2_weu3b")
 
 [node name="MurasaPlaceholder-sheet" type="Sprite2D" parent="Background"]
 position = Vector2(59, 89)
-texture = ExtResource("2_5u0ua")
+texture = ExtResource("3_egaq5")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Background"]
 position = Vector2(89, 88)
@@ -98,38 +98,26 @@ scale = Vector2(500, 1)
 shape = SubResource("RectangleShape2D_bviki")
 
 [node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
-texture = ExtResource("4_h8b8o")
+texture = ExtResource("4_odaej")
 
-[node name="PlaceholderBlock" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(343, 216)
-
-[node name="PlaceholderBlock2" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(363, 216)
-
-[node name="PlaceholderBlock5" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(321, 168)
-
-[node name="PlaceholderBlock4" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(337, 168)
-
-[node name="PlaceholderBlock3" parent="Foreground" instance=ExtResource("9_sb28j")]
-position = Vector2(350, 200)
+[node name="Block" parent="Foreground" instance=ExtResource("5_ki2bb")]
+position = Vector2(322, 211)
 
 [node name="Entities" type="Node2D" parent="."]
-script = ExtResource("6_eg0gn")
+script = ExtResource("6_8pwpu")
 
-[node name="Kagerou" parent="Entities" instance=ExtResource("10_1nyuf")]
+[node name="Kagerou" parent="Entities" instance=ExtResource("7_4kbhi")]
 position = Vector2(274, 186)
 
-[node name="Minamitsu" parent="Entities" instance=ExtResource("7_1p5t5")]
+[node name="Minamitsu" parent="Entities" instance=ExtResource("8_17ynt")]
 position = Vector2(218, 185)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Dialogue" parent="HUD" node_paths=PackedStringArray("dialogueComponents") instance=ExtResource("8_bofjh")]
+[node name="Dialogue" parent="HUD" node_paths=PackedStringArray("dialogueComponents") instance=ExtResource("9_esybj")]
 dialogueComponents = [NodePath("CutsceneComponent")]
 
-[node name="CutsceneComponent" parent="HUD/Dialogue" instance=ExtResource("10_fjlak")]
+[node name="CutsceneComponent" parent="HUD/Dialogue" instance=ExtResource("10_n4t0n")]
 nameSequence = Array[String](["Kagerou", "Kagerou", "Kagerou", "Kagerou", "Kagerou"])
 emoteSequence = Array[String](["happy2", "mad", "shock", "mad2", "neutral"])
 dialogueSequence = Array[String](["hey murasa", "eat ur greens", "what do you mean, no?", "its healthy for you", "ok fine"])

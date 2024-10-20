@@ -21,7 +21,6 @@ var tweenSound																# Declare a potential tween which modifies sound
 
 # Runs once when the character is instantiated
 func _ready() -> void:
-	currentState = state.Pause
 	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)
@@ -95,6 +94,12 @@ func _physics_process(delta: float) -> void:
 		3: stateFall(delta)
 		4: stateAbility(directionToDash)
 		5: statePause(delta)
+	
+	match currentState:
+		0, 1, 2, 3: set_collision_layer_value(3, false);
+		4: 
+			set_collision_layer_value(3, true);
+			blockCollision(delta);
 
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
@@ -131,6 +136,13 @@ func statePause(delta):
 	$AnimatedSprite2D.play("Idle")
 	applyGravity(delta) # Gravity
 
+func blockCollision(delta):
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Block":
+			var collider := collision.get_collider() as Block
+			collider.onCollision(delta)
+
 # Function to apply gravity
 func applyGravity(delta):
 	# Apply gravity to vertical velocity until max falling speed reached
@@ -144,3 +156,4 @@ func resetJumpSFX():
 
 func _on_dash_duration_timeout():
 	currentState = state.Idle
+

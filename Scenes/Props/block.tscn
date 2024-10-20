@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2jvmhxpc10pn"]
+
+[ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="1_bf5c5"]
+[ext_resource type="Script" path="res://Scenes/Props/block.gd" id="1_ivuek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfo1v"]
+size = Vector2(16, 16)
+
+[node name="Block" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 4
+script = ExtResource("1_ivuek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lfo1v")
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bf5c5")
