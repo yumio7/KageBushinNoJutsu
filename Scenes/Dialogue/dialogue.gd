@@ -10,6 +10,7 @@ signal proceedDialogue
 var usedComponent: CutsceneComponent = null
 var usedCompInd = 0
 var nameTable: Array = []
+var emoteTable: Array = []
 var lineTable: Array = []
 @onready var soundToUse = $SoundLib/Default
 var dialogueIndex = 0
@@ -32,17 +33,18 @@ func dialogueSequence(desiredComponentIndex):
 	var tweenKagIn = create_tween()
 	var tweenMitsuIn = create_tween()
 	tweenIn.tween_property($DialoguePanel, "position", Vector2(0, 0), .2).set_trans(Tween.TRANS_QUAD)
-	tweenKagIn.tween_property($Kag, "position", Vector2(35, 52), .2).set_trans(Tween.TRANS_QUAD)
-	tweenMitsuIn.tween_property($Mitsu, "position", Vector2(300, 52), .2).set_trans(Tween.TRANS_QUAD)
+	tweenKagIn.tween_property($Kag, "position", Vector2(35, 34), .2).set_trans(Tween.TRANS_QUAD)
+	tweenMitsuIn.tween_property($Mitsu, "position", Vector2(300, 34), .2).set_trans(Tween.TRANS_QUAD)
 	activeDialogue = true
 	dialogueIndex = 0
 	usedCompInd = desiredComponentIndex
 	usedComponent = dialogueComponents[desiredComponentIndex]
 	nameTable = usedComponent.nameSequence
+	emoteTable = usedComponent.emoteSequence
 	lineTable = usedComponent.dialogueSequence
 	
 	for i in nameTable.size():
-		writeDialogue(nameTable[dialogueIndex], lineTable[dialogueIndex])
+		writeDialogue(nameTable[dialogueIndex], emoteTable[dialogueIndex], lineTable[dialogueIndex])
 		await proceedDialogue
 		#if skip == true: break
 	
@@ -62,10 +64,10 @@ func dialogueSequence(desiredComponentIndex):
 func invisibleDialogue():
 	visible = false
 
-# Write dialogue. If input is taken during the writing process, skip
-func writeDialogue(Dname, _line):
+# Write dialogue.
+func writeDialogue(Dname, emote, _line):
 	$SpeakDelay.start()
-	matchSoundLib(Dname)
+	matchSpriteData(Dname, emote)
 	currentLine = ""
 	$DialoguePanel/Name.text = Dname
 	$DialoguePanel/Dialogue.text = ""
@@ -80,12 +82,14 @@ func _process(_delta):
 		$SpeakDelay.stop()
 
 # Match speaker name to specific sound to use
-func matchSoundLib(Dname):
+func matchSpriteData(Dname, emote):
 	match Dname:
 		"Minamitsu":
 			soundToUse = $SoundLib/Minamitsu
+			#$Mitsu.set_emotion(emote)
 		"Kagerou":
-			soundToUse = $SoundLib/Kagerou
+			soundToUse = $SoundLib/Default #$SoundLib/Kagerou
+			$Kag.set_emotion(emote)
 		"Wakasagihime":
 			soundToUse = $SoundLib/Wakasagihime
 		"Nazrin":
