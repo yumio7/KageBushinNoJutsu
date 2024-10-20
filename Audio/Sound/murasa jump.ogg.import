@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c3e1bl8ca543v"
+path="res://.godot/imported/murasa jump.ogg-6a87d9eca741aaabd9af1cb3750344c8.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/murasa jump.ogg"
+dest_files=["res://.godot/imported/murasa jump.ogg-6a87d9eca741aaabd9af1cb3750344c8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

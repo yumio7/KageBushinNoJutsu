@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dcxqrwpywlksd"
+path="res://.godot/imported/kage jump.ogg-6d9f9b04710b5df2b80cb6047b845046.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/kage jump.ogg"
+dest_files=["res://.godot/imported/kage jump.ogg-6d9f9b04710b5df2b80cb6047b845046.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

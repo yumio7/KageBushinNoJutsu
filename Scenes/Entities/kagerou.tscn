@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://it048b436dos"]
+[gd_scene load_steps=39 format=3 uid="uid://it048b436dos"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/kagerou.gd" id="1_obgcm"]
 [ext_resource type="Texture2D" uid="uid://c5wbii2af6f3k" path="res://Graphics/Kagerou/KagerouIdle.png" id="1_x8jmb"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c0m0sgllrkw48" path="res://Graphics/Kagerou/KagerouDash.png" id="2_c6f6w"]
 [ext_resource type="Texture2D" uid="uid://gohn7q7a24xv" path="res://Graphics/Kagerou/KagerouJump.png" id="4_wvu4o"]
 [ext_resource type="Texture2D" uid="uid://bsma534ob2ue" path="res://Graphics/Kagerou/KagerouWalk.png" id="5_moq2e"]
+[ext_resource type="AudioStream" uid="uid://dcxqrwpywlksd" path="res://Audio/Sound/kage jump.ogg" id="7_3w0h0"]
+[ext_resource type="AudioStream" uid="uid://ccbbpi1u4261i" path="res://Audio/Sound/kagerou dash.ogg" id="8_r4sym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyuek"]
 size = Vector2(11, 15)
@@ -220,6 +222,16 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_is65j"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("7_3w0h0")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s0iv2"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_r4sym")
+
 [node name="Kagerou" type="CharacterBody2D"]
 script = ExtResource("1_obgcm")
 
@@ -254,5 +266,18 @@ one_shot = true
 [node name="DashCooldown" type="Timer" parent="Timers"]
 wait_time = 0.5
 one_shot = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_is65j")
+volume_db = 0.8
+max_polyphony = 5
+bus = &"Sound"
+
+[node name="DashSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_s0iv2")
+pitch_scale = 1.2
+bus = &"Sound"
 
 [connection signal="timeout" from="Timers/DashDuration" to="." method="_on_dash_duration_timeout"]
