@@ -9,16 +9,18 @@ const walkSpeed: float = 40.0			# Base walking Movement speed
 const walkSpeedMax: float = 100.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
 const jumpVelocity: float = -210.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Minamitsu cannot fall faster than this.
-const anchorVelocity: float = 250.0		# Velocity at which the anchor flies through the air
-const grappleVelocity: float = 250.0	# Velocity at which Minamitsu is pulled to the anchor
+const anchorVelocity: float = 500.0		# Velocity at which the anchor flies through the air
+const grappleVelocity: float = 600.0	# Velocity at which Minamitsu is pulled to the anchor
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Tracks state of character for different movement behaviours
-enum state {Idle = 0, Walk = 1, Jump = 2, Fall = 3, Ability = 4, Pause = 5}	# Define enum for every state
-var currentState: int = state.Idle											# Tracks the current state. By default, it is set to idle.
-var walkDirection = 0														# Keep track of whether controls for walking are being held down
-var previousFloorState = false												# Tracks the previous grounded state of player. Used for Coyote Time
-var tweenSound																# Declare a potential tween which modifies sound
+enum state {Idle = 0, Walk = 1, Jump = 2, Fall = 3, Ability = 4, Pause = 5, Grapple = 6}		# Define enum for every state
+var currentState: int = state.Idle																# Tracks the current state. By default, it is set to idle.
+var walkDirection = 0																			# Keep track of whether controls for walking are being held down
+var previousFloorState = false																	# Tracks the previous grounded state of player. Used for Coyote Time
+var tweenSound																					# Declare a potential tween which modifies sound
+var anchorProjectile = preload("res://Scenes/Entities/anchor_projectile.tscn")					# Preload the anchor projectile for faster instantiation
+var anchorProjectileInstance = null																# Track the anchorProjectile instance's location and status
 
 # Runs once when the character is instantiated
 func _ready() -> void:
@@ -29,11 +31,27 @@ func _physics_process(delta: float) -> void:
 	
 	#print("0-" + str(currentState)) # FOR DEBUGGING: Print the current state before all physics logic executes
 
-	# Dash ability. Sets the state to ability and sets velocity
-	if currentState != state.Ability and currentState != state.Pause and Input.is_action_just_pressed("Ability") and $Timers/AnchorCooldown.time_left <= 0:
-		pass
+	var directionToThrow = 1 # Store the directionToThrow in wide scope for the stateAbility() function
+	if $AnimatedSprite2D.flip_h == true: directionToThrow = -1
+	else: directionToThrow = 1
+
+	# Throw/Grapple ability. Sets the state to ability and yeet anchor
+	if currentState != state.Ability and currentState != state.Pause and currentState != state.Grapple and Input.is_action_just_pressed("Ability") and $Timers/AnchorCooldown.time_left <= 0:
+		currentState = state.Ability
+		velocity = Vector2(0, 0)
+		$Timers/AnchorLimit.start()
+
+		# Create instance of anchor and attaches the velocity (Depends on where character faces) and character node to it.
+		anchorProjectileInstance = anchorProjectile.instantiate()
+		anchorProjectileInstance.throwVelocity = anchorVelocity * directionToThrow
+		anchorProjectileInstance.trackedPlayer = $"."	# References the current node the script is attached to (CharacterBody2D named Minamitsu)
+		anchorProjectileInstance.body_entered.connect(anchorHit) # Connect anchor's body_entered signal to function, so minamitsu can respond to what the anchor hits
+		$"..".add_child(anchorProjectileInstance)		# Sets the anchor instance's parent to the parent node (SHOULD BE ENTITIES NODE2D IN LEVEL)
+		anchorProjectileInstance.position = $AnchorStartPos.global_position	#AnchorStartPos is a node2D child under minamitsu which is slightly offset in front of her
+		
+
 	# If the user is using an ability, lock all other movement
-	if currentState != state.Ability and currentState != state.Pause:
+	if currentState != state.Ability and currentState != state.Pause and currentState != state.Grapple:
 		# Check if player is holding down movement control. Move them if yes.
 		walkDirection = Input.get_axis("Left", "Right")
 		# Track if user is making walking input and moves character in that direction.
@@ -87,14 +105,17 @@ func _physics_process(delta: float) -> void:
 		3: stateFall(delta)
 		4: stateAbility()
 		5: statePause(delta)
+		6: stateGrapple()
 
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
-	# Flip sprite depending on horizontal velocity
+	# Flip sprite depending on horizontal velocity, additionally set the anchorStartPosition to the other side
 	if walkDirection > 0:
 		$AnimatedSprite2D.flip_h = false
+		$AnchorStartPos.position.x = 4
 	elif walkDirection < 0:
 		$AnimatedSprite2D.flip_h = true
+		$AnchorStartPos.position.x = -4
 
 	# Character will slide along surfaces when moving
 	move_and_slide()
@@ -115,12 +136,22 @@ func stateFall(delta):
 	applyGravity(delta) # Gravity
 	
 func stateAbility():
-	$AnimatedSprite2D.play("Dash")
+	$AnimatedSprite2D.play("Idle")
 
 # During a paused state, the character will still be affected by gravity and will play an idle animation
 func statePause(delta):
 	$AnimatedSprite2D.play("Idle")
 	applyGravity(delta) # Gravity
+
+# Move minamitsu towards the anchor until she stops or gets near enough to it
+func stateGrapple():
+	$AnimatedSprite2D.play("Idle")
+	var directionToAnchor = position.direction_to(anchorProjectileInstance.global_position)
+	var distanceToAnchor = position.distance_to(anchorProjectileInstance.global_position)
+	velocity = directionToAnchor * grappleVelocity
+	if distanceToAnchor < 10:
+		anchorCancel()
+
 
 # Function to apply gravity
 func applyGravity(delta):
@@ -131,7 +162,43 @@ func applyGravity(delta):
 # When the player releases jump button and sound volume is tweened out, this function will reset volume
 func resetJumpSFX():
 	$Sounds/JumpSFX.stop()
-	$Sounds/JumpSFX.volume_db = 0.8
+	$Sounds/JumpSFX.volume_db = 10
 
 func _on_dash_duration_timeout():
 	currentState = state.Idle
+
+# When the anchor times out
+func _on_anchor_limit_timeout() -> void:
+	anchorCancel()
+
+# When the anchor projectile hits appropriate body
+func anchorHit(body):
+	
+	# ONLY PROCEED IF THE ANCHOR EXISTS AND ITS STATE IS ACTIVE (0)
+	if anchorProjectileInstance != null and anchorProjectileInstance.currentState == 0:
+
+		# Depending on if the hit body's collision layer (Environment or interactible), the anchor should perform different actions
+		var anchorCollideEnvironment: bool = body.get_collision_layer_value(2)
+		var anchorCollideInteractible: bool = body.get_collision_layer_value(3)
+		# If the layer is 2 (Environment), always attach the anchor and grapple minamitsu toward it
+		if anchorCollideEnvironment == true:
+			$Timers/AnchorLimit.stop()
+			anchorProjectileInstance.currentState = 1 # This sets anchor to an attached (1) state. This is ugly but it works
+			currentState = state.Grapple
+			$Timers/GrappleLimit.start()
+		# If the layer is 3 (Interactible), the anchor will check what type of interactible it is and either attach (Barrier) or break it (Breakable Block)
+		if anchorCollideInteractible:
+			pass
+
+# Function to end minamitsu's ability by retracting anchor and removing it
+func anchorCancel():
+	$Timers/AnchorLimit.stop()
+	$Timers/GrappleLimit.stop()
+	currentState = state.Idle
+	anchorProjectileInstance.currentState = 2 # This sets anchor to a retracting (2) state. This is ugly but if it works it works
+	$Timers/AnchorCooldown.start()
+	anchorProjectileInstance = null
+
+# In case minamitsu takes too long to grapple (Because she is stuck)
+func _on_grapple_limit_timeout() -> void:
+	anchorCancel()

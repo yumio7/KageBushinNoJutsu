@@ -233,6 +233,7 @@ streams_count = 1
 stream_0/stream = ExtResource("8_r4sym")
 
 [node name="Kagerou" type="CharacterBody2D"]
+collision_mask = 31
 script = ExtResource("1_obgcm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -271,13 +272,12 @@ one_shot = true
 
 [node name="JumpSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_is65j")
-volume_db = 0.8
+volume_db = 0.5
 max_polyphony = 5
 bus = &"Sound"
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_s0iv2")
-pitch_scale = 1.2
 bus = &"Sound"
 
 [connection signal="timeout" from="Timers/DashDuration" to="." method="_on_dash_duration_timeout"]

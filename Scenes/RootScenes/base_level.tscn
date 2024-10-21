@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://bdlkrwqu8gwex"]
+[gd_scene load_steps=3 format=3 uid="uid://bdlkrwqu8gwex"]
+
+[ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="1_dik7g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_155ek"]
+size = Vector2(16, 16)
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -9,6 +14,16 @@
 [node name="Foreground" type="Node2D" parent="."]
 
 [node name="TileMapLayers" type="Node2D" parent="Foreground"]
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
+position = Vector2(121, 232)
+scale = Vector2(500, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
+shape = SubResource("RectangleShape2D_155ek")
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
+texture = ExtResource("1_dik7g")
 
 [node name="Entities" type="Node2D" parent="."]
 

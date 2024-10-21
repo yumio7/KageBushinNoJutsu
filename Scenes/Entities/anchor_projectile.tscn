@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://gdyq5fwr2l65"]
+
+[ext_resource type="Texture2D" uid="uid://lasc352i1s3m" path="res://Graphics/Placeholders/AnchorPlaceholder.png" id="1_cd0ga"]
+[ext_resource type="Script" path="res://Scenes/Entities/anchor_projectile.gd" id="1_s13xn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4njlh"]
+size = Vector2(16, 13)
+
+[sub_resource type="Gradient" id="Gradient_p5k1n"]
+colors = PackedColorArray(0, 0.458824, 0.811765, 1, 0.50294, 0.88683, 0.988118, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e577d"]
+atlas = ExtResource("1_cd0ga")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5mhqm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e577d")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Attached",
+"speed": 5.0
+}]
+
+[node name="AnchorProjectile" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_s13xn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_4njlh")
+
+[node name="AnchorLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_p5k1n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -0.5)
+sprite_frames = SubResource("SpriteFrames_5mhqm")
+animation = &"Active"
+flip_h = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c2jgycsul45yr"]
+[gd_scene load_steps=24 format=3 uid="uid://c2jgycsul45yr"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/minamitsu.gd" id="1_7k5ee"]
 [ext_resource type="Texture2D" uid="uid://dmaak3c5rt8hd" path="res://Graphics/Minamitsu/Sprite-0001-Sheet.png" id="2_ghyni"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n47jc"]
 size = Vector2(13, 15)
+
+[sub_resource type="Gradient" id="Gradient_kvqc7"]
+colors = PackedColorArray(0.476843, 0.644697, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nphti"]
 atlas = ExtResource("2_ghyni")
@@ -147,16 +150,26 @@ streams_count = 1
 stream_0/stream = ExtResource("4_jjjda")
 
 [node name="Minamitsu" type="CharacterBody2D"]
+collision_mask = 31
 script = ExtResource("1_7k5ee")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 3.5)
 shape = SubResource("RectangleShape2D_n47jc")
 
+[node name="AnchorLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(0, 1, 1, 1)
+gradient = SubResource("Gradient_kvqc7")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.5, -3.5)
 sprite_frames = SubResource("SpriteFrames_ygx4w")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="AnchorStartPos" type="Node2D" parent="."]
+position = Vector2(4, 0)
 
 [node name="Timers" type="Node" parent="."]
 
@@ -173,13 +186,23 @@ wait_time = 0.075
 one_shot = true
 
 [node name="AnchorCooldown" type="Timer" parent="Timers"]
-wait_time = 0.5
+one_shot = true
+
+[node name="AnchorLimit" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
+[node name="GrappleLimit" type="Timer" parent="Timers"]
+wait_time = 0.3
 one_shot = true
 
 [node name="Sounds" type="Node" parent="."]
 
 [node name="JumpSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_rl6pa")
-volume_db = 1.0
+volume_db = 10.0
 max_polyphony = 5
 bus = &"Sound"
+
+[connection signal="timeout" from="Timers/AnchorLimit" to="." method="_on_anchor_limit_timeout"]
+[connection signal="timeout" from="Timers/GrappleLimit" to="." method="_on_grapple_limit_timeout"]
