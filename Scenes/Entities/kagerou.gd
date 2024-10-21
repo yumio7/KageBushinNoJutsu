@@ -21,7 +21,6 @@ var tweenSound																# Declare a potential tween which modifies sound
 
 # Runs once when the character is instantiated
 func _ready() -> void:
-	currentState = state.Pause
 	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)
