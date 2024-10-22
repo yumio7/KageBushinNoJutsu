@@ -18,10 +18,10 @@ var currentState: int = state.Idle											# Tracks the current state. By defa
 var walkDirection = 0														# Keep track of whether controls for walking are being held down
 var previousFloorState = false												# Tracks the previous grounded state of player. Used for Coyote Time
 var tweenSound																# Declare a potential tween which modifies sound
+var mirrorTransitioning = false												# Prevents multiple mirror activations when kagerou dashes into it
 
 # Runs once when the character is instantiated
 func _ready() -> void:
-	currentState = state.Pause
 	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)
@@ -93,14 +93,17 @@ func _physics_process(delta: float) -> void:
 		1: stateWalk()
 		2: stateJump(delta)
 		3: stateFall(delta)
-		4: stateAbility(directionToDash)
+		4: stateAbility(directionToDash, delta)
 		5: statePause(delta)
-	
-	match currentState:
-		0, 1, 2, 3: set_collision_layer_value(3, false);
-		4: 
-			set_collision_layer_value(3, true);
-			blockCollision(delta);
+
+	# Halfpot: Fixed collision layers. No need to set it manually in code.
+	# blockCollision function changed to specialCollision to account for dash collisions with other special objects (mirror, etc)
+	# specialCollision function is called inside the stateAbility function now
+	#match currentState:
+	#	0, 1, 2, 3: set_collision_layer_value(3, false);
+	#	4: 
+	#		set_collision_layer_value(3, true);
+	#		specialCollision(delta);
 
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
@@ -128,21 +131,31 @@ func stateFall(delta):
 	$AnimatedSprite2D.play("Fall")
 	applyGravity(delta) # Gravity
 	
-func stateAbility(directionToDash):
+func stateAbility(directionToDash, delta):
 	$AnimatedSprite2D.play("Dash")
 	velocity = Vector2(dashVelocity * directionToDash, 0)
+	specialCollision(directionToDash, delta)
 
 # During a paused state, the character will still be affected by gravity and will play an idle animation
 func statePause(delta):
 	$AnimatedSprite2D.play("Idle")
 	applyGravity(delta) # Gravity
 
-func blockCollision(delta):
+func specialCollision(directionToDash, delta):
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "Block":
-			var collider := collision.get_collider() as Block
-			collider.onCollision(delta)
+		var collisionAngle = collision.get_angle()
+
+		# Only count the collision if the dash is not parallel to the hit object (In this case, kagerou dash on top of breakable block should not break it)
+		if collisionAngle > 0:
+			if collision.get_collider().name == "Block":
+				var collider := collision.get_collider() as Block
+				collider.onCollision(delta)
+			if collision.get_collider().name == "VerticalMirror" and mirrorTransitioning == false:
+				mirrorTransitioning = true
+				var collider := collision.get_collider() as VerticalMirror
+				collider.mirrorSwitch(global_position.y, dashVelocity * directionToDash, name)
+				queue_free()
 
 # Function to apply gravity
 func applyGravity(delta):
@@ -157,4 +170,3 @@ func resetJumpSFX():
 
 func _on_dash_duration_timeout():
 	currentState = state.Idle
-

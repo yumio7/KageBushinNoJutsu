@@ -10,7 +10,7 @@ const walkSpeedMax: float = 85.0		# Maximum walking movement speed. Minamitsu ca
 const jumpVelocity: float = -210.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Minamitsu cannot fall faster than this.
 const anchorVelocity: float = 400.0		# Velocity at which the anchor flies through the air
-const grappleVelocity: float = 600.0	# Velocity at which Minamitsu is pulled to the anchor
+const grappleVelocity: float = 500.0	# Velocity at which Minamitsu is pulled to the anchor
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Tracks state of character for different movement behaviours
@@ -21,6 +21,9 @@ var previousFloorState = false																	# Tracks the previous grounded st
 var tweenSound																					# Declare a potential tween which modifies sound
 var anchorProjectile = preload("res://Scenes/Entities/anchor_projectile.tscn")					# Preload the anchor projectile for faster instantiation
 var anchorProjectileInstance = null																# Track the anchorProjectile instance's location and status
+var grappledMirrorFlag = false																	# Track whether minamitsu is currently grappling into the mirror
+var anchorHitObject	= null																		# Track the anchor's hit object
+var directionToAnchor = 0																		# Track the direction minamitsu faces when yeeting anchor
 
 # Runs once when the character is instantiated
 func _ready() -> void:
@@ -168,7 +171,7 @@ func statePause(delta):
 func stateGrapple():
 	$Anchor.visible = false
 	$AnimatedSprite2D.play("Fall")
-	var directionToAnchor = position.direction_to(anchorProjectileInstance.global_position)
+	directionToAnchor = position.direction_to(anchorProjectileInstance.global_position)
 	var distanceToAnchor = position.distance_to(anchorProjectileInstance.global_position)
 	velocity = directionToAnchor * grappleVelocity
 	if distanceToAnchor < 10:
@@ -203,22 +206,38 @@ func anchorHit(body):
 		var anchorCollideEnvironment: bool = body.get_collision_layer_value(2)
 		var anchorCollideInteractible: bool = body.get_collision_layer_value(3)
 		# If the layer is 2 (Environment), always attach the anchor and grapple minamitsu toward it
-		if anchorCollideEnvironment == true:
+		if anchorCollideEnvironment:
 			$Timers/AnchorLimit.stop()
 			anchorProjectileInstance.currentState = 1 # This sets anchor to an attached (1) state. This is ugly but it works
 			currentState = state.Grapple
 			$Timers/GrappleLimit.start()
 		# If the layer is 3 (Interactible), the anchor will check what type of interactible it is and either attach (Barrier) or break it (Breakable Block)
 		if anchorCollideInteractible:
-			pass
+			match body.name:
+				"VerticalMirror":
+					$Timers/AnchorLimit.stop()
+					anchorProjectileInstance.currentState = 1
+					currentState = state.Grapple
+					$Timers/GrappleLimit.start()
+					grappledMirrorFlag = true
+					anchorHitObject = body
 
-# Function to end minamitsu's ability by retracting anchor and removing it
+
+# Function to end minamitsu's ability by retracting anchor and removing it. Acts differently when minamitsu grapples the mirror
 func anchorCancel():
-	$Timers/AnchorLimit.stop()
-	$Timers/GrappleLimit.stop()
-	currentState = state.Idle
-	anchorProjectileInstance.currentState = 2 # This sets anchor to a retracting (2) state. This is ugly but if it works it works
-	$Timers/AnchorCooldown.start()
+
+	if grappledMirrorFlag == false:
+		$Timers/AnchorLimit.stop()
+		$Timers/GrappleLimit.stop()
+		currentState = state.Idle
+		anchorProjectileInstance.currentState = 2 # This sets anchor to a retracting (2) state. This is ugly but if it works it works
+		$Timers/AnchorCooldown.start()
+	elif grappledMirrorFlag == true:
+		if anchorProjectileInstance != null:
+			anchorProjectileInstance.queue_free()
+		anchorHitObject.mirrorSwitch(global_position.y, grappleVelocity * directionToAnchor.x, name)
+		queue_free()
+
 
 # Function to track when the anchor disappears
 func anchorRemoval():
@@ -227,4 +246,5 @@ func anchorRemoval():
 
 # In case minamitsu takes too long to grapple (Because she is stuck)
 func _on_grapple_limit_timeout() -> void:
+	grappledMirrorFlag = false
 	anchorCancel()

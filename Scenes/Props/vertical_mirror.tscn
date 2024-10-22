@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnqv3pm4ay68m"]
+
+[ext_resource type="Script" path="res://Scenes/Props/vertical_mirror.gd" id="1_5lfba"]
+[ext_resource type="Texture2D" uid="uid://baqc64l7iir38" path="res://Graphics/Props/MirrorLine.png" id="1_553lj"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3s55h"]
+normal = Vector2(-1, 0)
+
+[node name="VerticalMirror" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_5lfba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_3s55h")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 500, 0, -500)
+width = 4.0
+texture = ExtResource("1_553lj")
+texture_mode = 2
+
+[node name="switchStunTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="switchStunTimer" to="." method="_on_switch_stun_timer_timeout"]
