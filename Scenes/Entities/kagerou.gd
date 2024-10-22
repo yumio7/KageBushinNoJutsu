@@ -6,10 +6,10 @@ extends CharacterBody2D
 
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 50.0			# Base walking Movement speed
-const walkSpeedMax: float = 140.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
+const walkSpeedMax: float = 150.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
 const jumpVelocity: float = -160.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Kagerou cannot fall faster than this.
-const dashVelocity: float = 250.0		# Dash velocity.
+const dashVelocity: float = 300.0		# Dash velocity.
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Tracks state of character for different movement behaviours
@@ -21,6 +21,7 @@ var tweenSound																# Declare a potential tween which modifies sound
 
 # Runs once when the character is instantiated
 func _ready() -> void:
+	currentState = state.Pause
 	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)

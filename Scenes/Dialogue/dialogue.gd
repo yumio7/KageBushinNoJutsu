@@ -88,7 +88,7 @@ func matchSpriteData(Dname, emote):
 			soundToUse = $SoundLib/Minamitsu
 			#$Mitsu.set_emotion(emote)
 		"Kagerou":
-			soundToUse = $SoundLib/Default #$SoundLib/Kagerou
+			soundToUse = $SoundLib/Kagerou
 			$Kag.set_emotion(emote)
 		"Wakasagihime":
 			soundToUse = $SoundLib/Wakasagihime

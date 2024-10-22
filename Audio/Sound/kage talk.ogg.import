@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://rmg6msdcdlwo"
+path="res://.godot/imported/kage talk.ogg-fdff7de0a4016f652611df9ee649e943.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/kage talk.ogg"
+dest_files=["res://.godot/imported/kage talk.ogg-fdff7de0a4016f652611df9ee649e943.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

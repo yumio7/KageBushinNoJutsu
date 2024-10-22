@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dm0hime5lyij4"
+path="res://.godot/imported/murasa talk.ogg-d9997886b3043e984020a5a5615ded8e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/murasa talk.ogg"
+dest_files=["res://.godot/imported/murasa talk.ogg-d9997886b3043e984020a5a5615ded8e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

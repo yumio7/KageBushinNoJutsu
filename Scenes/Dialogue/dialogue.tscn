@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://383vp3jf8417"]
+[gd_scene load_steps=14 format=3 uid="uid://383vp3jf8417"]
 
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
 [ext_resource type="Texture2D" uid="uid://bctmmnep1083p" path="res://Graphics/Dialogue/Kag/spritesheet.png" id="2_7rlrd"]
@@ -8,10 +8,22 @@
 [ext_resource type="FontFile" uid="uid://cwhyduvyjoy24" path="res://Graphics/UI/Pixeltype.ttf" id="3_rl0hr"]
 [ext_resource type="Script" path="res://Scenes/Dialogue/kag.gd" id="3_tcosv"]
 [ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="7_m8igw"]
+[ext_resource type="AudioStream" uid="uid://rmg6msdcdlwo" path="res://Audio/Sound/kage talk.ogg" id="9_ol628"]
+[ext_resource type="AudioStream" uid="uid://dm0hime5lyij4" path="res://Audio/Sound/murasa talk.ogg" id="10_sny74"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uyxkx"]
 atlas = ExtResource("2_7rlrd")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_84xpj"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("9_ol628")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gi8ne"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("10_sny74")
 
 [node name="Dialogue" type="Control" node_paths=PackedStringArray("dialogueComponents")]
 layout_mode = 3
@@ -105,6 +117,19 @@ autowrap_mode = 2
 
 [node name="Default" type="AudioStreamPlayer" parent="SoundLib"]
 stream = ExtResource("7_m8igw")
+bus = &"Sound"
+
+[node name="Kagerou" type="AudioStreamPlayer" parent="SoundLib"]
+stream = SubResource("AudioStreamRandomizer_84xpj")
+volume_db = -0.5
+max_polyphony = 5
+bus = &"Sound"
+
+[node name="Minamitsu" type="AudioStreamPlayer" parent="SoundLib"]
+stream = SubResource("AudioStreamRandomizer_gi8ne")
+volume_db = -0.5
+max_polyphony = 5
+bus = &"Sound"
 
 [node name="SpeakDelay" type="Timer" parent="."]
 wait_time = 0.1

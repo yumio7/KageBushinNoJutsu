@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://gdyq5fwr2l65"]
+[gd_scene load_steps=15 format=3 uid="uid://gdyq5fwr2l65"]
 
-[ext_resource type="Texture2D" uid="uid://lasc352i1s3m" path="res://Graphics/Placeholders/AnchorPlaceholder.png" id="1_cd0ga"]
 [ext_resource type="Script" path="res://Scenes/Entities/anchor_projectile.gd" id="1_s13xn"]
+[ext_resource type="Texture2D" uid="uid://diirddapemhbb" path="res://Graphics/Minamitsu/Anchor_Yeet-Sheet.png" id="2_gm7dh"]
+[ext_resource type="Texture2D" uid="uid://2sd4fb86gicu" path="res://Graphics/Minamitsu/Anchor.png" id="3_o6rov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4njlh"]
 size = Vector2(16, 13)
@@ -9,21 +10,70 @@ size = Vector2(16, 13)
 [sub_resource type="Gradient" id="Gradient_p5k1n"]
 colors = PackedColorArray(0, 0.458824, 0.811765, 1, 0.50294, 0.88683, 0.988118, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e577d"]
-atlas = ExtResource("1_cd0ga")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf3rm"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37xc3"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33g3n"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dtc8"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwvfc"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sdah"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irqa7"]
+atlas = ExtResource("2_gm7dh")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ybo"]
+atlas = ExtResource("3_o6rov")
+region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5mhqm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e577d")
+"texture": SubResource("AtlasTexture_jf3rm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37xc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33g3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dtc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwvfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sdah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irqa7")
 }],
 "loop": true,
 "name": &"Active",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8ybo")
+}],
 "loop": true,
 "name": &"Attached",
 "speed": 5.0
@@ -45,6 +95,7 @@ gradient = SubResource("Gradient_p5k1n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -0.5)
+rotation = -0.785398
 sprite_frames = SubResource("SpriteFrames_5mhqm")
 animation = &"Active"
 flip_h = true

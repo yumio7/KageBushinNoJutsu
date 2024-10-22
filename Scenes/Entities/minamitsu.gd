@@ -6,10 +6,10 @@ extends CharacterBody2D
 
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 40.0			# Base walking Movement speed
-const walkSpeedMax: float = 100.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
+const walkSpeedMax: float = 85.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
 const jumpVelocity: float = -210.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Minamitsu cannot fall faster than this.
-const anchorVelocity: float = 500.0		# Velocity at which the anchor flies through the air
+const anchorVelocity: float = 400.0		# Velocity at which the anchor flies through the air
 const grappleVelocity: float = 600.0	# Velocity at which Minamitsu is pulled to the anchor
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -46,6 +46,7 @@ func _physics_process(delta: float) -> void:
 		anchorProjectileInstance.throwVelocity = anchorVelocity * directionToThrow
 		anchorProjectileInstance.trackedPlayer = $"."	# References the current node the script is attached to (CharacterBody2D named Minamitsu)
 		anchorProjectileInstance.body_entered.connect(anchorHit) # Connect anchor's body_entered signal to function, so minamitsu can respond to what the anchor hits
+		anchorProjectileInstance.tree_exiting.connect(anchorRemoval) # Make sure that Minamitsu can respond to anchor exitting the tree
 		$"..".add_child(anchorProjectileInstance)		# Sets the anchor instance's parent to the parent node (SHOULD BE ENTITIES NODE2D IN LEVEL)
 		anchorProjectileInstance.position = $AnchorStartPos.global_position	#AnchorStartPos is a node2D child under minamitsu which is slightly offset in front of her
 		
@@ -112,31 +113,51 @@ func _physics_process(delta: float) -> void:
 	# Flip sprite depending on horizontal velocity, additionally set the anchorStartPosition to the other side
 	if walkDirection > 0:
 		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.offset.x = 0
+		$Anchor.flip_h = true
 		$AnchorStartPos.position.x = 4
 	elif walkDirection < 0:
 		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.offset.x = 3
+		$Anchor.flip_h = false
 		$AnchorStartPos.position.x = -4
 
 	# Character will slide along surfaces when moving
 	move_and_slide()
 
+# Anchor tween
+func anchorTweener(posY, rotDeg):
+	if $AnimatedSprite2D.flip_h == true: rotDeg = rotDeg * -1
+
+	if $Anchor.position.y != posY:
+		var anchorTween = $Anchor.create_tween()
+		anchorTween.tween_property($Anchor, "position", Vector2(0, posY), .2)
+		anchorTween.parallel().tween_property($Anchor, "rotation_degrees", rotDeg, .2)
+
 # Specific behaviours for each state
 func stateIdle():
 	$AnimatedSprite2D.play("Idle")
+	anchorTweener(-5, 0)
 	
 func stateWalk():
 	$AnimatedSprite2D.play("Walk")
+	anchorTweener(-5, 0)
 
 func stateJump(delta):
 	$AnimatedSprite2D.play("Jump")
+	anchorTweener(-4, -15)
+
 	applyGravity(delta) # Gravity
 
 func stateFall(delta):
 	$AnimatedSprite2D.play("Fall")
+	anchorTweener(-12, 15)
+
 	applyGravity(delta) # Gravity
 	
 func stateAbility():
-	$AnimatedSprite2D.play("Idle")
+	$Anchor.visible = false
+	$AnimatedSprite2D.play("Jump")
 
 # During a paused state, the character will still be affected by gravity and will play an idle animation
 func statePause(delta):
@@ -145,7 +166,8 @@ func statePause(delta):
 
 # Move minamitsu towards the anchor until she stops or gets near enough to it
 func stateGrapple():
-	$AnimatedSprite2D.play("Idle")
+	$Anchor.visible = false
+	$AnimatedSprite2D.play("Fall")
 	var directionToAnchor = position.direction_to(anchorProjectileInstance.global_position)
 	var distanceToAnchor = position.distance_to(anchorProjectileInstance.global_position)
 	velocity = directionToAnchor * grappleVelocity
@@ -197,6 +219,10 @@ func anchorCancel():
 	currentState = state.Idle
 	anchorProjectileInstance.currentState = 2 # This sets anchor to a retracting (2) state. This is ugly but if it works it works
 	$Timers/AnchorCooldown.start()
+
+# Function to track when the anchor disappears
+func anchorRemoval():
+	$Anchor.visible = true
 	anchorProjectileInstance = null
 
 # In case minamitsu takes too long to grapple (Because she is stuck)

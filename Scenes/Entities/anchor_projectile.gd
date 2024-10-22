@@ -6,7 +6,7 @@ extends Area2D
 const retractVelocity: float = 600	# Speed that the anchor retracts to the player
 
 # Variables
-var throwVelocity: float = 600				# Will be set when instantiated in minamitsu.gd
+var throwVelocity: float = 400				# Will be set when instantiated in minamitsu.gd
 var trackedPlayer: CharacterBody2D = null	# Will be set when instantiated in minamitsu.gd, will track the player position when retracting
 
 # Track projectile behaviour
@@ -38,12 +38,12 @@ func stateActive(delta):
 	position.x += throwVelocity * delta
 
 func stateAttached():
-	$AnimatedSprite2D.play("Active") # TODO: SET TO ATTACHED ANIMATION WHEN THAT IS A THING
+	$AnimatedSprite2D.play("Attached")
 	pass
 
 # Move back to the player position, and if the distance between them is below a threshold it deletes itself
 func stateRetract(delta):
-	$AnimatedSprite2D.play("Active") # TODO: SET TO ATTACHED ANIMATION WHEN THAT IS A THING
+	$AnimatedSprite2D.play("Attached")
 	$AnimatedSprite2D.modulate = Color(0.5, 0.5, 0.5) # Gray out the projectile
 	# Thank god godot has functions to make me not have to do vector math EYAHAHAH I love vector math
 	var directionToPlayer = position.direction_to(trackedPlayer.global_position)
