@@ -23,14 +23,14 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 	if currentCharName == "Kagerou":
 		var minamitsuInstance = minamitsuScene.instantiate()
 		minamitsuInstance.currentState = 5  # Set her to pause state temporarily. The switchStunTimer will switch her back to idle state afterwards
-		$"..".add_child(minamitsuInstance)
+		$"../ControlledCharacter".add_child(minamitsuInstance)
 		minamitsuInstance.position = Vector2(global_position.x, charPositionY)
 		minamitsuInstance.velocity = Vector2(charVelocity, 0)
 		trackedCharInstance = minamitsuInstance
 	elif currentCharName == "Minamitsu":
 		var kagerouInstance = kagerouScene.instantiate()
 		kagerouInstance.currentState = 5 # Set her to pause state temporarily. The switchStunTimer will switch her back to idle state afterwards
-		$"..".add_child(kagerouInstance)
+		$"../ControlledCharacter".add_child(kagerouInstance)
 		kagerouInstance.position = Vector2(global_position.x, charPositionY)
 		kagerouInstance.velocity = Vector2(charVelocity, 0)
 		trackedCharInstance = kagerouInstance

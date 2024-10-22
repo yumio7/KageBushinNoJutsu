@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		currentState = state.Ability
 		velocity = Vector2(0, 0)
 		$Timers/AnchorLimit.start()
+		$Sounds/AnchorThrowSFX.play()
 
 		# Create instance of anchor and attaches the velocity (Depends on where character faces) and character node to it.
 		anchorProjectileInstance = anchorProjectile.instantiate()

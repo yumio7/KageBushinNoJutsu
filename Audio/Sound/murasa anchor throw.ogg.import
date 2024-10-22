@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dfptxsbgypvku"
+path="res://.godot/imported/murasa anchor throw.ogg-139b61129031f8de0713f0f1b80d3552.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/murasa anchor throw.ogg"
+dest_files=["res://.godot/imported/murasa anchor throw.ogg-139b61129031f8de0713f0f1b80d3552.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
