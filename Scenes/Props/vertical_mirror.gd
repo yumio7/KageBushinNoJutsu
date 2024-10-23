@@ -12,6 +12,8 @@ var trackedCharInstance = null
 # charCurrent refers to the current character. All parameters are passed to this function by the controlled character
 func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 
+	$SwapSFX.play()
+
     # Depending on the normal of the worldboundary, switch it
 	if $CollisionShape2D.shape.normal == Vector2(-1, 0):
 		$CollisionShape2D.shape.normal = Vector2(1, 0)

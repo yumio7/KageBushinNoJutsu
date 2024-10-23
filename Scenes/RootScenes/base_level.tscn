@@ -1,13 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdlkrwqu8gwex"]
+[gd_scene load_steps=2 format=3 uid="uid://bdlkrwqu8gwex"]
 
-[ext_resource type="Texture2D" uid="uid://drucm1u5f45bs" path="res://Graphics/Placeholders/andesite_top.png" id="1_dik7g"]
-[ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="2_12y2q"]
 [ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="2_ngkrh"]
-[ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="2_uwpg5"]
-[ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="3_e0gg3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_155ek"]
-size = Vector2(16, 16)
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -17,34 +10,10 @@ size = Vector2(16, 16)
 
 [node name="Foreground" type="Node2D" parent="."]
 
-[node name="TileMapLayers" type="Node2D" parent="Foreground"]
-
-[node name="Ground" type="StaticBody2D" parent="Foreground"]
-position = Vector2(121, 232)
-scale = Vector2(500, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
-shape = SubResource("RectangleShape2D_155ek")
-
-[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
-texture = ExtResource("1_dik7g")
-
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="ControlledCharacter" type="Node2D" parent="Entities"]
 
-[node name="Kagerou" parent="Entities/ControlledCharacter" instance=ExtResource("2_uwpg5")]
-position = Vector2(26, 188)
-
-[node name="VerticalMirror" parent="Entities" instance=ExtResource("2_12y2q")]
-position = Vector2(240, 0)
-
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Dialogue" parent="HUD" node_paths=PackedStringArray("dialogueComponents") instance=ExtResource("2_ngkrh")]
-dialogueComponents = [NodePath("CutsceneComponent")]
-
-[node name="CutsceneComponent" parent="HUD/Dialogue" instance=ExtResource("3_e0gg3")]
-nameSequence = Array[String](["Kagerou", "Kagerou", "Kagerou", "Kagerou", "Kagerou", "Minamitsu"])
-emoteSequence = Array[String](["happy2", "mad", "shock", "mad2", "mad2", ""])
-dialogueSequence = Array[String](["hey murasa", "eat ur greens", "what do you mean, no?", "its healthy for you", "You... You... You really... You think you can not eat your greens and get away with it? You really think so? You scum. Trash. I will destroy you. I do not care. One who does not eat their greens in not worthy of life. I will send you back down into the depths of the earth where you belong. How dare you... How dare you...! How dare you! Prepare yourself. You have committed something unspeakable, and I will see that you are given due punishment!", "Haha, that's a skill issue. Now if you'll excuse me, I have a pizza to order."])
+[node name="Dialogue" parent="HUD" instance=ExtResource("2_ngkrh")]

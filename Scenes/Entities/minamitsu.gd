@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 40.0			# Base walking Movement speed
-const walkSpeedMax: float = 85.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
+const walkSpeedMax: float = 100.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
 const jumpVelocity: float = -210.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Minamitsu cannot fall faster than this.
 const anchorVelocity: float = 400.0		# Velocity at which the anchor flies through the air
@@ -60,10 +60,9 @@ func _physics_process(delta: float) -> void:
 		# Check if player is holding down movement control. Move them if yes.
 		walkDirection = Input.get_axis("Left", "Right")
 		# Track if user is making walking input and moves character in that direction.
-		if walkDirection and abs(velocity.x) < walkSpeedMax:
-			velocity.x += walkDirection * walkSpeed
-		else:
-			velocity.x = move_toward(velocity.x, 0, walkSpeed)
+		if walkDirection and abs(velocity.x) < walkSpeedMax: velocity.x += walkDirection * walkSpeed
+		elif walkDirection and abs(velocity.x) > walkSpeedMax: velocity.x = walkSpeedMax * walkDirection
+		else: velocity.x = move_toward(velocity.x, 0, walkSpeed)
 		
 		# Determine if the player can jump with this variable
 		var canJump = false
@@ -202,12 +201,19 @@ func anchorHit(body):
 	
 	# ONLY PROCEED IF THE ANCHOR EXISTS AND ITS STATE IS ACTIVE (0)
 	if anchorProjectileInstance != null and anchorProjectileInstance.currentState == 0:
+		
+		var anchorCollideEnvironmentTileMap = 0
+		var anchorCollideEnvironment = false
+		var anchorCollideInteractible = false
 
 		# Depending on if the hit body's collision layer (Environment or interactible), the anchor should perform different actions
-		var anchorCollideEnvironment: bool = body.get_collision_layer_value(2)
-		var anchorCollideInteractible: bool = body.get_collision_layer_value(3)
+		if body is TileMapLayer:
+			anchorCollideEnvironmentTileMap = body.tile_set.get_physics_layer_collision_layer(0)
+		else:
+			anchorCollideEnvironment = body.get_collision_layer_value(2)
+			anchorCollideInteractible = body.get_collision_layer_value(3)
 		# If the layer is 2 (Environment), always attach the anchor and grapple minamitsu toward it
-		if anchorCollideEnvironment:
+		if anchorCollideEnvironment == true or anchorCollideEnvironmentTileMap == 2:
 			$Timers/AnchorLimit.stop()
 			anchorProjectileInstance.currentState = 1 # This sets anchor to an attached (1) state. This is ugly but it works
 			currentState = state.Grapple

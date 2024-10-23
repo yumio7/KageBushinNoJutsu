@@ -50,11 +50,9 @@ func _physics_process(delta: float) -> void:
 		# Check if player is holding down movement control. Move them if yes.
 		walkDirection = Input.get_axis("Left", "Right")
 		# Track if user is making walking input and moves character in that direction.
-		if walkDirection and abs(velocity.x) < walkSpeedMax:
-			velocity.x += walkDirection * walkSpeed
-		else:
-			velocity.x = move_toward(velocity.x, 0, walkSpeed)
-		
+		if walkDirection and abs(velocity.x) < walkSpeedMax: velocity.x += walkDirection * walkSpeed
+		elif walkDirection and abs(velocity.x) > walkSpeedMax: velocity.x = walkSpeedMax * walkDirection
+		else: velocity.x = move_toward(velocity.x, 0, walkSpeed)
 		
 		var canJump = false		# Determine if the player can jump with this variable
 		# Determine if coyote time is allowed by comparing previous floor state with current ground state

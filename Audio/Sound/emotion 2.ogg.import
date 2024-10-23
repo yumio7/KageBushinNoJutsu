@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b4nlybqa51yfy"
+path="res://.godot/imported/emotion 2.ogg-edbc4e2bf57710208d7e320871d01310.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/emotion 2.ogg"
+dest_files=["res://.godot/imported/emotion 2.ogg-edbc4e2bf57710208d7e320871d01310.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

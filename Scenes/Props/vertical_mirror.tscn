@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnqv3pm4ay68m"]
+[gd_scene load_steps=6 format=3 uid="uid://cnqv3pm4ay68m"]
 
 [ext_resource type="Script" path="res://Scenes/Props/vertical_mirror.gd" id="1_5lfba"]
 [ext_resource type="Texture2D" uid="uid://baqc64l7iir38" path="res://Graphics/Props/MirrorLine.png" id="1_553lj"]
+[ext_resource type="AudioStream" uid="uid://ckiyqempjwlge" path="res://Audio/Sound/character switch.ogg" id="3_jk0bq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3s55h"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j2xil"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("3_jk0bq")
 
 [node name="VerticalMirror" type="StaticBody2D"]
 collision_layer = 4
@@ -23,5 +29,10 @@ texture_mode = 2
 [node name="switchStunTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="SwapSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_j2xil")
+volume_db = 0.5
+bus = &"Sound"
 
 [connection signal="timeout" from="switchStunTimer" to="." method="_on_switch_stun_timer_timeout"]
