@@ -19,9 +19,13 @@ var walkDirection = 0														# Keep track of whether controls for walking 
 var previousFloorState = false												# Tracks the previous grounded state of player. Used for Coyote Time
 var tweenSound																# Declare a potential tween which modifies sound
 var mirrorTransitioning = false												# Prevents multiple mirror activations when kagerou dashes into it
+var timeInDash: int = 0;
+var dashFXScene = preload("res://Scenes/Entities/kagerou_dash_fx.tscn")
+var dashParticleScene = preload("res://Scenes/Entities/kagerou_dash_particles.tscn")
 
 # Runs once when the character is instantiated
 func _ready() -> void:
+	#currentState = state.Pause
 	pass # Nothing happens here for now
 
 # Runs every physics frame (60fps)
@@ -40,6 +44,7 @@ func _physics_process(delta: float) -> void:
 		$Sounds/DashSFX.play()
 		$Timers/DashDuration.start()
 		$Timers/DashCooldown.start()
+		addDashParticles(directionToDash);
 	# If the user is using an ability, lock all other movement
 	if currentState != state.Ability and currentState != state.Pause:
 		# Check if player is holding down movement control. Move them if yes.
@@ -105,6 +110,20 @@ func _physics_process(delta: float) -> void:
 	#		set_collision_layer_value(3, true);
 	#		specialCollision(delta);
 
+	
+	match currentState:
+		0, 1, 2, 3: 
+			$AnimatedSprite2D.material.set_shader_parameter("colourMultiplier", 1.0);
+			timeInDash = 0;
+		4: 
+			timeInDash += 1;
+			specialCollision(directionToDash, delta);
+			$AnimatedSprite2D.material.set_shader_parameter("colourMultiplier", (timeInDash as float)/12);
+			if (timeInDash % 2 == 0):
+				addDashFX();
+			
+		
+	
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
 	# Flip sprite depending on horizontal velocity
@@ -140,6 +159,23 @@ func stateAbility(directionToDash, delta):
 func statePause(delta):
 	$AnimatedSprite2D.play("Idle")
 	applyGravity(delta) # Gravity
+
+func addDashFX():
+	var fx: AnimatedSprite2D = dashFXScene.instantiate()
+	get_parent().get_parent().add_child(fx)
+	var frame = $AnimatedSprite2D.get_frame();
+	fx.z_index = self.z_index-1;
+	fx.set_frame(frame);
+	fx.set_global_position($AnimatedSprite2D.global_position);
+	fx.flip_h = $AnimatedSprite2D.flip_h
+	fx.material.set_shader_parameter("lifespan", 15);
+	fx.material.set_shader_parameter("timer", timeInDash);
+
+func addDashParticles(directionToDash):
+	var particles: GPUParticles2D = dashParticleScene.instantiate();
+	self.add_child(particles);
+	particles.emitting = true;
+	particles.rotation_degrees = 0 if directionToDash == -1 else 180;
 
 func specialCollision(directionToDash, delta):
 	for i in get_slide_collision_count():
