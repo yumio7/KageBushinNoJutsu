@@ -30,11 +30,11 @@ func dialogueSequence(desiredComponentIndex):
 	visible = true
 	#$Skip.visible = true
 	var tweenIn = create_tween()
-	var tweenKagIn = create_tween()
-	var tweenMitsuIn = create_tween()
+	var tweenLeftSpriteIn = create_tween()
+	var tweenRightSpriteIn = create_tween()
 	tweenIn.tween_property($DialoguePanel, "position", Vector2(0, 0), .2).set_trans(Tween.TRANS_QUAD)
-	tweenKagIn.tween_property($Kag, "position", Vector2(35, 34), .2).set_trans(Tween.TRANS_QUAD)
-	tweenMitsuIn.tween_property($Mitsu, "position", Vector2(300, 34), .2).set_trans(Tween.TRANS_QUAD)
+	tweenLeftSpriteIn.tween_property($LeftSprite, "position", Vector2(35, 34), .2).set_trans(Tween.TRANS_QUAD)
+	tweenRightSpriteIn.tween_property($RightSprite, "position", Vector2(300, 34), .2).set_trans(Tween.TRANS_QUAD)
 	activeDialogue = true
 	dialogueIndex = 0
 	usedCompInd = desiredComponentIndex
@@ -52,11 +52,11 @@ func dialogueSequence(desiredComponentIndex):
 	#skip = false
 	activeDialogue = false
 	var tweenOut = create_tween()
-	var tweenKagOut = create_tween()
-	var tweenMitsuOut = create_tween()
+	var tweenLeftSpriteOut = create_tween()
+	var tweenRightSpriteOut = create_tween()
 	tweenOut.tween_property($DialoguePanel, "position", Vector2(0, 120), .2).set_trans(Tween.TRANS_QUAD)
-	tweenKagOut.tween_property($Kag, "position", Vector2(-170, 52), .2).set_trans(Tween.TRANS_QUAD)
-	tweenMitsuOut.tween_property($Mitsu, "position", Vector2(500, 52), .2).set_trans(Tween.TRANS_QUAD)
+	tweenLeftSpriteOut.tween_property($LeftSprite, "position", Vector2(-170, 52), .2).set_trans(Tween.TRANS_QUAD)
+	tweenRightSpriteOut.tween_property($RightSprite, "position", Vector2(500, 52), .2).set_trans(Tween.TRANS_QUAD)
 	tweenOut.tween_callback(invisibleDialogue)
 	endDialogue.emit()
 	
@@ -86,18 +86,28 @@ func matchSpriteData(Dname, emote):
 	match Dname:
 		"Minamitsu":
 			soundToUse = $SoundLib/Minamitsu
-			#$Mitsu.set_emotion(emote)
+			$RightSprite.set_sprite(Dname)
+			$RightSprite.set_emotion(emote)
 		"Kagerou":
 			soundToUse = $SoundLib/Kagerou
-			$Kag.set_emotion(emote)
+			$LeftSprite.set_sprite(Dname)
+			$LeftSprite.set_emotion(emote)
 		"Wakasagihime":
 			soundToUse = $SoundLib/Wakasagihime
+			$RightSprite.set_sprite(Dname)
+			$RightSprite.set_emotion(emote)
 		"Nazrin":
 			soundToUse = $SoundLib/Nazrin
+			$LeftSprite.set_sprite(Dname)
+			$LeftSprite.set_emotion(emote)
 		"Seija":
 			soundToUse = $SoundLib/Seija
+			$LeftSprite.set_sprite(Dname)
+			$LeftSprite.set_emotion(emote)
 		"Shinmyoumaru":
 			soundToUse = $SoundLib/Shinmyoumaru
+			$RightSprite.set_sprite(Dname)
+			$RightSprite.set_emotion(emote)
 		_:
 			soundToUse = $SoundLib/Default
 

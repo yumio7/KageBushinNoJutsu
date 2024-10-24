@@ -1,19 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://383vp3jf8417"]
+[gd_scene load_steps=15 format=3 uid="uid://383vp3jf8417"]
 
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
-[ext_resource type="Texture2D" uid="uid://bctmmnep1083p" path="res://Graphics/Dialogue/Kag/spritesheet.png" id="2_7rlrd"]
+[ext_resource type="Texture2D" uid="uid://dg4o1eacge1at" path="res://Graphics/Dialogue/Sprites/Kagerou.tres" id="2_7bp1h"]
 [ext_resource type="Texture2D" uid="uid://0yak3a2pwv7w" path="res://Graphics/Dialogue/Dialogue Box.png" id="2_hvfeh"]
 [ext_resource type="Texture2D" uid="uid://ckkkfg1aiwsyv" path="res://Graphics/Dialogue/placeholder/image.png" id="3_d3v05"]
 [ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="3_pbnsd"]
 [ext_resource type="FontFile" uid="uid://cwhyduvyjoy24" path="res://Graphics/UI/Pixeltype.ttf" id="3_rl0hr"]
-[ext_resource type="Script" path="res://Scenes/Dialogue/kag.gd" id="3_tcosv"]
+[ext_resource type="Script" path="res://Scenes/Dialogue/LeftSprite.gd" id="3_tcosv"]
+[ext_resource type="Script" path="res://Scenes/Dialogue/RightSprite.gd" id="5_ar06d"]
 [ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="7_m8igw"]
 [ext_resource type="AudioStream" uid="uid://rmg6msdcdlwo" path="res://Audio/Sound/kage talk.ogg" id="9_ol628"]
 [ext_resource type="AudioStream" uid="uid://dm0hime5lyij4" path="res://Audio/Sound/murasa talk.ogg" id="10_sny74"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uyxkx"]
-atlas = ExtResource("2_7rlrd")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5gtc"]
+atlas = ExtResource("3_d3v05")
+region = Rect2(103, 111, 128, 128)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_84xpj"]
 random_pitch = 1.05
@@ -35,7 +36,7 @@ grow_vertical = 2
 script = ExtResource("1_cmfh0")
 dialogueComponents = [null]
 
-[node name="Kag" type="TextureRect" parent="."]
+[node name="LeftSprite" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -47,10 +48,10 @@ offset_right = -282.0
 offset_bottom = -108.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_uyxkx")
+texture = ExtResource("2_7bp1h")
 script = ExtResource("3_tcosv")
 
-[node name="Mitsu" type="TextureRect" parent="."]
+[node name="RightSprite" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -58,12 +59,12 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 260.0
 offset_top = 34.0
-offset_right = 598.0
-offset_bottom = 148.0
+offset_right = 388.0
+offset_bottom = -108.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.389394, 0.389394)
-texture = ExtResource("3_d3v05")
+texture = SubResource("AtlasTexture_t5gtc")
+script = ExtResource("5_ar06d")
 
 [node name="DialoguePanel" type="TextureRect" parent="."]
 layout_mode = 1
