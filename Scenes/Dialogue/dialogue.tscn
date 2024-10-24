@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://383vp3jf8417"]
+[gd_scene load_steps=17 format=3 uid="uid://383vp3jf8417"]
 
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
 [ext_resource type="Texture2D" uid="uid://dg4o1eacge1at" path="res://Graphics/Dialogue/Sprites/Kagerou.tres" id="2_7bp1h"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://rmg6msdcdlwo" path="res://Audio/Sound/kage talk.ogg" id="9_ol628"]
 [ext_resource type="AudioStream" uid="uid://dm0hime5lyij4" path="res://Audio/Sound/murasa talk.ogg" id="10_sny74"]
 [ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="12_e3vv7"]
+[ext_resource type="AudioStream" uid="uid://c5oddv1a2sral" path="res://Audio/Sound/game-bump.mp3" id="13_uvivl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5gtc"]
 atlas = ExtResource("3_d3v05")
@@ -137,6 +138,7 @@ bus = &"Sound"
 stream = ExtResource("12_e3vv7")
 
 [node name="Impact" type="AudioStreamPlayer" parent="SoundLib"]
+stream = ExtResource("13_uvivl")
 
 [node name="SpeakDelay" type="Timer" parent="."]
 wait_time = 0.1
