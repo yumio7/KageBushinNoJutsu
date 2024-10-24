@@ -2,6 +2,9 @@ extends StaticBody2D
 class_name VerticalMirror
 # This vertical mirror will respond accordingly when the controlled character ability contacts it (kagerou dash, minamitsu grapple)
 
+# Mirror dimensions
+const mirrorBaseUpPoint: Vector2 = Vector2(0, 0)
+
 # SET THIS OR ELSE CAMERA FUNCTIONALITY MIGHT BE BUGGY
 @export var starterCharacter: CharacterBody2D = null
 @export var cameraSettingComponent: Node = null
@@ -29,6 +32,11 @@ func _ready() -> void:
 		camNewOffset = cameraSettingComponent.newOffset
 
 	trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+
+# Update the mirror drawing to match the player
+func _physics_process(delta: float) -> void:
+	pass
+
 
 # charCurrent refers to the current character. All parameters are passed to this function by the controlled character
 func mirrorSwitch(charPositionY, charVelocity, currentCharName):

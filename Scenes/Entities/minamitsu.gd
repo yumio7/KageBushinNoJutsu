@@ -9,7 +9,7 @@ const walkSpeed: float = 40.0			# Base walking Movement speed
 const walkSpeedMax: float = 100.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
 const jumpVelocity: float = -210.0		# Jump velocity. It is negative because in Godot up is negative y.
 const fallSpeedMax: float = 200.0		# Maximum fall velocity. Minamitsu cannot fall faster than this.
-const anchorVelocity: float = 400.0		# Velocity at which the anchor flies through the air
+const anchorVelocity: float = 300.0		# Velocity at which the anchor flies through the air
 const grappleVelocity: float = 500.0	# Velocity at which Minamitsu is pulled to the anchor
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
