@@ -204,3 +204,11 @@ func resetJumpSFX():
 
 func _on_dash_duration_timeout():
 	currentState = state.Idle
+
+# Function to set camera limits
+func setCameraLimits(left, right, bottom, top, newOffset):
+	$Camera2D.limit_left = left
+	$Camera2D.limit_right = right
+	$Camera2D.limit_bottom = bottom
+	$Camera2D.limit_top = top
+	$Camera2D.offset = newOffset

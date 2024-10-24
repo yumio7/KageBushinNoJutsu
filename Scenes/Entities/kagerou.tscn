@@ -287,4 +287,11 @@ bus = &"Sound"
 stream = SubResource("AudioStreamRandomizer_s0iv2")
 bus = &"Sound"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -20)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+rotation_smoothing_enabled = true
+
 [connection signal="timeout" from="Timers/DashDuration" to="." method="_on_dash_duration_timeout"]
