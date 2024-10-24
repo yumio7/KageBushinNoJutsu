@@ -12,6 +12,7 @@ var usedCompInd = 0
 var nameTable: Array = []
 var emoteTable: Array = []
 var lineTable: Array = []
+var sfxTable: Array = []
 @onready var soundToUse = $SoundLib/Default
 var dialogueIndex = 0
 var activeDialogue = false
@@ -42,9 +43,10 @@ func dialogueSequence(desiredComponentIndex):
 	nameTable = usedComponent.nameSequence
 	emoteTable = usedComponent.emoteSequence
 	lineTable = usedComponent.dialogueSequence
+	sfxTable = usedComponent.sfxSequence
 	
 	for i in nameTable.size():
-		writeDialogue(nameTable[dialogueIndex], emoteTable[dialogueIndex], lineTable[dialogueIndex])
+		writeDialogue(nameTable[dialogueIndex], emoteTable[dialogueIndex], sfxTable[i], lineTable[dialogueIndex])
 		await proceedDialogue
 		#if skip == true: break
 	
@@ -65,8 +67,9 @@ func invisibleDialogue():
 	visible = false
 
 # Write dialogue.
-func writeDialogue(Dname, emote, _line):
+func writeDialogue(Dname, emote, sfx, _line):
 	$SpeakDelay.start()
+	matchSfx(sfx)
 	matchSpriteData(Dname, emote)
 	currentLine = ""
 	$DialoguePanel/Name.text = Dname
@@ -110,6 +113,16 @@ func matchSpriteData(Dname, emote):
 			$RightSprite.set_emotion(emote)
 		_:
 			soundToUse = $SoundLib/Default
+
+func matchSfx(SFXname):
+	match SFXname:
+		"Shock":
+			$SoundLib/Shock.play()
+		"Impact":
+			$SoundLib/Impact.play()
+		_:
+			pass
+
 
 func _input(event):
 	if event.is_action_released("ui_accept") and activeDialogue == true:
