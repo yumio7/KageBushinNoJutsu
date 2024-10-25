@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnhrfnr4s6nnn"]
+[gd_scene load_steps=4 format=3 uid="uid://cnhrfnr4s6nnn"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_xx30u"]
+[ext_resource type="Script" path="res://Scenes/RootScenes/intro.gd" id="2_6nra8"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="2_kpnkl"]
 
 [node name="Intro" instance=ExtResource("1_xx30u")]
+script = ExtResource("2_6nra8")
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 dialogueComponents = [NodePath("CutsceneComponent")]
@@ -13,3 +15,5 @@ nameSequence = Array[String](["Kagerou", "Kagerou", "Kagerou", "Minamitsu", "Min
 emoteSequence = Array[String](["neutral", "happy", "shock", "mad", "shock", "shock", "happy", "happy2", "mad", "happy", "happy", "happy2", "neutral", "sad", "happy", "sad", "mad", "neutral", "happy", "shock", "happy2", "happy", "shock", "shock"])
 dialogueSequence = Array[String](["This looks like the place Rinnosuke told me about. Big temple, not too far from the village...", "I wonder if this nun can actually help me. Rijiri, no, Hijiri. Yes that was her name.", "*thud*", "Hey! Watch where you're sweeping Kyouk- Oh.", "You're not Kyouko... Kinda look like her though.", "Oh! S-Sorry. I was lost in thought.", "Hey, you don't happen to be Hijiri, do you?", "*Laughs*", "Hey, what's so funny?", "Sorry, sorry. I was just imagining Byakuren dressed up like me. But no, She's actually out right now. She should be back soon though if you want to stick around.", "Name's Minamitsu by the way. What bring's you to Myouren Temple?", "Ah, so this is the right place after all. I'm Kagerou, someone recommended I seek out the nun Hijiri to help with a personal problem.", "Eh? And what might that be?", "Well, uhm, I'm a werewolf.", "Your ears and tail told me that much, y'know. How's that a problem though? plenty of youkai to go around here.", "Ah, well its more like people keep getting scared I'm going to eat them!", "I only kind of look like a wolf though! Even on the way here I had to pass by the Village and I kept getting looks from people out by the gates.", "Hmm, I see the issue now.", "Y'know, you're kinda like me. I'm a big mean ship sinking phantom, and to really nail it down I left my human past a loooo~ng time ago.", "Woah, I would have never guessed with how human you look. Do you think Hijiri can really help me though?", "There's no doubt in my mind, I owe my life to her.", "I simply wouldnt be who I am today without her help.", "Hey, wasnt it getting late? Why's the sky so bright?", "Huh? What do you mea-"])
 sfxSequence = Array[String](["", "", "Impact", "", "Shock", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
+
+[connection signal="endDialogue" from="HUD/Dialogue" to="." method="_on_dialogue_end_dialogue"]

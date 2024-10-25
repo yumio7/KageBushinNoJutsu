@@ -1,97 +1,158 @@
 [gd_scene load_steps=7 format=3 uid="uid://bml40bdytp3gb"]
 
-[ext_resource type="Texture2D" uid="uid://bdej44ojb18g2" path="res://Graphics/Placeholders/logo.png" id="1_b0pat"]
 [ext_resource type="Script" path="res://Scenes/mainmenu.gd" id="1_esexo"]
-[ext_resource type="Texture2D" uid="uid://clekrcpdjwfdr" path="res://Graphics/Placeholders/button.png" id="2_cna7s"]
-[ext_resource type="Texture2D" uid="uid://bwrom5pwh4jff" path="res://Graphics/Placeholders/pressed.png" id="4_xr7yu"]
-[ext_resource type="Texture2D" uid="uid://6cf2l48dvf4v" path="res://Graphics/Placeholders/disabled.png" id="5_gu4o0"]
-[ext_resource type="Texture2D" uid="uid://op8rjldao14k" path="res://Graphics/Placeholders/selected.png" id="6_u2gbt"]
+[ext_resource type="Texture2D" uid="uid://dctll3np6o6y4" path="res://Graphics/UI/Button.png" id="2_h2lrw"]
+[ext_resource type="Texture2D" uid="uid://p05poolegoqj" path="res://Graphics/UI/Pressed.png" id="4_s1wx5"]
+[ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="5_10biw"]
+[ext_resource type="Texture2D" uid="uid://csc5k1pa5bqwn" path="res://Graphics/Dialogue/placeholder/s-l1200.jpg" id="5_tw8ms"]
+[ext_resource type="Texture2D" uid="uid://d2o5koo3lft3t" path="res://Graphics/UI/Selected.png" id="5_v812k"]
 
 [node name="Mainmenu" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -20.0
-offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 40
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_bottom = 20
 script = ExtResource("1_esexo")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="MenuButtons" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="logo" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 175)
-layout_mode = 2
-texture = ExtResource("1_b0pat")
-expand_mode = 1
-
-[node name="MenuButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
-theme_override_constants/separation = 18
 alignment = 1
 
-[node name="play" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
-custom_minimum_size = Vector2(175, 50)
+[node name="play" type="TextureButton" parent="HBoxContainer/MenuButtons"]
+clip_contents = true
+custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
 focus_neighbor_top = NodePath("../credits")
 focus_neighbor_bottom = NodePath("../settings")
-texture_normal = ExtResource("2_cna7s")
-texture_pressed = ExtResource("4_xr7yu")
-texture_disabled = ExtResource("5_gu4o0")
-texture_focused = ExtResource("6_u2gbt")
-ignore_texture_size = true
-stretch_mode = 0
+texture_normal = ExtResource("2_h2lrw")
+texture_pressed = ExtResource("4_s1wx5")
+texture_focused = ExtResource("5_v812k")
+stretch_mode = 3
 
-[node name="settings" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
-custom_minimum_size = Vector2(175, 50)
+[node name="Label" type="Label" parent="HBoxContainer/MenuButtons/play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -5.0
+offset_right = 12.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_10biw")
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="settings" type="TextureButton" parent="HBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
 focus_neighbor_top = NodePath("../play")
 focus_neighbor_bottom = NodePath("../quit")
-texture_normal = ExtResource("2_cna7s")
-texture_pressed = ExtResource("4_xr7yu")
-texture_disabled = ExtResource("5_gu4o0")
-texture_focused = ExtResource("6_u2gbt")
-ignore_texture_size = true
-stretch_mode = 0
+texture_normal = ExtResource("2_h2lrw")
+texture_pressed = ExtResource("4_s1wx5")
+texture_focused = ExtResource("5_v812k")
+stretch_mode = 3
 
-[node name="quit" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
-custom_minimum_size = Vector2(175, 50)
+[node name="Label" type="Label" parent="HBoxContainer/MenuButtons/settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -5.0
+offset_right = 23.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_10biw")
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="quit" type="TextureButton" parent="HBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
 focus_neighbor_top = NodePath("../settings")
 focus_neighbor_bottom = NodePath("../credits")
-texture_normal = ExtResource("2_cna7s")
-texture_pressed = ExtResource("4_xr7yu")
-texture_disabled = ExtResource("5_gu4o0")
-texture_focused = ExtResource("6_u2gbt")
-ignore_texture_size = true
-stretch_mode = 0
+texture_normal = ExtResource("2_h2lrw")
+texture_pressed = ExtResource("4_s1wx5")
+texture_focused = ExtResource("5_v812k")
+stretch_mode = 3
 
-[node name="credits" type="TextureButton" parent="HBoxContainer/VBoxContainer/MenuButtons"]
-custom_minimum_size = Vector2(75, 25)
+[node name="Label" type="Label" parent="HBoxContainer/MenuButtons/quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -5.0
+offset_right = 11.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_10biw")
+text = "QUIT
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="credits" type="TextureButton" parent="HBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
-size_flags_horizontal = 0
 focus_neighbor_top = NodePath("../quit")
 focus_neighbor_bottom = NodePath("../play")
-texture_normal = ExtResource("2_cna7s")
-texture_pressed = ExtResource("4_xr7yu")
-texture_disabled = ExtResource("5_gu4o0")
-texture_focused = ExtResource("6_u2gbt")
-ignore_texture_size = true
-stretch_mode = 0
+texture_normal = ExtResource("2_h2lrw")
+texture_pressed = ExtResource("4_s1wx5")
+texture_focused = ExtResource("5_v812k")
+stretch_mode = 3
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
+[node name="Label" type="Label" parent="HBoxContainer/MenuButtons/credits"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 20.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_10biw")
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="logo" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("5_tw8ms")
+expand_mode = 1
+
+[connection signal="pressed" from="HBoxContainer/MenuButtons/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
