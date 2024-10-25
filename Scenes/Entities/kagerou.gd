@@ -179,10 +179,12 @@ func specialCollision(directionToDash, delta):
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collisionAngle = collision.get_angle()
+		var collisionObject = collision.get_collider()
 
 		# Only count the collision if the dash is not parallel to the hit object (In this case, kagerou dash on top of breakable block should not break it)
-		if collisionAngle > 0:
-			if collision.get_collider().name == "Block":
+		if collisionAngle > 0 and collisionObject != null:
+			if collision.get_collider() is Block:
+				currentState = state.Idle
 				var collider := collision.get_collider() as Block
 				collider.onCollision(delta)
 			if collision.get_collider().name == "VerticalMirror" and mirrorTransitioning == false:

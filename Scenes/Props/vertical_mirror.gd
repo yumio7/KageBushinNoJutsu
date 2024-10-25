@@ -3,7 +3,8 @@ class_name VerticalMirror
 # This vertical mirror will respond accordingly when the controlled character ability contacts it (kagerou dash, minamitsu grapple)
 
 # Mirror dimensions
-const mirrorBaseUpPoint: Vector2 = Vector2(0, 0)
+const mirrorBaseTopPoint: Vector2 = Vector2(0, -500)
+const mirrorBaseBottomPoint: Vector2 = Vector2(0, 500)
 
 # SET THIS OR ELSE CAMERA FUNCTIONALITY MIGHT BE BUGGY
 @export var starterCharacter: CharacterBody2D = null
@@ -36,9 +37,11 @@ func _ready() -> void:
 	$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
 
 
-# Update the mirror drawing to match the player
-func _physics_process(delta: float) -> void:
-	pass
+# Update the mirror drawing to match the player location
+func _physics_process(_delta: float) -> void:
+	if trackedCharInstance != null:
+		$Line2D.points[0] = mirrorBaseTopPoint + Vector2(0, trackedCharInstance.global_position.y)
+		$Line2D.points[1] = mirrorBaseBottomPoint + Vector2(0, trackedCharInstance.global_position.y)
 
 
 # charCurrent refers to the current character. All parameters are passed to this function by the controlled character
