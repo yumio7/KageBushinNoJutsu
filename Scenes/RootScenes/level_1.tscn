@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://hifpc6lsroul"]
+[gd_scene load_steps=11 format=4 uid="uid://hifpc6lsroul"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_6k7ps"]
 [ext_resource type="TileSet" uid="uid://dv13k5ootlney" path="res://Resources/MyourenTempleTileset.tres" id="2_eg63w"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="4_w76kx"]
 [ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="7_qg0li"]
 [ext_resource type="PackedScene" path="res://Scenes/Props/screen_shader.tscn" id="9_nlgka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0vxo"]
+size = Vector2(16, 2048)
 
 [node name="Level1" instance=ExtResource("1_6k7ps")]
 
@@ -69,6 +72,21 @@ tile_set = ExtResource("2_eg63w")
 [node name="FGDecorLayer" type="TileMapLayer" parent="Foreground/TileMapLayersRight" index="1"]
 tile_map_data = PackedByteArray("AAACAAkAAAAMAAEAAAACAAgAAAAMAAAAAAAEAAwAAAALAAEAAAANAAwAAAALAAEAAAAIAAwAAAAHAAEAAAAJAAYAAAAHAAEAAAALAAQAAAAIAAEAAAAMAAIAAAAHAAEAAAADAAIAAAAMAAEAAAADAAEAAAAMAAAAAAD+/wIAAAANAAEAAAAAAAIAAAANAAEAAAABAAIAAAAPAAEAAAD//wIAAAAPAAEAAAAHAPf/AAAPAAEAAAALAPf/AAAPAAEAAAAMAPf/AAAPAAEAAAAOAPf/AAAOAAEAAAANAPf/AAAOAAAAAAAJAPf/AAANAAAAAAAIAPf/AAAOAAEAAAAKAPf/AAAPAAEAAAAMAPH/AAANAAEAAAALAPH/AAAOAAEAAAAAAOz/AAAOAAEAAAD//+z/AAAOAAAAAAD+/+z/AAAPAAEAAAABAOz/AAAPAAEAAAAHAOr/AAALAAEAAAALAOr/AAALAAEAAAAJAOj/AAALAAEAAAAJAO7/AAAKAAEAAAAIAO7/AAAJAAEAAAAFAOX/AAALAAEAAAABAOL/AAALAAEAAAAFAN//AAALAAEAAAANANz/AAAMAAEAAAANANv/AAAMAAAAAAAIAPH/AAANAAEAAAAKAPH/AAAOAAEAAAAJAPH/AAAOAAAAAAA=")
 tile_set = ExtResource("2_eg63w")
+
+[node name="InvisibleWalls" type="Node2D" parent="Foreground" index="4"]
+
+[node name="WallLeft" type="StaticBody2D" parent="Foreground/InvisibleWalls" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/InvisibleWalls/WallLeft" index="0"]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_r0vxo")
+
+[node name="WallRight" type="StaticBody2D" parent="Foreground/InvisibleWalls" index="1"]
+position = Vector2(496, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/InvisibleWalls/WallRight" index="0"]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_r0vxo")
 
 [node name="Kagerou" parent="Entities/ControlledCharacter" index="0" instance=ExtResource("3_2lrmb")]
 position = Vector2(138, 169)
