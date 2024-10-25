@@ -14,6 +14,7 @@ var camNewOffset = Vector2(0, 0)
 # Preload the characters for faster switching
 var kagerouScene: PackedScene = preload("res://Scenes/Entities/kagerou.tscn")
 var minamitsuScene: PackedScene = preload("res://Scenes/Entities/minamitsu.tscn")
+var switchParticleScene: PackedScene = preload("res://Scenes/Props/vertical_mirror_particles.tscn")
 
 # Track the current character instance for the switch stun
 var trackedCharInstance = null
@@ -29,6 +30,8 @@ func _ready() -> void:
 		camNewOffset = cameraSettingComponent.newOffset
 
 	trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+	$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
+
 
 # charCurrent refers to the current character. All parameters are passed to this function by the controlled character
 func mirrorSwitch(charPositionY, charVelocity, currentCharName):
@@ -49,23 +52,35 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 		var minamitsuInstance = minamitsuScene.instantiate()
 		minamitsuInstance.currentState = 5  # Set her to pause state temporarily. The switchStunTimer will switch her back to idle state afterwards
 		$"../ControlledCharacter".add_child(minamitsuInstance)
+		$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", -1);
 		minamitsuInstance.position = Vector2(global_position.x, charPositionY)
 		minamitsuInstance.velocity = Vector2(charVelocity, 0)
 		minamitsuInstance.find_child("AnimatedSprite2D").flip_h = swapDirection
 		trackedCharInstance = minamitsuInstance
 		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+		addSwitchParticles(-1, minamitsuInstance.position);
 	elif currentCharName == "Minamitsu":
 		var kagerouInstance = kagerouScene.instantiate()
 		kagerouInstance.currentState = 5 # Set her to pause state temporarily. The switchStunTimer will switch her back to idle state afterwards
 		$"../ControlledCharacter".add_child(kagerouInstance)
+		$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
 		kagerouInstance.position = Vector2(global_position.x, charPositionY)
 		kagerouInstance.velocity = Vector2(charVelocity, 0)
 		kagerouInstance.find_child("AnimatedSprite2D").flip_h = swapDirection
 		trackedCharInstance = kagerouInstance
 		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+		addSwitchParticles(1, kagerouInstance.position);
 
 	# Start switchStunTimer
 	$switchStunTimer.start()
+
+func addSwitchParticles(direction, position):
+	var particles: GPUParticles2D = switchParticleScene.instantiate();
+	self.add_child(particles);
+	particles.emitting = true;
+	particles.rotation_degrees = 0 if direction == -1 else 180;
+	particles.global_position = position;
+
 
 func _on_switch_stun_timer_timeout() -> void:
 	trackedCharInstance.currentState = 0 # Set her to idle state

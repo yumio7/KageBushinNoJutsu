@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://llwnibvhojw6"]
 
-[ext_resource type="Shader" path="res://Graphics/Kagerou/kagerou_dash_fx.gdshader" id="1_ede5n"]
+[ext_resource type="Shader" path="res://Scenes/Entities/kagerou_dash_fx.gdshader" id="1_ede5n"]
 [ext_resource type="Texture2D" uid="uid://c0m0sgllrkw48" path="res://Graphics/Kagerou/KagerouDash.png" id="1_wxodb"]
 [ext_resource type="Script" path="res://Scenes/Entities/kagerou_dash_fx.gd" id="2_7ob2p"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dok21rpid5yjj"]
+[gd_scene load_steps=19 format=3 uid="uid://dok21rpid5yjj"]
 
 [ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_jeh6m"]
 [ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="2_weu3b"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2jgycsul45yr" path="res://Scenes/Entities/minamitsu.tscn" id="8_17ynt"]
 [ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="9_esybj"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="10_n4t0n"]
+[ext_resource type="PackedScene" uid="uid://cw0jww5jd3r6w" path="res://Scenes/Props/screen_shader.tscn" id="11_p1if5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn32p"]
 atlas = ExtResource("1_jeh6m")
@@ -121,3 +122,6 @@ dialogueComponents = [NodePath("CutsceneComponent")]
 nameSequence = Array[String](["Kagerou", "Kagerou", "Kagerou", "Kagerou", "Kagerou"])
 emoteSequence = Array[String](["happy2", "mad", "shock", "mad2", "neutral"])
 dialogueSequence = Array[String](["hey murasa", "eat ur greens", "what do you mean, no?", "its healthy for you", "ok fine"])
+sfxSequence = Array[String](["", "", "", "", "", ""])
+
+[node name="CanvasShaderLayer" parent="." instance=ExtResource("11_p1if5")]

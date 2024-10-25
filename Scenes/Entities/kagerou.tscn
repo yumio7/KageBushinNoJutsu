@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c5wbii2af6f3k" path="res://Graphics/Kagerou/KagerouIdle.png" id="1_x8jmb"]
 [ext_resource type="Texture2D" uid="uid://cfw5yw5tx1iow" path="res://Graphics/Kagerou/KagerouFall.png" id="2_7aqg6"]
 [ext_resource type="Texture2D" uid="uid://c0m0sgllrkw48" path="res://Graphics/Kagerou/KagerouDash.png" id="2_c6f6w"]
-[ext_resource type="Shader" path="res://Graphics/Kagerou/kagerou.gdshader" id="2_rgqic"]
+[ext_resource type="Shader" path="res://Scenes/Entities/kagerou.gdshader" id="2_rgqic"]
 [ext_resource type="Texture2D" uid="uid://gohn7q7a24xv" path="res://Graphics/Kagerou/KagerouJump.png" id="4_wvu4o"]
 [ext_resource type="Texture2D" uid="uid://bsma534ob2ue" path="res://Graphics/Kagerou/KagerouWalk.png" id="5_moq2e"]
 [ext_resource type="AudioStream" uid="uid://dcxqrwpywlksd" path="res://Audio/Sound/kage jump.ogg" id="7_3w0h0"]
