@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://bysx37h7656x0"]
+
+[ext_resource type="Texture2D" uid="uid://c32dskiqfnbye" path="res://Graphics/Props/CheckpointBlock-Sheet.png" id="1_dmlcb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfya1"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phrgu"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11ffk"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi5v4"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k76b4"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhrqr"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loi44"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf74w"]
+atlas = ExtResource("1_dmlcb")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ua65w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phrgu")
+}],
+"loop": true,
+"name": &"Activated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11ffk")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi5v4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k76b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhrqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loi44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf74w")
+}],
+"loop": false,
+"name": &"Shimmer",
+"speed": 10.0
+}]
+
+[node name="CheckpointBlock" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bfya1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ua65w")
+animation = &"Activated"
+autoplay = "Default"
