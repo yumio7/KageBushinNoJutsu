@@ -21,7 +21,7 @@ size = Vector2(16, 2048)
 
 [node name="MusicLoop" type="AudioStreamPlayer" parent="Music" index="0"]
 stream = ExtResource("2_cvckg")
-volume_db = -5.0
+volume_db = -10.0
 bus = &"Music"
 
 [node name="ParallaxLeft" type="ParallaxBackground" parent="Background" index="0"]
