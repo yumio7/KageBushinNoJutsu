@@ -4,6 +4,7 @@ extends Control
 signal endDialogue
 signal startDialogue
 signal proceedDialogue
+signal dialogueLineFired(currentLine, lineCount)
 
 # Variables for dialogue behavior
 @export var dialogueComponents: Array[CutsceneComponent] = []
@@ -46,6 +47,7 @@ func dialogueSequence(desiredComponentIndex):
 	sfxTable = usedComponent.sfxSequence
 	
 	for i in nameTable.size():
+		dialogueLineFired.emit(i, nameTable.size())
 		writeDialogue(nameTable[dialogueIndex], emoteTable[dialogueIndex], sfxTable[i], lineTable[dialogueIndex])
 		await proceedDialogue
 		#if skip == true: break
