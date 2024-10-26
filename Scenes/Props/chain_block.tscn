@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy0lqrkrmvnqv"]
+
+[ext_resource type="Texture2D" uid="uid://5btv10xb2qnb" path="res://Graphics/Props/ChainBlock.png" id="1_lytyx"]
+[ext_resource type="Script" path="res://Scenes/Props/chain_block.gd" id="1_mpwsi"]
+[ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="2_r7xh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgy1l"]
+size = Vector2(16, 16)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pc6ug"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("2_r7xh6")
+
+[node name="ChainBlock" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_mpwsi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bgy1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lytyx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_pc6ug")
+volume_db = -5.0
+pitch_scale = 3.0
+bus = &"Sound"
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

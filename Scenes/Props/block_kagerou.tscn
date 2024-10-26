@@ -85,8 +85,12 @@ wait_time = 2.5
 autostart = true
 
 [node name="DeathTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
+
+[node name="ChainBlockBreakDelay" type="Timer" parent="."]
+wait_time = 0.1
 
 [connection signal="timeout" from="ShineTimer" to="." method="_on_shine_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="ChainBlockBreakDelay" to="." method="_on_chain_block_break_delay_timeout"]
