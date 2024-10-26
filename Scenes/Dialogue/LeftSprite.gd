@@ -24,7 +24,7 @@ func set_sprite(char_name):
 	match char_name:
 		"Kagerou":
 			sprite = 0
-		"Nazrin":
-			sprite = 128
 		"Seija":
+			sprite = 128
+		"Nazrin":
 			sprite = 256
