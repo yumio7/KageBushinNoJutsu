@@ -187,6 +187,12 @@ func specialCollision(directionToDash, delta):
 				currentState = state.Idle
 				var collider := collision.get_collider() as Block
 				collider.onCollision()
+			if collision.get_collider() is BlockKagerou:
+				currentState = state.Idle
+				var collider := collision.get_collider() as BlockKagerou
+				collider.onCollision()
+			if collision.get_collider() is BlockMinamitsu:
+				currentState = state.Idle
 			if collision.get_collider().name == "VerticalMirror" and mirrorTransitioning == false:
 				mirrorTransitioning = true
 				var collider := collision.get_collider() as VerticalMirror
