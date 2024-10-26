@@ -4,7 +4,7 @@ extends Control
 signal endDialogue
 signal startDialogue
 signal proceedDialogue
-signal dialogueLineFired(currentLine, lineCount)
+signal dialogueLineFired(currentLineIndex, lineArraySize)
 
 # Variables for dialogue behavior
 @export var dialogueComponents: Array[CutsceneComponent] = []
