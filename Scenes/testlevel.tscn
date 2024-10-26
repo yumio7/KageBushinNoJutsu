@@ -131,9 +131,9 @@ position = Vector2(218, 185)
 dialogueComponents = [NodePath("CutsceneComponent")]
 
 [node name="CutsceneComponent" parent="HUD/Dialogue" instance=ExtResource("10_fjlak")]
-nameSequence = Array[String](["Kagerou", "Kagerou", "Kagerou", "Kagerou", "Kagerou", "Minamitsu"])
-emoteSequence = Array[String](["happy2", "mad", "shock", "mad2", "mad2", "neutral"])
-dialogueSequence = Array[String](["hey murasa", "eat ur greens", "what do you mean, no?", "its healthy for you", "You... You... You really... You think you can not eat your greens and get away with it? You really think so? You scum. Trash. I will destroy you. I do not care. One who does not eat their greens in not worthy of life. I will send you back down into the depths of the earth where you belong. How dare you... How dare you...! How dare you! Prepare yourself. You have committed something unspeakable, and I will see that you are given due punishment!", "Haha, that's a skill issue. Now if you'll excuse me, I have a pizza to order."])
+nameSequence = Array[String](["Kagerou", "Minamitsu", "Seija", "Wakasagihime", "Nazrin", "Shinmyoumaru"])
+emoteSequence = Array[String](["happy", "happy2", "ohno", "happy2", "neutral", "happy2"])
+dialogueSequence = Array[String](["I'm Kagerou", "I'm Minamitsu", "I'm Seija", "I'm Wakasagihime, cheesed to meet you", "I'm Nazrin- Hey! thats my line!", "I'm Shinmyoumaru"])
 sfxSequence = Array[String](["", "", "", "", "", ""])
 
 [node name="Block" parent="." instance=ExtResource("11_lhgja")]
