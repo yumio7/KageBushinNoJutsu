@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
 [ext_resource type="Texture2D" uid="uid://0yak3a2pwv7w" path="res://Graphics/Dialogue/Dialogue Box.png" id="2_hvfeh"]
 [ext_resource type="Texture2D" uid="uid://cc3oymw04obqi" path="res://Graphics/Dialogue/Sprites/leftsprites.png" id="2_we1e8"]
-[ext_resource type="Theme" path="res://ourple.tres" id="3_pbnsd"]
+[ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="3_pbnsd"]
 [ext_resource type="FontFile" uid="uid://cwhyduvyjoy24" path="res://Graphics/UI/Pixeltype.ttf" id="3_rl0hr"]
 [ext_resource type="Script" path="res://Scenes/Dialogue/LeftSprite.gd" id="3_tcosv"]
 [ext_resource type="Texture2D" uid="uid://cdowami7rva6r" path="res://Graphics/Dialogue/Sprites/rightsprites.png" id="4_lyboj"]
@@ -27,7 +27,7 @@
 atlas = ExtResource("2_we1e8")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h23tb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kofcj"]
 atlas = ExtResource("4_lyboj")
 region = Rect2(0, 0, 128, 128)
 
@@ -102,7 +102,7 @@ offset_right = 388.0
 offset_bottom = -108.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_h23tb")
+texture = SubResource("AtlasTexture_kofcj")
 script = ExtResource("5_ar06d")
 
 [node name="DialoguePanel" type="TextureRect" parent="."]

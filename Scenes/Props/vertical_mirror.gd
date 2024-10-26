@@ -25,7 +25,9 @@ var trackedCharInstance = null
 
 # Set the camera settings for the character
 func _ready() -> void:
-	if starterCharacter != null: trackedCharInstance = starterCharacter
+	if starterCharacter != null: 
+		trackedCharInstance = starterCharacter
+		trackedCharInstance.end_level.connect(get_node("../../HUD/LevelComplete")._on_level_end)
 	if cameraSettingComponent != null:
 		camLimLeft = cameraSettingComponent.limitLeft
 		camLimRight = cameraSettingComponent.limitRight
@@ -81,6 +83,9 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 		trackedCharInstance = kagerouInstance
 		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
 		addSwitchParticles(1, kagerouInstance.position);
+
+	# connect end_level signal to properly de
+	trackedCharInstance.end_level.connect(get_node("../../HUD/LevelComplete")._on_level_end)
 
 	# Start switchStunTimer
 	$switchStunTimer.start()
