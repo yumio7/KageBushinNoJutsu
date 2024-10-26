@@ -239,6 +239,11 @@ func anchorHit(body):
 		if anchorCollideInteractible and body is Block:
 			anchorCancel()
 			body.onCollision()
+		elif anchorCollideInteractible and body is BlockMinamitsu:
+			anchorCancel()
+			body.onCollision()
+		elif anchorCollideInteractible and body is BlockKagerou:
+			anchorCancel()
 
 
 
