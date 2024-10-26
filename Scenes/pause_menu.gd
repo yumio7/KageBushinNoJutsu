@@ -5,7 +5,7 @@ func _on_resume_pressed() -> void:
 	get_tree().paused = false
 
 func _on_visibility_changed() -> void:
-	$VBoxContainer/Buttons/Resume.grab_focus()
+	$VBoxContainer/Buttons/Resume.call_deferred("grab_focus")
 
 func _on_settings_pressed() -> void:
 	#TODO: implement settings menu
