@@ -1,26 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://bml40bdytp3gb"]
+[gd_scene load_steps=8 format=3 uid="uid://bml40bdytp3gb"]
 
 [ext_resource type="Script" path="res://Scenes/mainmenu.gd" id="1_esexo"]
+[ext_resource type="Texture2D" uid="uid://dkuymm3ffyuc3" path="res://Graphics/Background/mainmenubg.png" id="1_m2dni"]
 [ext_resource type="Texture2D" uid="uid://dctll3np6o6y4" path="res://Graphics/UI/Button.png" id="2_h2lrw"]
 [ext_resource type="Texture2D" uid="uid://p05poolegoqj" path="res://Graphics/UI/Pressed.png" id="4_s1wx5"]
 [ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="5_10biw"]
 [ext_resource type="Texture2D" uid="uid://csc5k1pa5bqwn" path="res://Graphics/Dialogue/placeholder/s-l1200.jpg" id="5_tw8ms"]
 [ext_resource type="Texture2D" uid="uid://d2o5koo3lft3t" path="res://Graphics/UI/Selected.png" id="5_v812k"]
 
-[node name="Mainmenu" type="MarginContainer"]
+[node name="Mainmenu" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 20
+texture = ExtResource("1_m2dni")
 script = ExtResource("1_esexo")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 80.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 250.0
 
 [node name="MenuButtons" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
