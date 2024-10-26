@@ -229,9 +229,6 @@ func anchorHit(body):
 					$Timers/GrappleLimit.start()
 					grappledMirrorFlag = true
 					anchorHitObject = body
-				"Block":
-					anchorCancel()
-					body.onCollision()
 				"StageEnd":
 					$Timers/AnchorLimit.stop()
 					anchorProjectileInstance.currentState = 1
@@ -239,6 +236,10 @@ func anchorHit(body):
 					$Timers/GrappleLimit.start()
 					grappledStageEndFlag = true
 					anchorHitObject = body
+		if anchorCollideInteractible and body is Block:
+			anchorCancel()
+			body.onCollision()
+
 
 
 # Function to end minamitsu's ability by retracting anchor and removing it. Acts differently when minamitsu grapples the mirror

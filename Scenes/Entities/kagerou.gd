@@ -186,7 +186,7 @@ func specialCollision(directionToDash, delta):
 			if collision.get_collider() is Block:
 				currentState = state.Idle
 				var collider := collision.get_collider() as Block
-				collider.onCollision(delta)
+				collider.onCollision()
 			if collision.get_collider().name == "VerticalMirror" and mirrorTransitioning == false:
 				mirrorTransitioning = true
 				var collider := collision.get_collider() as VerticalMirror

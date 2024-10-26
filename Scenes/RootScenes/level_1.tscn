@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://hifpc6lsroul"]
+[gd_scene load_steps=12 format=4 uid="uid://hifpc6lsroul"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_6k7ps"]
 [ext_resource type="TileSet" uid="uid://dv13k5ootlney" path="res://Resources/MyourenTempleTileset.tres" id="2_eg63w"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="3_2lrmb"]
 [ext_resource type="Texture2D" uid="uid://cram5lq33s3xd" path="res://Graphics/Decor/Tree1.png" id="3_x4tfp"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="4_w76kx"]
-[ext_resource type="PackedScene" path="res://Scenes/Props/camera_settings_component.tscn" id="7_qg0li"]
+[ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="7_qg0li"]
+[ext_resource type="PackedScene" uid="uid://c2jvmhxpc10pn" path="res://Scenes/Props/block.tscn" id="8_bvbns"]
 [ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="9_nlgka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0vxo"]
@@ -100,6 +101,28 @@ cameraSettingComponent = NodePath("CameraSettingsComponent")
 limitLeft = 0.0
 limitRight = 480.0
 newOffset = Vector2(0, -15)
+
+[node name="BlocksLeft" type="Node2D" parent="Entities" index="2"]
+
+[node name="Block" parent="Entities/BlocksLeft" index="0" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("8_bvbns")]
+position = Vector2(140, -136)
+mirroredForm = NodePath("../../BlocksRight/Block")
+
+[node name="Block2" parent="Entities/BlocksLeft" index="1" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("8_bvbns")]
+position = Vector2(40, -471)
+mirroredForm = NodePath("../../BlocksRight/Block2")
+
+[node name="BlocksRight" type="Node2D" parent="Entities" index="3"]
+position = Vector2(480, 0)
+scale = Vector2(-1, 1)
+
+[node name="Block" parent="Entities/BlocksRight" index="0" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("8_bvbns")]
+position = Vector2(140, -136)
+mirroredForm = NodePath("../../BlocksLeft/Block")
+
+[node name="Block2" parent="Entities/BlocksRight" index="1" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("8_bvbns")]
+position = Vector2(40, -471)
+mirroredForm = NodePath("../../BlocksLeft/Block2")
 
 [node name="ShaderCanvasLayer" parent="." index="4" instance=ExtResource("9_nlgka")]
 
