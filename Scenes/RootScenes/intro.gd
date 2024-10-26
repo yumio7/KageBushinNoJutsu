@@ -15,7 +15,5 @@ func _process(_delta: float) -> void:
 		timer += 1
 		$BrightenCanvasLayer/ColorRect.material.set_shader_parameter("colourAdd", (timer as float) / 100)
 		$BrightenCanvasLayer/ColorRect.material.set_shader_parameter("multiplier", 1.0 + (timer as float) / 30)
-
-
-func _on_dialogue_pen_ult_line_dialogue():
-	pass # Replace with function body.
+		if timer >= 100:
+			get_tree().change_scene_to_file("res://Scenes/RootScenes/level_1.tscn")

@@ -6,13 +6,13 @@ void vertex() {
 }
 
 void fragment() {
-	
+
 	//if (!(COLOR.r >= 1.0 - EPSILON && COLOR.r <= 1.0 + EPSILON)) {
 		//COLOR.r *= colourMultiplier;
 		//COLOR.g *= colourMultiplier;
 		//COLOR.b *= colourMultiplier;
 	//}
-	
+
 	COLOR *= colourMultiplier;
 }
 
