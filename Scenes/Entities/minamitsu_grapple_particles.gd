@@ -1,6 +1,5 @@
-extends AnimatedSprite2D
-const lifespan: float = 15;
-var timer: float = 0;
+extends GPUParticles2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,8 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	timer+=1;
-	play("default");
-	if (timer > lifespan):
-		queue_free()
-	
+	pass
+
+func _on_finished():
+	queue_free();

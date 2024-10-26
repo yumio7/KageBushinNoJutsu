@@ -1,19 +1,18 @@
 shader_type canvas_item;
-uniform float colourMultiplier = 1.0;
+uniform float timer;
+uniform float lifespan;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	
-	//if (!(COLOR.r >= 1.0 - EPSILON && COLOR.r <= 1.0 + EPSILON)) {
-		//COLOR.r *= colourMultiplier;
-		//COLOR.g *= colourMultiplier;
-		//COLOR.b *= colourMultiplier;
-	//}
-	
-	COLOR *= colourMultiplier;
+	if (COLOR.a > 0.0) {
+		COLOR.a = (lifespan-timer)/lifespan;
+		COLOR.r = (timer)/lifespan;
+		COLOR.g = 1.0;
+		COLOR.b = 1.0;
+	}
 }
 
 //void light() {

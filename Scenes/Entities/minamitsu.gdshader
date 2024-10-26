@@ -1,5 +1,5 @@
 shader_type canvas_item;
-uniform float colourMultiplier = 1.0;
+uniform float colourMultiplier = 0;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -13,7 +13,9 @@ void fragment() {
 		//COLOR.b *= colourMultiplier;
 	//}
 	
-	COLOR *= colourMultiplier;
+	COLOR.r = COLOR.r*(colourMultiplier);
+	COLOR.g = COLOR.g;
+	COLOR.b = COLOR.b;
 }
 
 //void light() {

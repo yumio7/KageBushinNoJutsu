@@ -24,6 +24,10 @@ var anchorProjectileInstance = null																# Track the anchorProjectile 
 var grappledMirrorFlag = false																	# Track whether minamitsu is currently grappling into the mirror
 var anchorHitObject	= null																		# Track the anchor's hit object
 var directionToAnchor = 0																		# Track the direction minamitsu faces when yeeting anchor
+var timeInGrapple = 0;
+var grappleFXScene = preload("res://Scenes/Entities/minamitsu_grapple_fx.tscn");
+var grappleParticleScene = preload("res://Scenes/Entities/minamitsu_grapple_particles.tscn")
+var anchorDustState = 0;
 
 # Runs once when the character is instantiated
 func _ready() -> void:
@@ -110,6 +114,14 @@ func _physics_process(delta: float) -> void:
 		4: stateAbility()
 		5: statePause(delta)
 		6: stateGrapple()
+	
+	match currentState:
+		0, 1, 2, 3, 4, 5: 
+			timeInGrapple = 0;
+			$AnimatedSprite2D.material.set_shader_parameter("colourMultiplier", 1);
+		6: 
+			timeInGrapple+=1;
+			$AnimatedSprite2D.material.set_shader_parameter("colourMultiplier", (timeInGrapple as float)/10);
 
 	#print("1-" + str(currentState)) # FOR DEBUGGING: Print the current state after all physics logic executes
 
@@ -176,7 +188,24 @@ func stateGrapple():
 	velocity = directionToAnchor * grappleVelocity
 	if distanceToAnchor < 10:
 		anchorCancel()
+	addGrappleFX();
 
+func addGrappleFX():
+	var fx: AnimatedSprite2D = grappleFXScene.instantiate()
+	get_parent().get_parent().add_child(fx)
+	var frame = $AnimatedSprite2D.get_frame();
+	fx.z_index = self.z_index-1;
+	fx.set_frame(frame);
+	fx.set_global_position($AnimatedSprite2D.global_position);
+	fx.flip_h = $AnimatedSprite2D.flip_h
+	fx.material.set_shader_parameter("lifespan", 10);
+	fx.material.set_shader_parameter("timer", timeInGrapple);
+
+func addGrappleDust():
+	var particles: GPUParticles2D = grappleParticleScene.instantiate();
+	self.add_child(particles);
+	particles.emitting = true;
+	particles.rotation_degrees = 0 if $AnimatedSprite2D.flip_h == true else 180;
 
 # Function to apply gravity
 func applyGravity(delta):
@@ -213,9 +242,10 @@ func anchorHit(body):
 			anchorCollideEnvironment = body.get_collision_layer_value(2)
 			anchorCollideInteractible = body.get_collision_layer_value(3)
 		# If the layer is 2 (Environment), always attach the anchor and grapple minamitsu toward it
-		if anchorCollideEnvironment == true or anchorCollideEnvironmentTileMap == 2:
+		if anchorCollideEnvironment or anchorCollideEnvironmentTileMap == 2:
 			$Timers/AnchorLimit.stop()
 			anchorProjectileInstance.currentState = 1 # This sets anchor to an attached (1) state. This is ugly but it works
+			anchorDustState = 1 
 			currentState = state.Grapple
 			$Timers/GrappleLimit.start()
 		# If the layer is 3 (Interactible), the anchor will check what type of interactible it is and either attach (Barrier) or break it (Breakable Block)
@@ -224,6 +254,7 @@ func anchorHit(body):
 				"VerticalMirror":
 					$Timers/AnchorLimit.stop()
 					anchorProjectileInstance.currentState = 1
+					anchorDustState = 1 
 					currentState = state.Grapple
 					$Timers/GrappleLimit.start()
 					grappledMirrorFlag = true
@@ -253,6 +284,9 @@ func anchorCancel():
 func anchorRemoval():
 	$Anchor.visible = true
 	anchorProjectileInstance = null
+	if (anchorDustState == 1):
+		anchorDustState = 0;
+		addGrappleDust();
 
 # In case minamitsu takes too long to grapple (Because she is stuck)
 func _on_grapple_limit_timeout() -> void:

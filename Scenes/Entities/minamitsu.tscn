@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://c2jgycsul45yr"]
+[gd_scene load_steps=38 format=3 uid="uid://c2jgycsul45yr"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/minamitsu.gd" id="1_7k5ee"]
 [ext_resource type="Texture2D" uid="uid://hhfpajg632ll" path="res://Graphics/Minamitsu/DownNew-Sheet.png" id="2_di1d6"]
 [ext_resource type="Texture2D" uid="uid://2sd4fb86gicu" path="res://Graphics/Minamitsu/Anchor.png" id="2_m2yje"]
+[ext_resource type="Shader" path="res://Scenes/Entities/minamitsu.gdshader" id="3_iqx3g"]
 [ext_resource type="Texture2D" uid="uid://csv5isugpqhic" path="res://Graphics/Minamitsu/IdleNew.png" id="3_phwes"]
 [ext_resource type="Texture2D" uid="uid://bccdpqycagctu" path="res://Graphics/Minamitsu/JumpNew-Sheet.png" id="4_bskpc"]
 [ext_resource type="AudioStream" uid="uid://c3e1bl8ca543v" path="res://Audio/Sound/murasa jump.ogg" id="4_jjjda"]
@@ -11,6 +12,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n47jc"]
 size = Vector2(13, 15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqo0h"]
+shader = ExtResource("3_iqx3g")
+shader_parameter/colourMultiplier = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nvnl8"]
 atlas = ExtResource("2_di1d6")
@@ -224,9 +229,10 @@ texture = ExtResource("2_m2yje")
 flip_h = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_gqo0h")
 position = Vector2(-1.5, -3.5)
 sprite_frames = SubResource("SpriteFrames_ygx4w")
-animation = &"Idle"
+animation = &"Jump"
 autoplay = "Idle"
 
 [node name="AnchorStartPos" type="Node2D" parent="."]

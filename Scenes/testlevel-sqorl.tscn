@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2jgycsul45yr" path="res://Scenes/Entities/minamitsu.tscn" id="8_17ynt"]
 [ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="9_esybj"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="10_n4t0n"]
-[ext_resource type="PackedScene" uid="uid://cw0jww5jd3r6w" path="res://Scenes/Props/screen_shader.tscn" id="11_p1if5"]
+[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="11_p1if5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn32p"]
 atlas = ExtResource("1_jeh6m")

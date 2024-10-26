@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtsldwxfwcahv"]
+[gd_scene load_steps=9 format=3 uid="uid://bf7muvvdjo8fa"]
 
-[ext_resource type="Texture2D" uid="uid://cgfv3rfrddoc3" path="res://Graphics/Kagerou/KagerouDashDust.png" id="1_tyfnp"]
-[ext_resource type="Script" path="res://Scenes/Props/vertical_mirror_particles.gd" id="2_5c8r7"]
+[ext_resource type="Texture2D" uid="uid://cgfv3rfrddoc3" path="res://Graphics/Kagerou/KagerouDashDust.png" id="1_uao20"]
+[ext_resource type="Script" path="res://Scenes/Entities/minamitsu_grapple_particles.gd" id="2_2a5x4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lv1v1"]
 particles_animation = true
@@ -9,11 +9,11 @@ particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id="Gradient_lwkcy"]
-colors = PackedColorArray(0, 0, 0.133333, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_j8rxx"]
+colors = PackedColorArray(0.8, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yiqou"]
-gradient = SubResource("Gradient_lwkcy")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nih5p"]
+gradient = SubResource("Gradient_j8rxx")
 
 [sub_resource type="Curve" id="Curve_1d2ip"]
 max_value = 3.0
@@ -29,7 +29,7 @@ particle_flag_disable_z = true
 angle_min = -67.0
 angle_max = 67.0
 direction = Vector3(0, 0, 0)
-spread = 40.0
+spread = 70.0
 initial_velocity_min = 120.0
 initial_velocity_max = 180.0
 gravity = Vector3(0, 0, 0)
@@ -37,22 +37,22 @@ linear_accel_min = -30.0
 linear_accel_max = -30.0
 scale_max = 2.0
 scale_over_velocity_curve = SubResource("CurveTexture_rw80x")
-color = Color(0, 0, 0.133333, 1)
-color_ramp = SubResource("GradientTexture1D_yiqou")
+color = Color(0.8, 1, 1, 1)
+color_ramp = SubResource("GradientTexture1D_nih5p")
 hue_variation_min = -2.23517e-08
 hue_variation_max = -2.23517e-08
 turbulence_enabled = true
 
-[node name="KagerouDashParticles" type="GPUParticles2D"]
+[node name="MinamitsuGrappleParticles" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_lv1v1")
 rotation = 1.5708
 emitting = false
-amount = 30
+amount = 60
 process_material = SubResource("ParticleProcessMaterial_3ggcu")
-texture = ExtResource("1_tyfnp")
-lifetime = 0.33
+texture = ExtResource("1_uao20")
+lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
-script = ExtResource("2_5c8r7")
+script = ExtResource("2_2a5x4")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

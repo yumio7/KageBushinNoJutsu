@@ -116,7 +116,7 @@ func _physics_process(delta: float) -> void:
 		4: 
 			timeInDash += 1;
 			specialCollision(directionToDash, delta);
-			$AnimatedSprite2D.material.set_shader_parameter("colourMultiplier", (timeInDash as float)/12);
+			$AnimatedSprite2D.material.set_shader_parameter("colourMultiplier", (timeInDash as float)/15);
 			if (timeInDash % 2 == 0):
 				addDashFX();
 			

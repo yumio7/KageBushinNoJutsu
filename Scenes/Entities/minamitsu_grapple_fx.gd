@@ -1,5 +1,5 @@
 extends AnimatedSprite2D
-const lifespan: float = 15;
+const lifespan: float = 10;
 var timer: float = 0;
 
 # Called when the node enters the scene tree for the first time.

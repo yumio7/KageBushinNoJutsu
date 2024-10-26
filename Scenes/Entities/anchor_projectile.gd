@@ -52,4 +52,3 @@ func stateRetract(delta):
 	# Retract to player, and under a certain distance the anchor will delete
 	if distanceToPlayer > 30: position += directionToPlayer * retractVelocity * delta
 	else: queue_free()
-

@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0vbtab4av4cq"]
+
+[ext_resource type="Shader" path="res://Scenes/Entities/minamitsu_grapple_fx.gdshader" id="1_ckf4j"]
+[ext_resource type="Texture2D" uid="uid://hhfpajg632ll" path="res://Graphics/Minamitsu/DownNew-Sheet.png" id="1_plkw6"]
+[ext_resource type="Script" path="res://Scenes/Entities/minamitsu_grapple_fx.gd" id="3_kammm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkvok"]
+shader = ExtResource("1_ckf4j")
+shader_parameter/timer = null
+shader_parameter/lifespan = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ptu8"]
+atlas = ExtResource("1_plkw6")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlqyo"]
+atlas = ExtResource("1_plkw6")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp27h"]
+atlas = ExtResource("1_plkw6")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqu21"]
+atlas = ExtResource("1_plkw6")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bv0gi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ptu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlqyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xp27h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqu21")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MinamitsuGrappleFx" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_fkvok")
+sprite_frames = SubResource("SpriteFrames_bv0gi")
+script = ExtResource("3_kammm")
