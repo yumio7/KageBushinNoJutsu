@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://383vp3jf8417"]
+[gd_scene load_steps=31 format=3 uid="uid://383vp3jf8417"]
 
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
 [ext_resource type="Texture2D" uid="uid://0yak3a2pwv7w" path="res://Graphics/Dialogue/Dialogue Box.png" id="2_hvfeh"]
@@ -13,6 +13,15 @@
 [ext_resource type="AudioStream" uid="uid://dm0hime5lyij4" path="res://Audio/Sound/murasa talk.ogg" id="10_sny74"]
 [ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="12_e3vv7"]
 [ext_resource type="AudioStream" uid="uid://c5oddv1a2sral" path="res://Audio/Sound/game-bump.mp3" id="13_uvivl"]
+[ext_resource type="AudioStream" uid="uid://brnokbn72akr8" path="res://Audio/Sound/seija talk.ogg" id="14_4mr26"]
+[ext_resource type="AudioStream" uid="uid://bx5nuvpb2ilkb" path="res://Audio/Sound/sukuna talk.ogg" id="15_dttom"]
+[ext_resource type="AudioStream" uid="uid://cjr55xfdqqmkm" path="res://Audio/Sound/nazrin talk.ogg" id="16_eyt84"]
+[ext_resource type="AudioStream" uid="uid://bxvg5ghbyioym" path="res://Audio/Sound/waka talk 1.ogg" id="17_xgby8"]
+[ext_resource type="AudioStream" uid="uid://cc7k8b4ehc7qo" path="res://Audio/Sound/waka talk 2.ogg" id="18_lh3q3"]
+[ext_resource type="AudioStream" uid="uid://dqpaqigdaeyf" path="res://Audio/Sound/waka talk 3.ogg" id="19_0u073"]
+[ext_resource type="AudioStream" uid="uid://cpnq7x5xml454" path="res://Audio/Sound/waka talk 4.ogg" id="20_rn7vd"]
+[ext_resource type="AudioStream" uid="uid://b5uo8lkv0u6rt" path="res://Audio/Sound/waka talk 5.ogg" id="21_36w2f"]
+[ext_resource type="AudioStream" uid="uid://dftac5230pqf7" path="res://Audio/Sound/waka talk 6.ogg" id="22_5024w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_so8rl"]
 atlas = ExtResource("2_we1e8")
@@ -31,6 +40,30 @@ stream_0/stream = ExtResource("9_ol628")
 random_pitch = 1.05
 streams_count = 1
 stream_0/stream = ExtResource("10_sny74")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_le3ui"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("14_4mr26")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ogit6"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("15_dttom")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v4lmk"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("16_eyt84")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4wcsv"]
+streams_count = 6
+stream_0/stream = ExtResource("17_xgby8")
+stream_1/stream = ExtResource("18_lh3q3")
+stream_2/stream = ExtResource("19_0u073")
+stream_3/stream = ExtResource("20_rn7vd")
+stream_4/stream = ExtResource("21_36w2f")
+stream_5/stream = ExtResource("22_5024w")
 
 [node name="Dialogue" type="Control" node_paths=PackedStringArray("dialogueComponents")]
 layout_mode = 3
@@ -143,6 +176,18 @@ stream = ExtResource("12_e3vv7")
 
 [node name="Impact" type="AudioStreamPlayer" parent="SoundLib"]
 stream = ExtResource("13_uvivl")
+
+[node name="Seija" type="AudioStreamPlayer" parent="SoundLib"]
+stream = SubResource("AudioStreamRandomizer_le3ui")
+
+[node name="Shinmyoumaru" type="AudioStreamPlayer" parent="SoundLib"]
+stream = SubResource("AudioStreamRandomizer_ogit6")
+
+[node name="Nazrin" type="AudioStreamPlayer" parent="SoundLib"]
+stream = SubResource("AudioStreamRandomizer_v4lmk")
+
+[node name="Wakasagihime" type="AudioStreamPlayer" parent="SoundLib"]
+stream = SubResource("AudioStreamRandomizer_4wcsv")
 
 [node name="SpeakDelay" type="Timer" parent="."]
 wait_time = 0.1

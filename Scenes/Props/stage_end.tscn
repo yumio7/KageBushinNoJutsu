@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://liwsjvxophs5"]
+
+[ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_4t2hi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85av4"]
+size = Vector2(8, 20)
+
+[node name="StageEnd" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_85av4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 1)
+texture = ExtResource("1_4t2hi")

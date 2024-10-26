@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://6dbtq6dhm3iw"]
+
+[ext_resource type="Texture2D" uid="uid://b35evg77ln4ut" path="res://Graphics/Props/BreakableBlockKagerou-Sheet.png" id="1_hvoie"]
+[ext_resource type="Script" path="res://Scenes/Props/block_kagerou.gd" id="1_hxh0p"]
+[ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="2_oglpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ym8jm"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egtps"]
+atlas = ExtResource("1_hvoie")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25r3m"]
+atlas = ExtResource("1_hvoie")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkk2s"]
+atlas = ExtResource("1_hvoie")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msu7g"]
+atlas = ExtResource("1_hvoie")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7q2j"]
+atlas = ExtResource("1_hvoie")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5kn0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egtps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25r3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkk2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msu7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7q2j")
+}],
+"loop": false,
+"name": &"Shimmer",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7xftx"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("2_oglpc")
+
+[node name="BlockKagerou" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_hxh0p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ym8jm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5kn0y")
+animation = &"Shimmer"
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7xftx")
+pitch_scale = 1.8
+bus = &"Sound"
+
+[node name="ShineTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ShineTimer" to="." method="_on_shine_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

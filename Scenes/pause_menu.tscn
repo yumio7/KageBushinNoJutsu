@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://x2kcvjtcy516"]
+
+[node name="PauseMenu" type="MarginContainer"]

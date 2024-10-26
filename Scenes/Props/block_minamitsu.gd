@@ -1,12 +1,12 @@
 extends StaticBody2D
-class_name Block
+class_name BlockMinamitsu
 # This block will break when hit by an ability (Dash, anchor)
 # Additionally, it will also break its sister block in the reflection
 # My idea is to have two "BlockContainer" node to contain all breakable blocks, assigned numbers
 # I will copy this blockContainer node to the other side. It will then automatically break the sister block inside the copied blockContainer node
 
 # Refers to the same-position block on the other side of the mirror
-@export var mirroredForm: Block = null
+@export var mirroredForm: BlockMinamitsu = null
 var canBreak = true # Failsafe in case onCollision triggers more than once
 
 func onCollision():

@@ -186,12 +186,20 @@ func specialCollision(directionToDash, delta):
 			if collision.get_collider() is Block:
 				currentState = state.Idle
 				var collider := collision.get_collider() as Block
-				collider.onCollision(delta)
+				collider.onCollision()
+			if collision.get_collider() is BlockKagerou:
+				currentState = state.Idle
+				var collider := collision.get_collider() as BlockKagerou
+				collider.onCollision()
+			if collision.get_collider() is BlockMinamitsu:
+				currentState = state.Idle
 			if collision.get_collider().name == "VerticalMirror" and mirrorTransitioning == false:
 				mirrorTransitioning = true
 				var collider := collision.get_collider() as VerticalMirror
 				collider.mirrorSwitch(global_position.y, dashVelocity * directionToDash, name)
 				queue_free()
+			if collision.get_collider().name == "StageEnd":
+				print("poop")
 
 # Function to apply gravity
 func applyGravity(delta):

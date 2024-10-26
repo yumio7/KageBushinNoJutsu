@@ -82,8 +82,8 @@ streams_count = 1
 stream_0/stream = ExtResource("3_0hkxa")
 
 [node name="Block" type="StaticBody2D"]
-collision_layer = 5
-collision_mask = 4
+collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_ivuek")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -103,7 +103,7 @@ pitch_scale = 1.8
 bus = &"Sound"
 
 [node name="ShineTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.5
 autostart = true
 
 [node name="DeathTimer" type="Timer" parent="."]
