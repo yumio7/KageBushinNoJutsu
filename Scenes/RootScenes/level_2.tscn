@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://xusikbeivf1e"]
+[gd_scene load_steps=16 format=4 uid="uid://xusikbeivf1e"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_hp1p4"]
+[ext_resource type="AudioStream" uid="uid://ctpombhah1cme" path="res://Audio/Music/stage 2.ogg" id="2_cvgf6"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="2_ig7xt"]
 [ext_resource type="Texture2D" uid="uid://by6pq46c48ghx" path="res://Graphics/Background/MistyLakeBG0.png" id="2_qdjlp"]
 [ext_resource type="TileSet" uid="uid://3alsterig0un" path="res://Resources/MistyLakeTileset.tres" id="2_tpo48"]
@@ -18,6 +19,11 @@
 size = Vector2(16, 2048)
 
 [node name="Level2" instance=ExtResource("1_hp1p4")]
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="Music" index="0"]
+stream = ExtResource("2_cvgf6")
+volume_db = -10.0
+bus = &"Music"
 
 [node name="ParallaxLeft" type="ParallaxBackground" parent="Background" index="0"]
 offset = Vector2(120, 135)
