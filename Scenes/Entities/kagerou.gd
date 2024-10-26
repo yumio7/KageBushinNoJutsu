@@ -4,6 +4,8 @@ extends CharacterBody2D
 # Jump buffer
 # Variant jump height depending on how long the jump input is held
 
+signal end_level
+
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 50.0			# Base walking Movement speed
 const walkSpeedMax: float = 150.0		# Maximum walking movement speed. Kagerou cannot move faster than this when walking.
@@ -199,7 +201,7 @@ func specialCollision(directionToDash, delta):
 				collider.mirrorSwitch(global_position.y, dashVelocity * directionToDash, name)
 				queue_free()
 			if collision.get_collider().name == "StageEnd":
-				print("poop")
+				end_level.emit()
 
 # Function to apply gravity
 func applyGravity(delta):

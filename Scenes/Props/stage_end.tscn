@@ -1,9 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://liwsjvxophs5"]
+[gd_scene load_steps=8 format=3 uid="uid://liwsjvxophs5"]
 
-[ext_resource type="Texture2D" uid="uid://yl2wwtxo8dta" path="res://Graphics/Placeholders/KagerouPlaceholder-Sheet.png" id="1_4t2hi"]
+[ext_resource type="Texture2D" uid="uid://d1440w5570te2" path="res://Graphics/Props/level_end.png" id="1_d4ejk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85av4"]
 size = Vector2(8, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_focbn"]
+atlas = ExtResource("1_d4ejk")
+region = Rect2(0, 0, 12, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2xat"]
+atlas = ExtResource("1_d4ejk")
+region = Rect2(12, 0, 12, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y5f4"]
+atlas = ExtResource("1_d4ejk")
+region = Rect2(24, 0, 12, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_541wv"]
+atlas = ExtResource("1_d4ejk")
+region = Rect2(36, 0, 12, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fekev"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_focbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2xat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y5f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_541wv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="StageEnd" type="StaticBody2D"]
 collision_layer = 4
@@ -12,6 +48,6 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_85av4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 1)
-texture = ExtResource("1_4t2hi")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fekev")
+autoplay = "default"

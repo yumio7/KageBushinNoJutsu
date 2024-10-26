@@ -4,6 +4,8 @@ extends CharacterBody2D
 # Jump buffer
 # Variant jump height depending on how long the jump input is held
 
+signal end_level
+
 # Constants. Assigned values cannot be changed
 const walkSpeed: float = 40.0			# Base walking Movement speed
 const walkSpeedMax: float = 100.0		# Maximum walking movement speed. Minamitsu cannot move faster than this when walking.
@@ -296,7 +298,7 @@ func anchorCancel():
 	if grappledStageEndFlag == true:
 		if anchorProjectileInstance != null:
 			anchorProjectileInstance.queue_free()
-		print("pee")
+		end_level.emit()
 
 
 # Function to track when the anchor disappears

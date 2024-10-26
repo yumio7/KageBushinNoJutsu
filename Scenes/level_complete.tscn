@@ -1,8 +1,97 @@
-[gd_scene format=3 uid="uid://cdp1lulu24hbo"]
+[gd_scene load_steps=7 format=3 uid="uid://cdp1lulu24hbo"]
+
+[ext_resource type="Script" path="res://Scenes/level_complete.gd" id="1_lngah"]
+[ext_resource type="Texture2D" uid="uid://cft48vyfgwgc" path="res://Graphics/Background/menu_background.png" id="1_ypn3x"]
+[ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="2_bq44y"]
+[ext_resource type="Texture2D" uid="uid://dctll3np6o6y4" path="res://Graphics/UI/Button.png" id="3_uavgr"]
+[ext_resource type="Texture2D" uid="uid://p05poolegoqj" path="res://Graphics/UI/Pressed.png" id="4_td2dy"]
+[ext_resource type="Texture2D" uid="uid://d2o5koo3lft3t" path="res://Graphics/UI/Selected.png" id="5_65txs"]
 
 [node name="LevelComplete" type="MarginContainer"]
+process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lngah")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_ypn3x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme = ExtResource("2_bq44y")
+theme_override_font_sizes/font_size = 32
+text = "YOU WIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Continue" type="TextureButton" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Menu")
+focus_neighbor_bottom = NodePath("../Menu")
+texture_normal = ExtResource("3_uavgr")
+texture_pressed = ExtResource("4_td2dy")
+texture_focused = ExtResource("5_65txs")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Buttons/Continue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -5.0
+offset_right = 23.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_bq44y")
+text = "CONTINUE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="TextureButton" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Continue")
+focus_neighbor_bottom = NodePath("../Continue")
+texture_normal = ExtResource("3_uavgr")
+texture_pressed = ExtResource("4_td2dy")
+texture_focused = ExtResource("5_65txs")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Buttons/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -5.0
+offset_right = 12.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_bq44y")
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Menu" to="." method="_on_menu_pressed"]
