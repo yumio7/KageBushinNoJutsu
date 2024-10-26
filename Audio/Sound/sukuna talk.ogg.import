@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bx5nuvpb2ilkb"
+path="res://.godot/imported/sukuna talk.ogg-b16454a12b276b00cb2212c8a7ee664c.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/sukuna talk.ogg"
+dest_files=["res://.godot/imported/sukuna talk.ogg-b16454a12b276b00cb2212c8a7ee664c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

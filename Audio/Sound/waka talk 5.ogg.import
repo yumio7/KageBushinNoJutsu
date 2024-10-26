@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b5uo8lkv0u6rt"
+path="res://.godot/imported/waka talk 5.ogg-f0ce83a7833dd343e2d6d0bbb2eec96d.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/waka talk 5.ogg"
+dest_files=["res://.godot/imported/waka talk 5.ogg-f0ce83a7833dd343e2d6d0bbb2eec96d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
