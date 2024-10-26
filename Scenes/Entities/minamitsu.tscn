@@ -253,6 +253,7 @@ wait_time = 0.075
 one_shot = true
 
 [node name="AnchorCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
 one_shot = true
 
 [node name="AnchorLimit" type="Timer" parent="Timers"]
