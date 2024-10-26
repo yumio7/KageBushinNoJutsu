@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdlkrwqu8gwex"]
+[gd_scene load_steps=4 format=3 uid="uid://bdlkrwqu8gwex"]
 
+[ext_resource type="Script" path="res://Scenes/RootScenes/hud.gd" id="1_xdkdm"]
 [ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="2_ngkrh"]
+[ext_resource type="PackedScene" uid="uid://x2kcvjtcy516" path="res://Scenes/pause_menu.tscn" id="3_st5mn"]
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -15,5 +17,9 @@
 [node name="ControlledCharacter" type="Node2D" parent="Entities"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_xdkdm")
 
 [node name="Dialogue" parent="HUD" instance=ExtResource("2_ngkrh")]
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("3_st5mn")]
+visible = false
