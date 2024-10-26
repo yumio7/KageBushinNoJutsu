@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdlkrwqu8gwex"]
+[gd_scene load_steps=5 format=3 uid="uid://bdlkrwqu8gwex"]
 
+[ext_resource type="Script" path="res://Scenes/RootScenes/base_level.gd" id="1_c084h"]
 [ext_resource type="Script" path="res://Scenes/RootScenes/hud.gd" id="1_xdkdm"]
 [ext_resource type="PackedScene" uid="uid://383vp3jf8417" path="res://Scenes/Dialogue/dialogue.tscn" id="2_ngkrh"]
 [ext_resource type="PackedScene" uid="uid://x2kcvjtcy516" path="res://Scenes/pause_menu.tscn" id="3_st5mn"]
 
 [node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_c084h")
 
 [node name="Music" type="Node" parent="."]
 
@@ -23,3 +25,5 @@ script = ExtResource("1_xdkdm")
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("3_st5mn")]
 visible = false
+
+[connection signal="endDialogue" from="HUD/Dialogue" to="." method="_on_dialogue_end_dialogue"]

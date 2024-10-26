@@ -90,7 +90,7 @@ position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_r0vxo")
 
 [node name="Kagerou" parent="Entities/ControlledCharacter" index="0" instance=ExtResource("3_2lrmb")]
-position = Vector2(138, 169)
+position = Vector2(181, 200)
 
 [node name="VerticalMirror" parent="Entities" index="1" node_paths=PackedStringArray("starterCharacter", "cameraSettingComponent") instance=ExtResource("2_uc46o")]
 position = Vector2(240, 0)
