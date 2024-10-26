@@ -11,6 +11,10 @@ func _ready() -> void:
 	if initialControlledCharacter != null and initDialoguePause:
 		initialControlledCharacter.currentState = 5 # Set the state to pause
 
+	var verticalMirror = $Entities.find_child("VerticalMirror")
+	if verticalMirror != null:
+		verticalMirror.find_child("CollisionShape2D").shape.normal = Vector2(-1, 0)
+
 # When dialogue has ended, unpause the character
 func _on_dialogue_end_dialogue() -> void:
 	initialControlledCharacter.currentState = 0

@@ -254,6 +254,13 @@ func anchorHit(body):
 		# If the layer is 3 (Interactible), the anchor will check what type of interactible it is and either attach (Barrier) or break it (Breakable Block)
 		if anchorCollideInteractible:
 			match body.name:
+				"StageEnd":
+					$Timers/AnchorLimit.stop()
+					anchorProjectileInstance.currentState = 1
+					currentState = state.Grapple
+					$Timers/GrappleLimit.start()
+					grappledStageEndFlag = true
+					anchorHitObject = body
 				"VerticalMirror":
 					$Timers/AnchorLimit.stop()
 					anchorProjectileInstance.currentState = 1
@@ -261,13 +268,6 @@ func anchorHit(body):
 					currentState = state.Grapple
 					$Timers/GrappleLimit.start()
 					grappledMirrorFlag = true
-					anchorHitObject = body
-				"StageEnd":
-					$Timers/AnchorLimit.stop()
-					anchorProjectileInstance.currentState = 1
-					currentState = state.Grapple
-					$Timers/GrappleLimit.start()
-					grappledStageEndFlag = true
 					anchorHitObject = body
 		if anchorCollideInteractible and body is Block:
 			anchorCancel()
@@ -277,13 +277,20 @@ func anchorHit(body):
 			body.onCollision()
 		elif anchorCollideInteractible and body is BlockKagerou:
 			anchorCancel()
+		elif anchorCollideInteractible and body is BlockCheckpoint:
+			anchorCancel()
+			body.onCollision()
 
 
 
 # Function to end minamitsu's ability by retracting anchor and removing it. Acts differently when minamitsu grapples the mirror
 func anchorCancel():
 
-	if grappledMirrorFlag == false:
+	if grappledStageEndFlag == true:
+		if anchorProjectileInstance != null:
+			anchorProjectileInstance.queue_free()
+		end_level.emit()
+	elif grappledMirrorFlag == false:
 		$Timers/AnchorLimit.stop()
 		$Timers/GrappleLimit.stop()
 		currentState = state.Idle
@@ -294,11 +301,6 @@ func anchorCancel():
 			anchorProjectileInstance.queue_free()
 		anchorHitObject.mirrorSwitch(global_position.y, grappleVelocity * directionToAnchor.x, name)
 		queue_free()
-	
-	if grappledStageEndFlag == true:
-		if anchorProjectileInstance != null:
-			anchorProjectileInstance.queue_free()
-		end_level.emit()
 
 
 # Function to track when the anchor disappears

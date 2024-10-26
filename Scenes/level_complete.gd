@@ -1,6 +1,6 @@
 extends MarginContainer
 
-@export_file var next_scene = "res://Scenes/mainmenu.gd"
+@export_file var next_scene = "res://Scenes/mainmenu.tscn"
 
 func _on_level_end() -> void:
 	show()

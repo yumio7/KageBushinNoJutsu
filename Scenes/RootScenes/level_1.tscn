@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://hifpc6lsroul"]
+[gd_scene load_steps=14 format=4 uid="uid://hifpc6lsroul"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_6k7ps"]
 [ext_resource type="TileSet" uid="uid://dv13k5ootlney" path="res://Resources/MyourenTempleTileset.tres" id="2_eg63w"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="3_2lrmb"]
 [ext_resource type="Texture2D" uid="uid://cram5lq33s3xd" path="res://Graphics/Decor/Tree1.png" id="3_x4tfp"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="4_w76kx"]
+[ext_resource type="PackedScene" uid="uid://liwsjvxophs5" path="res://Scenes/Props/stage_end.tscn" id="5_g0jtl"]
 [ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="7_qg0li"]
 [ext_resource type="PackedScene" uid="uid://c2jvmhxpc10pn" path="res://Scenes/Props/block.tscn" id="8_bvbns"]
+[ext_resource type="PackedScene" uid="uid://bysx37h7656x0" path="res://Scenes/Props/checkpoint_block.tscn" id="9_gl6yy"]
 [ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="9_nlgka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0vxo"]
@@ -89,8 +91,11 @@ position = Vector2(496, 1)
 position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_r0vxo")
 
+[node name="StageEnd" parent="Foreground" index="5" instance=ExtResource("5_g0jtl")]
+position = Vector2(240, -570)
+
 [node name="Kagerou" parent="Entities/ControlledCharacter" index="0" instance=ExtResource("3_2lrmb")]
-position = Vector2(181, 200)
+position = Vector2(177, 199)
 
 [node name="VerticalMirror" parent="Entities" index="1" node_paths=PackedStringArray("starterCharacter", "cameraSettingComponent") instance=ExtResource("2_uc46o")]
 position = Vector2(240, 0)
@@ -112,6 +117,10 @@ mirroredForm = NodePath("../../BlocksRight/Block")
 position = Vector2(40, -471)
 mirroredForm = NodePath("../../BlocksRight/Block2")
 
+[node name="CheckpointBlock" parent="Entities/BlocksLeft" index="2" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("9_gl6yy")]
+position = Vector2(120, -280)
+mirroredForm = NodePath("../../BlocksRight/CheckpointBlock")
+
 [node name="BlocksRight" type="Node2D" parent="Entities" index="3"]
 position = Vector2(480, 0)
 scale = Vector2(-1, 1)
@@ -124,9 +133,16 @@ mirroredForm = NodePath("../../BlocksLeft/Block")
 position = Vector2(40, -471)
 mirroredForm = NodePath("../../BlocksLeft/Block2")
 
+[node name="CheckpointBlock" parent="Entities/BlocksRight" index="2" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("9_gl6yy")]
+position = Vector2(120, -280)
+mirroredForm = NodePath("../../BlocksLeft/CheckpointBlock")
+
 [node name="ShaderCanvasLayer" parent="." index="4" instance=ExtResource("9_nlgka")]
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 dialogueComponents = [NodePath("CutsceneComponent")]
 
 [node name="CutsceneComponent" parent="HUD/Dialogue" index="5" instance=ExtResource("4_w76kx")]
+
+[node name="LevelComplete" parent="HUD" index="2"]
+next_scene = "res://Scenes/RootScenes/level_2.tscn"

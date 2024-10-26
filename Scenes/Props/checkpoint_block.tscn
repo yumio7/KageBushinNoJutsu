@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bysx37h7656x0"]
+[gd_scene load_steps=12 format=3 uid="uid://bysx37h7656x0"]
 
+[ext_resource type="Script" path="res://Scenes/Props/checkpoint_block.gd" id="1_5ma6k"]
 [ext_resource type="Texture2D" uid="uid://c32dskiqfnbye" path="res://Graphics/Props/CheckpointBlock-Sheet.png" id="1_dmlcb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfya1"]
@@ -75,11 +76,21 @@ animations = [{
 [node name="CheckpointBlock" type="StaticBody2D"]
 collision_layer = 4
 collision_mask = 9
+script = ExtResource("1_5ma6k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bfya1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ua65w")
-animation = &"Activated"
+animation = &"Default"
 autoplay = "Default"
+
+[node name="ShineTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="FloorSpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, 8)
+
+[connection signal="timeout" from="ShineTimer" to="." method="_on_shine_timer_timeout"]

@@ -195,6 +195,10 @@ func specialCollision(directionToDash, delta):
 				collider.onCollision()
 			if collision.get_collider() is BlockMinamitsu:
 				currentState = state.Idle
+			if collision.get_collider() is BlockCheckpoint:
+				currentState = state.Idle
+				var collider := collision.get_collider() as BlockCheckpoint
+				collider.onCollision()
 			if collision.get_collider().name == "VerticalMirror" and mirrorTransitioning == false:
 				mirrorTransitioning = true
 				var collider := collision.get_collider() as VerticalMirror

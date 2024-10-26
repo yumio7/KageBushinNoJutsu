@@ -48,7 +48,6 @@ func _physics_process(_delta: float) -> void:
 
 # charCurrent refers to the current character. All parameters are passed to this function by the controlled character
 func mirrorSwitch(charPositionY, charVelocity, currentCharName):
-
 	$SwapSFX.play()
 
 	# Depending on the normal of the worldboundary, switch it. Change direction character is facing if applicable
