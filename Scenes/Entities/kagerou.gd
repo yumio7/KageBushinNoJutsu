@@ -192,6 +192,8 @@ func specialCollision(directionToDash, delta):
 				var collider := collision.get_collider() as VerticalMirror
 				collider.mirrorSwitch(global_position.y, dashVelocity * directionToDash, name)
 				queue_free()
+			if collision.get_collider().name == "StageEnd":
+				print("poop")
 
 # Function to apply gravity
 func applyGravity(delta):

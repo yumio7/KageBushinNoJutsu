@@ -21,7 +21,8 @@ var previousFloorState = false																	# Tracks the previous grounded st
 var tweenSound																					# Declare a potential tween which modifies sound
 var anchorProjectile = preload("res://Scenes/Entities/anchor_projectile.tscn")					# Preload the anchor projectile for faster instantiation
 var anchorProjectileInstance = null																# Track the anchorProjectile instance's location and status
-var grappledMirrorFlag = false																	# Track whether minamitsu is currently grappling into the mirror
+var grappledMirrorFlag = false
+var grappledStageEndFlag = false																# Track whether minamitsu is currently grappling into the mirror
 var anchorHitObject	= null																		# Track the anchor's hit object
 var directionToAnchor = 0																		# Track the direction minamitsu faces when yeeting anchor
 
@@ -231,6 +232,13 @@ func anchorHit(body):
 				"Block":
 					anchorCancel()
 					body.onCollision()
+				"StageEnd":
+					$Timers/AnchorLimit.stop()
+					anchorProjectileInstance.currentState = 1
+					currentState = state.Grapple
+					$Timers/GrappleLimit.start()
+					grappledStageEndFlag = true
+					anchorHitObject = body
 
 
 # Function to end minamitsu's ability by retracting anchor and removing it. Acts differently when minamitsu grapples the mirror
@@ -247,6 +255,11 @@ func anchorCancel():
 			anchorProjectileInstance.queue_free()
 		anchorHitObject.mirrorSwitch(global_position.y, grappleVelocity * directionToAnchor.x, name)
 		queue_free()
+	
+	if grappledStageEndFlag == true:
+		if anchorProjectileInstance != null:
+			anchorProjectileInstance.queue_free()
+		print("pee")
 
 
 # Function to track when the anchor disappears
