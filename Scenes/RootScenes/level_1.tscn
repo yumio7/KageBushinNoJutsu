@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cyxhjx1byq5hu" path="res://Audio/Music/stage 1.ogg" id="2_cvckg"]
 [ext_resource type="TileSet" uid="uid://dv13k5ootlney" path="res://Resources/MyourenTempleTileset.tres" id="2_eg63w"]
 [ext_resource type="Texture2D" uid="uid://b11fw1t3llmke" path="res://Graphics/Background/MyourenBG0.png" id="2_l4ap7"]
-[ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="2_uc46o"]
+[ext_resource type="PackedScene" path="res://Scenes/Props/vertical_mirror.tscn" id="2_uc46o"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="3_2lrmb"]
 [ext_resource type="Texture2D" uid="uid://cram5lq33s3xd" path="res://Graphics/Decor/Tree1.png" id="3_x4tfp"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="4_w76kx"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="7_qg0li"]
 [ext_resource type="PackedScene" uid="uid://c2jvmhxpc10pn" path="res://Scenes/Props/block.tscn" id="8_bvbns"]
 [ext_resource type="PackedScene" uid="uid://bysx37h7656x0" path="res://Scenes/Props/checkpoint_block.tscn" id="9_gl6yy"]
-[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="9_nlgka"]
+[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/grayscale_screen.tscn" id="9_nlgka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0vxo"]
 size = Vector2(16, 2048)
@@ -143,7 +143,7 @@ mirroredForm = NodePath("../../BlocksLeft/Block2")
 position = Vector2(168, -248)
 mirroredForm = NodePath("../../BlocksLeft/CheckpointBlock")
 
-[node name="ShaderCanvasLayer" parent="." index="4" instance=ExtResource("9_nlgka")]
+[node name="GrayscaleShaderLayer" parent="." index="4" instance=ExtResource("9_nlgka")]
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 dialogueComponents = [NodePath("CutsceneComponent")]

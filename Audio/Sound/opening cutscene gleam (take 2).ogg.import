@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://btcvxj6ekjpsl"
+path="res://.godot/imported/opening cutscene gleam (take 2).ogg-fd5c64660c34ad0410ff7f7eccec793b.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/opening cutscene gleam (take 2).ogg"
+dest_files=["res://.godot/imported/opening cutscene gleam (take 2).ogg-fd5c64660c34ad0410ff7f7eccec793b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

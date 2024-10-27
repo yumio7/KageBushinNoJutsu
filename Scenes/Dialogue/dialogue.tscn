@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://383vp3jf8417"]
+[gd_scene load_steps=34 format=3 uid="uid://383vp3jf8417"]
 
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
 [ext_resource type="Texture2D" uid="uid://0yak3a2pwv7w" path="res://Graphics/Dialogue/Dialogue Box.png" id="2_hvfeh"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Scenes/Dialogue/LeftSprite.gd" id="3_tcosv"]
 [ext_resource type="Texture2D" uid="uid://cdowami7rva6r" path="res://Graphics/Dialogue/Sprites/rightsprites.png" id="4_lyboj"]
 [ext_resource type="Script" path="res://Scenes/Dialogue/RightSprite.gd" id="5_ar06d"]
-[ext_resource type="AudioStream" uid="uid://3ulypp8n3fjo" path="res://Audio/gabe-bark.mp3" id="7_m8igw"]
 [ext_resource type="AudioStream" uid="uid://rmg6msdcdlwo" path="res://Audio/Sound/kage talk.ogg" id="9_ol628"]
 [ext_resource type="AudioStream" uid="uid://dm0hime5lyij4" path="res://Audio/Sound/murasa talk.ogg" id="10_sny74"]
 [ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="12_e3vv7"]
@@ -23,6 +22,9 @@
 [ext_resource type="AudioStream" uid="uid://b5uo8lkv0u6rt" path="res://Audio/Sound/waka talk 5.ogg" id="21_36w2f"]
 [ext_resource type="AudioStream" uid="uid://dftac5230pqf7" path="res://Audio/Sound/waka talk 6.ogg" id="22_5024w"]
 [ext_resource type="AudioStream" uid="uid://cdvrvf4u348ua" path="res://Audio/Sound/boowomp.ogg" id="23_kvd8f"]
+[ext_resource type="AudioStream" uid="uid://bbdpyx6i2jae3" path="res://Audio/Sound/nazrin rustle.ogg" id="24_fslmr"]
+[ext_resource type="AudioStream" uid="uid://dyrxgrk7i7m5f" path="res://Audio/Sound/waka splash.ogg" id="25_0v3ac"]
+[ext_resource type="AudioStream" uid="uid://btcvxj6ekjpsl" path="res://Audio/Sound/opening cutscene gleam (take 2).ogg" id="26_cg6bg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_so8rl"]
 atlas = ExtResource("2_we1e8")
@@ -157,7 +159,6 @@ autowrap_mode = 2
 [node name="SoundLib" type="Node" parent="."]
 
 [node name="Default" type="AudioStreamPlayer" parent="SoundLib"]
-stream = ExtResource("7_m8igw")
 bus = &"Sound"
 
 [node name="Kagerou" type="AudioStreamPlayer" parent="SoundLib"]
@@ -192,6 +193,15 @@ stream = SubResource("AudioStreamRandomizer_4wcsv")
 
 [node name="Boowomp" type="AudioStreamPlayer" parent="SoundLib"]
 stream = ExtResource("23_kvd8f")
+
+[node name="Rustle" type="AudioStreamPlayer" parent="SoundLib"]
+stream = ExtResource("24_fslmr")
+
+[node name="Splash" type="AudioStreamPlayer" parent="SoundLib"]
+stream = ExtResource("25_0v3ac")
+
+[node name="Gleam" type="AudioStreamPlayer" parent="SoundLib"]
+stream = ExtResource("26_cg6bg")
 
 [node name="SpeakDelay" type="Timer" parent="."]
 wait_time = 0.1
