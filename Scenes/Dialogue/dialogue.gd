@@ -122,6 +122,8 @@ func matchSfx(SFXname):
 			$SoundLib/Shock.play()
 		"Impact":
 			$SoundLib/Impact.play()
+		"Boowomp":
+			$SoundLib/Boowomp.play()
 		_:
 			pass
 

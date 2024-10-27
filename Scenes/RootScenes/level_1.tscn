@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cyxhjx1byq5hu" path="res://Audio/Music/stage 1.ogg" id="2_cvckg"]
 [ext_resource type="TileSet" uid="uid://dv13k5ootlney" path="res://Resources/MyourenTempleTileset.tres" id="2_eg63w"]
 [ext_resource type="Texture2D" uid="uid://b11fw1t3llmke" path="res://Graphics/Background/MyourenBG0.png" id="2_l4ap7"]
-[ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="2_uc46o"]
+[ext_resource type="PackedScene" path="res://Scenes/Props/vertical_mirror.tscn" id="2_uc46o"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="3_2lrmb"]
 [ext_resource type="Texture2D" uid="uid://cram5lq33s3xd" path="res://Graphics/Decor/Tree1.png" id="3_x4tfp"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="4_w76kx"]
@@ -149,6 +149,10 @@ mirroredForm = NodePath("../../BlocksLeft/CheckpointBlock")
 dialogueComponents = [NodePath("CutsceneComponent")]
 
 [node name="CutsceneComponent" parent="HUD/Dialogue" index="5" instance=ExtResource("4_w76kx")]
+nameSequence = Array[String](["Kagerou", "Kagerou", "Kagerou", "Minamitsu", "Kagerou", "Kagerou", "Kagerou", "Minamitsu", "Minamitsu", "Kagerou", "Minamitsu", "Kagerou", "Kagerou", "Minamitsu", "Minamitsu", "Minamitsu", "Kagerou", "Kagerou", "Minamitsu", "Kagerou", "Minamitsu", "Minamitsu", "Kagerou", "Kagerou", "Kagerou", "Minamitsu", "Minamitsu", "Kagerou", "Minamitsu", "Minamitsu", "Minamitsu", "Minamitsu", "Kagerou", "Minamitsu", "Minamitsu", "Kagerou"])
+emoteSequence = Array[String](["eugh", "eugh", "sad", "happy", "shock", "shock", "sad", "neutral", "sad", "shock", "neutral", "sad", "eugh", "mad", "sad", "sad", "sad", "shock", "happy2", "sad", "happy", "happy", "happy", "sad", "mad", "shock", "neutral", "shock", "sad", "sad", "neutral", "neutral", "sad", "happy", "happy2", "happy2"])
+dialogueSequence = Array[String](["Uuuuueh...", "...my head!", "What even *was* that?!", "That was some sunset, huh?", "Woah!", "Minamitsu, how long have you been there?", "And what's this big mirror-like thing between us?", "'Dunno.", "Seems it stretches on forever, though.", "What do you mean \"forever\"?", "Take a look for yourself. I'm not seeing any end to it.", "That's concerning.", "What even happened? All I remember is some big flash of light, and then we ended up here.", "Hey, I'm just as out of the loop as you.", "I mean take a look at the temple courtyard!", "I'm going to be copying sutras for days...", "So much of the ground is floating around...", "Ah! Hime!", "Hey, I'm used to 'captain', but I guess I don't mind that either.", "Oh, sorry, I just remembered my friend at Misty Lake, Wakasagihime.", "The mermaid, right?", "I haven't met her myself, but I've heard the name.", "Yup, she's the one.", "She's probably worried about me...", "I've got to get over there.", "Woah, woah. Hold on there a second.", "Haven't you noticed already?", "Huh? What?", "Even with this wall between us...", "...it seems we can't go too far from one another.", "Before you woke up, I even tried to check on the Temple but I didn't make it far.", "The moment I stepped beyond a certain range, I felt a strong pull back towards your location.", "Ah, uh, well...", "It's alright. I wanted to go find the others anyway.", "Let's climb our way out of here first, and see if we learn anything.", "Yes, let's."])
+sfxSequence = Array[String](["", "Boowomp", "", "", "", "", "", "", "", "", "", "", "", "", "", "Boowomp", "", "Impact", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
 
 [node name="LevelComplete" parent="HUD" index="2"]
 next_scene = "res://Scenes/RootScenes/level_2.tscn"

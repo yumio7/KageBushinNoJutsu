@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://383vp3jf8417"]
+[gd_scene load_steps=32 format=3 uid="uid://383vp3jf8417"]
 
 [ext_resource type="Script" path="res://Scenes/Dialogue/dialogue.gd" id="1_cmfh0"]
 [ext_resource type="Texture2D" uid="uid://0yak3a2pwv7w" path="res://Graphics/Dialogue/Dialogue Box.png" id="2_hvfeh"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://cpnq7x5xml454" path="res://Audio/Sound/waka talk 4.ogg" id="20_rn7vd"]
 [ext_resource type="AudioStream" uid="uid://b5uo8lkv0u6rt" path="res://Audio/Sound/waka talk 5.ogg" id="21_36w2f"]
 [ext_resource type="AudioStream" uid="uid://dftac5230pqf7" path="res://Audio/Sound/waka talk 6.ogg" id="22_5024w"]
+[ext_resource type="AudioStream" uid="uid://cdvrvf4u348ua" path="res://Audio/Sound/boowomp.ogg" id="23_kvd8f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_so8rl"]
 atlas = ExtResource("2_we1e8")
@@ -188,6 +189,9 @@ stream = SubResource("AudioStreamRandomizer_v4lmk")
 
 [node name="Wakasagihime" type="AudioStreamPlayer" parent="SoundLib"]
 stream = SubResource("AudioStreamRandomizer_4wcsv")
+
+[node name="Boowomp" type="AudioStreamPlayer" parent="SoundLib"]
+stream = ExtResource("23_kvd8f")
 
 [node name="SpeakDelay" type="Timer" parent="."]
 wait_time = 0.1
