@@ -1,8 +1,8 @@
 [gd_scene load_steps=26 format=4 uid="uid://ddorfs6errhdq"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_2knpy"]
+[ext_resource type="AudioStream" uid="uid://cm1d440x3y0n6" path="res://Audio/Music/stage 3, boss final.ogg" id="2_1g0bv"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="2_cax5b"]
-[ext_resource type="AudioStream" uid="uid://b74740i10blhj" path="res://Audio/Music/stage 3, boss.ogg" id="2_duopd"]
 [ext_resource type="Texture2D" uid="uid://ccqnqur172yob" path="res://Graphics/Background/HumanVillageBG0.png" id="2_grp1w"]
 [ext_resource type="PackedScene" uid="uid://b3p5y84mwj4ej" path="res://Scenes/Props/background_thunder_controller.tscn" id="2_q3k40"]
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="2_trwkq"]
@@ -137,7 +137,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_28jcb")
 [node name="Level3" instance=ExtResource("1_2knpy")]
 
 [node name="MusicLoop" type="AudioStreamPlayer" parent="Music" index="0"]
-stream = ExtResource("2_duopd")
+stream = ExtResource("2_1g0bv")
 volume_db = -20.0
 bus = &"Music"
 
