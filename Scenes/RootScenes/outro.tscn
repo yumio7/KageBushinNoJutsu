@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhkxw3pchhv6n"]
+
+[ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_5o5mg"]
+[ext_resource type="Script" path="res://Scenes/RootScenes/outro.gd" id="2_aibyr"]
+[ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="2_cwfea"]
+
+[node name="outro" instance=ExtResource("1_5o5mg")]
+script = ExtResource("2_aibyr")
+
+[node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
+dialogueComponents = [NodePath("CutsceneComponent")]
+
+[node name="CutsceneComponent" parent="HUD/Dialogue" index="5" instance=ExtResource("2_cwfea")]
+nameSequence = Array[String](["Seija", "Minamitsu", "Kagerou", "Seija", "Seija", "Seija", "Minamitsu", "Nazrin", "Wakasagihime", "Seija", "Nazrin", "Shinmyoumaru", "Seija", "Nazrin", "Seija", "Seija", "Seija", "Nazrin", "Nazrin", "Minamitsu", "Nazrin", "Seija", "Kagerou", "Seija", "Seija", "Shinmyoumaru", "Shinmyoumaru", "Seija", "Shinmyoumaru", "Seija", "Shinmyoumaru", "Seija", "Wakasagihime", "Kagerou", "Nazrin", "Minamitsu", "Minamitsu", "Minamitsu", "Kagerou", "Kagerou", "Minamitsu", "Minamitsu", "Kagerou"])
+emoteSequence = Array[String](["shock", "mad2", "neutral", "mad2", "happy2", "ohno", "eugh", "shock", "mad2", "mad", "neutral", "mad2", "happy", "neutral", "happy", "shock", "mad2", "happy", "mad", "happy", "happy2", "mad", "mad", "eugh", "happy", "mad2", "happy2", "mad", "ohno", "mad2", "ohno", "eugh", "shock", "shock", "shock", "shock", "eugh", "happy2", "shock", "shock", "happy", "happy2", "happy2"])
+dialogueSequence = Array[String](["Huh, you two're pretty good together.", "Well, we have been attached by the hip for the past few hours.", "It'd be nice if you could just give it up already...", "'Give it up'? Oh, please!", "I *LIVE* for this!", "Does the fear in these humans not stir something, *anything*, in you?", "Well, I prefer to get to know who I'm capsizing, if I'll be honest.", "...", "Please, can't you see these humans just want to go to sleep?", "Oh, who cares what they want? I'm the one who gets to have all the fun tonight!", "(Maybe if I just...)", "Can you just give it a rest already, Seija?", "Pffft, as if that'll happen any time s-", "*snatch*", "-oon...?", "Wait, wh-", "Hey! Give that back!", "I think I'll pass.", "It wasn't even yours in the first place.", "Hey, Nazrin! Good thinking.", "I mean, she made it pretty easy.", "Oh, c'mon! I was at least *using* it!", "Oh, you don't even know how that thing works!", "Well, it's not like I needed it in the first place...", "I'll just go find some other humans to mess with.", "No, Seija, you won't!", "We're going back to the Shining Needle Castle this very instant!", "What? No, I'm going to-", "WE. ARE. LEAVING.", "...", "NOW.", "...yes, Princess.", "Scary...!", "I don't think I've ever seen Shinmyoumaru that mad before...", "And I thought Byakuren could get scary...", "...", "(...yeah, but the saint's much cooler when she's mad...)", "Oh, speaking of! Byakuren must be back by the temple by now.", "Ah! Miss Hijiri! I almost forgot!", "She's the reason I even came out here in the first place!", "Well, it's been a long night.", "But let's head back to the temple so you can finally meet her.", "Yes, let's!"])
+sfxSequence = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "Impact", "", "Boowomp", "", "", "", "", "", "", "", "", "", "", "", "", "Impact", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
