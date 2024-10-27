@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://xusikbeivf1e"]
+[gd_scene load_steps=17 format=4 uid="uid://xusikbeivf1e"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_hp1p4"]
 [ext_resource type="AudioStream" uid="uid://ctpombhah1cme" path="res://Audio/Music/stage 2.ogg" id="2_cvgf6"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cy0lqrkrmvnqv" path="res://Scenes/Props/chain_block.tscn" id="6_68hn2"]
 [ext_resource type="PackedScene" uid="uid://db585pf7ne44l" path="res://Scenes/Props/block_minamitsu.tscn" id="7_3lphv"]
 [ext_resource type="PackedScene" uid="uid://bysx37h7656x0" path="res://Scenes/Props/checkpoint_block.tscn" id="8_kynqr"]
+[ext_resource type="PackedScene" uid="uid://b7h3k241uaj4e" path="res://Scenes/Props/fog_shader.tscn" id="13_yru3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muhqx"]
 size = Vector2(16, 2048)
@@ -382,7 +383,9 @@ limitLeft = 0.0
 limitRight = 480.0
 newOffset = Vector2(0, -15)
 
-[node name="GrayscaleShaderLayer" parent="." index="4" instance=ExtResource("5_ag5au")]
+[node name="FogShaderLayer" parent="." index="4" instance=ExtResource("13_yru3j")]
+
+[node name="GrayscaleShaderLayer" parent="." index="5" instance=ExtResource("5_ag5au")]
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 dialogueComponents = [NodePath("CutsceneComponent")]
