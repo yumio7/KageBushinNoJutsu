@@ -24,7 +24,7 @@ func _process(_delta):
 		$BrightenCanvasLayer/ColorRect.material.set_shader_parameter("multiplier", 1.0 + ((thunderDuration - timer % thunderInterval) as float / thunderDuration) * 0.05)
 		$BackgroundThunder1/ColorRect.material.set_shader_parameter("alpha", 1.0 - ((timer % thunderInterval) as float / thunderDuration))
 		$BackgroundThunder2/ColorRect.material.set_shader_parameter("alpha", 1.0 - ((timer % thunderInterval) as float / thunderDuration))
-	if (timer == thunderInterval - 1):
+	if (timer == thunderInterval):
 		timer = randi_range(0, -thunderInterval);
 	timer += 1;
 
