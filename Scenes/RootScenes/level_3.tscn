@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddorfs6errhdq"]
+
+[ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_2knpy"]
+[ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="2_cax5b"]
+[ext_resource type="Texture2D" uid="uid://ccqnqur172yob" path="res://Graphics/Background/HumanVillageBG0.png" id="2_grp1w"]
+[ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="2_trwkq"]
+[ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="3_oab56"]
+[ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="4_0uble"]
+[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="5_uwhns"]
+
+[node name="Level3" instance=ExtResource("1_2knpy")]
+
+[node name="ParallaxLeft" type="ParallaxBackground" parent="Background" index="0"]
+offset = Vector2(120, 135)
+transform = Transform2D(1, 0, 0, 1, 120, 135)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxLeft" index="0"]
+motion_scale = Vector2(0, 0.005)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxLeft/ParallaxLayer" index="0"]
+texture = ExtResource("2_grp1w")
+
+[node name="ParallaxRight" type="ParallaxBackground" parent="Background" index="1"]
+offset = Vector2(360, 135)
+rotation = 3.14159
+scale = Vector2(1, -1)
+transform = Transform2D(-1, 0, 0, 1, 360, 135)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxRight" index="0"]
+motion_scale = Vector2(0, 0.005)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxRight/ParallaxLayer" index="0"]
+texture = ExtResource("2_grp1w")
+
+[node name="Kagerou" parent="Entities/ControlledCharacter" index="0" instance=ExtResource("2_trwkq")]
+position = Vector2(65, 69)
+
+[node name="VerticalMirror" parent="Entities" index="1" node_paths=PackedStringArray("starterCharacter", "cameraSettingComponent") instance=ExtResource("3_oab56")]
+position = Vector2(240, 0)
+starterCharacter = NodePath("../ControlledCharacter/Kagerou")
+cameraSettingComponent = NodePath("CameraSettingsComponent")
+
+[node name="CameraSettingsComponent" parent="Entities/VerticalMirror" index="4" instance=ExtResource("4_0uble")]
+limitLeft = 0.0
+limitRight = 480.0
+newOffset = Vector2(0, -15)
+
+[node name="ShaderCanvasLayer" parent="." index="4" instance=ExtResource("5_uwhns")]
+
+[node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
+dialogueComponents = [NodePath("CutsceneComponent")]
+
+[node name="CutsceneComponent" parent="HUD/Dialogue" index="5" instance=ExtResource("2_cax5b")]
