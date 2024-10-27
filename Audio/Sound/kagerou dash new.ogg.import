@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dluf4lqiluq3l"
+path="res://.godot/imported/kagerou dash new.ogg-d62cd71f86c5d26a6a8a96c78c2c7ee4.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/kagerou dash new.ogg"
+dest_files=["res://.godot/imported/kagerou dash new.ogg-d62cd71f86c5d26a6a8a96c78c2c7ee4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
