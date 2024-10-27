@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://ddorfs6errhdq"]
+[gd_scene load_steps=20 format=4 uid="uid://ddorfs6errhdq"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_2knpy"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="2_cax5b"]
@@ -6,11 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="2_trwkq"]
 [ext_resource type="Texture2D" uid="uid://tx7prrtwyhuv" path="res://Graphics/Tilesets/HumanVillageTileset.png" id="3_3l4bi"]
 [ext_resource type="TileSet" uid="uid://c7cj114k7ovy2" path="res://Resources/HumanVillageTileset.tres" id="3_b4xej"]
+[ext_resource type="PackedScene" uid="uid://b3p5y84mwj4ej" path="res://Scenes/Props/background_thunder_controller.tscn" id="3_mkvra"]
 [ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="3_oab56"]
-[ext_resource type="PackedScene" path="res://Scenes/Props/camera_settings_component.tscn" id="4_0uble"]
-[ext_resource type="PackedScene" path="res://Scenes/Props/grayscale_screen.tscn" id="5_uwhns"]
+[ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="4_0uble"]
+[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/grayscale_screen.tscn" id="5_uwhns"]
 [ext_resource type="PackedScene" uid="uid://6dbtq6dhm3iw" path="res://Scenes/Props/block_kagerou.tscn" id="8_5j2f8"]
 [ext_resource type="PackedScene" uid="uid://db585pf7ne44l" path="res://Scenes/Props/block_minamitsu.tscn" id="9_vatuq"]
+[ext_resource type="Shader" path="res://Scenes/Props/fog_shader.gdshader" id="10_8jpnp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcm0q"]
 texture = ExtResource("3_3l4bi")
@@ -108,6 +110,24 @@ sources/0 = SubResource("TileSetAtlasSource_bcm0q")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm3w6"]
 size = Vector2(16, 2048)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2ccig"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_28jcb"]
+width = 256
+height = 256
+seamless = true
+normalize = false
+noise = SubResource("FastNoiseLite_2ccig")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15nx8"]
+shader = ExtResource("10_8jpnp")
+shader_parameter/density = 0.25
+shader_parameter/speed = Vector2(0.2, 1.5)
+shader_parameter/displacement = Vector2(0, 0)
+shader_parameter/scale = Vector2(1, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_28jcb")
+
 [node name="Level3" instance=ExtResource("1_2knpy")]
 
 [node name="ParallaxLeft" type="ParallaxBackground" parent="Background" index="0"]
@@ -131,6 +151,8 @@ motion_scale = Vector2(0, 0.005)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxRight/ParallaxLayer" index="0"]
 texture = ExtResource("2_grp1w")
+
+[node name="BackgroundThunderController" parent="Background" index="2" instance=ExtResource("3_mkvra")]
 
 [node name="TileMapLayersRight" type="Node2D" parent="Foreground" index="0"]
 position = Vector2(480, 0)
@@ -213,7 +235,17 @@ mirroredForm = NodePath("../../BlocksLeft/BlockMinamitsu1")
 position = Vector2(152, 24)
 mirroredForm = NodePath("../../BlocksLeft/BlockKagerou2")
 
-[node name="GrayscaleShaderLayer" parent="." index="4" instance=ExtResource("5_uwhns")]
+[node name="FogShaderLayer" type="CanvasLayer" parent="." index="4"]
+
+[node name="ColorRect" type="ColorRect" parent="FogShaderLayer" index="0"]
+material = SubResource("ShaderMaterial_15nx8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GrayscaleShaderLayer" parent="." index="5" instance=ExtResource("5_uwhns")]
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 visible = false

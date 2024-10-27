@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3p5y84mwj4ej"]
+
+[ext_resource type="Script" path="res://Scenes/Props/background_thunder_controller.gd" id="1_e8oya"]
+[ext_resource type="Shader" path="res://Scenes/Props/brighten_screen.gdshader" id="2_3shla"]
+[ext_resource type="PackedScene" uid="uid://4ur60213fs87" path="res://Scenes/Props/background_thunder.tscn" id="3_wginm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6mfb"]
+shader = ExtResource("2_3shla")
+shader_parameter/colourAdd = 0.0
+shader_parameter/multiplier = 1.0
+
+[node name="BackgroundThunderController" type="CanvasLayer"]
+layer = -1
+script = ExtResource("1_e8oya")
+
+[node name="BrightenCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="BrightenCanvasLayer"]
+material = SubResource("ShaderMaterial_i6mfb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="BackgroundThunder1" parent="." instance=ExtResource("3_wginm")]
+
+[node name="BackgroundThunder2" parent="." instance=ExtResource("3_wginm")]

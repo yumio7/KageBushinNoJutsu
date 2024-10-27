@@ -13,7 +13,7 @@ noise = SubResource("FastNoiseLite_2ccig")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_15nx8"]
 shader = ExtResource("1_ygnrw")
 shader_parameter/density = 0.25
-shader_parameter/speed = Vector2(0.04, 0.02)
+shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/displacement = Vector2(0, 0)
 shader_parameter/scale = Vector2(1, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_28jcb")
