@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://it048b436dos" path="res://Scenes/Entities/kagerou.tscn" id="2_trwkq"]
 [ext_resource type="Texture2D" uid="uid://tx7prrtwyhuv" path="res://Graphics/Tilesets/HumanVillageTileset.png" id="3_3l4bi"]
 [ext_resource type="TileSet" uid="uid://c7cj114k7ovy2" path="res://Resources/HumanVillageTileset.tres" id="3_b4xej"]
-[ext_resource type="PackedScene" path="res://Scenes/Props/vertical_mirror.tscn" id="3_oab56"]
+[ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="3_oab56"]
 [ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="4_0uble"]
 [ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/grayscale_screen.tscn" id="5_uwhns"]
 [ext_resource type="PackedScene" uid="uid://liwsjvxophs5" path="res://Scenes/Props/stage_end.tscn" id="6_t1y7n"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://db585pf7ne44l" path="res://Scenes/Props/block_minamitsu.tscn" id="9_vatuq"]
 [ext_resource type="PackedScene" uid="uid://cy0lqrkrmvnqv" path="res://Scenes/Props/chain_block.tscn" id="10_l5xr3"]
 [ext_resource type="PackedScene" uid="uid://cih88yfpwocq8" path="res://Scenes/Entities/seija.tscn" id="10_tiv4u"]
-[ext_resource type="PackedScene" path="res://Scenes/Entities/seija_mirror_form.tscn" id="11_nqufu"]
+[ext_resource type="PackedScene" uid="uid://bgb68fc7bxmax" path="res://Scenes/Entities/seija_mirror_form.tscn" id="11_nqufu"]
 [ext_resource type="Shader" path="res://Scenes/Props/fog_shader.gdshader" id="12_6hhc1"]
 [ext_resource type="PackedScene" uid="uid://c8rifv1r1a3kg" path="res://Scenes/Props/boss_ceiling.tscn" id="15_s4d20"]
 
@@ -442,3 +442,5 @@ sfxSequence = Array[String](["", "", "", "", "", "", "", "Boowomp", "", "", "", 
 
 [node name="LevelComplete" parent="HUD" index="2"]
 next_scene = "res://Scenes/RootScenes/outro.tscn"
+
+[connection signal="dialogueLineFired" from="HUD/Dialogue" to="." method="_on_dialogue_dialogue_line_fired"]
