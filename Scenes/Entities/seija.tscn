@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cih88yfpwocq8"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/seija.gd" id="1_p0itx"]
+[ext_resource type="Texture2D" uid="uid://de1y8cnav6nps" path="res://Graphics/Placeholders/SeijaPlaceholder.png" id="1_sromp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orcnj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr4fp"]
+atlas = ExtResource("1_sromp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3xdol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr4fp")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Seija" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 9
+slide_on_ceiling = false
+script = ExtResource("1_p0itx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_orcnj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3xdol")
+animation = &"Idle"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Sounds" type="Node" parent="."]
