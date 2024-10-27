@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Props/block.gd" id="1_ivuek"]
 [ext_resource type="Texture2D" uid="uid://bfhuxcxtr1aep" path="res://Graphics/Props/BreakableBlockGlobal-Sheet.png" id="2_sem4v"]
-[ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="3_0hkxa"]
+[ext_resource type="AudioStream" uid="uid://c5r4q6q48gg3f" path="res://Audio/Sound/block break.ogg" id="3_ic10l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfo1v"]
 size = Vector2(16, 16)
@@ -79,7 +79,7 @@ animations = [{
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fwebu"]
 random_pitch = 1.1
 streams_count = 1
-stream_0/stream = ExtResource("3_0hkxa")
+stream_0/stream = ExtResource("3_ic10l")
 
 [node name="Block" type="StaticBody2D"]
 collision_layer = 4
@@ -99,7 +99,7 @@ frame_progress = 1.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_fwebu")
-pitch_scale = 1.8
+volume_db = 15.0
 bus = &"Sound"
 
 [node name="ShineTimer" type="Timer" parent="."]

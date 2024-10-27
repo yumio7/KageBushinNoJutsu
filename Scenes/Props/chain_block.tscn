@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://5btv10xb2qnb" path="res://Graphics/Props/ChainBlock.png" id="1_lytyx"]
 [ext_resource type="Script" path="res://Scenes/Props/chain_block.gd" id="1_mpwsi"]
-[ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="2_r7xh6"]
+[ext_resource type="AudioStream" uid="uid://c5r4q6q48gg3f" path="res://Audio/Sound/block break.ogg" id="3_p4ajl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgy1l"]
 size = Vector2(16, 16)
@@ -10,7 +10,7 @@ size = Vector2(16, 16)
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pc6ug"]
 random_pitch = 1.1
 streams_count = 1
-stream_0/stream = ExtResource("2_r7xh6")
+stream_0/stream = ExtResource("3_p4ajl")
 
 [node name="ChainBlock" type="StaticBody2D"]
 collision_layer = 2
@@ -25,8 +25,8 @@ texture = ExtResource("1_lytyx")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_pc6ug")
-volume_db = -5.0
-pitch_scale = 3.0
+volume_db = 10.0
+pitch_scale = 1.5
 bus = &"Sound"
 
 [node name="DeathTimer" type="Timer" parent="."]

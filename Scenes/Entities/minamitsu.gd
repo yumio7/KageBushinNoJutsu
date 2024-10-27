@@ -239,6 +239,8 @@ func anchorHit(body):
 		var anchorCollideEnvironment = false
 		var anchorCollideInteractible = false
 
+		$Sounds/AnchorImpactSFX.play()
+
 		# Depending on if the hit body's collision layer (Environment or interactible), the anchor should perform different actions
 		if body is TileMapLayer:
 			anchorCollideEnvironmentTileMap = body.tile_set.get_physics_layer_collision_layer(0)
@@ -272,7 +274,7 @@ func anchorHit(body):
 					anchorHitObject = body
 				"Seija":
 					anchorCancel()
-					body.hitByPlayer()
+					body.call_deferred("hitByPlayer")
 		if anchorCollideInteractible and body is Block:
 			anchorCancel()
 			body.onCollision()

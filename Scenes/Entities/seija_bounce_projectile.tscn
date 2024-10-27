@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3up0ilh2lebx"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/seija_bounce_projectile.gd" id="1_f3ur3"]
+[ext_resource type="Texture2D" uid="uid://bkg8fk48vimjc" path="res://Graphics/Seija/BouncingBullet-Sheet.png" id="1_fbqj4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tans"]
+atlas = ExtResource("1_fbqj4")
+region = Rect2(10, 0, 10, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obbmv"]
+atlas = ExtResource("1_fbqj4")
+region = Rect2(0, 0, 10, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3egqf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tans")
+}],
+"loop": true,
+"name": &"Bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obbmv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gawbd"]
+radius = 2.0
+height = 8.0
+
+[node name="SeijaBounceProjectile" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_f3ur3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3egqf")
+animation = &"Bounce"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gawbd")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-50, 0)
+collision_mask = 2
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

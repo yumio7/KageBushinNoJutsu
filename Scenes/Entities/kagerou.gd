@@ -208,7 +208,7 @@ func specialCollision(directionToDash, _delta):
 			if collision.get_collider().name == "StageEnd":
 				end_level.emit()
 			if collision.get_collider().name == "Seija":
-				collision.get_collider().hitByPlayer()
+				collision.get_collider().call_deferred("hitByPlayer")
 
 # Function to apply gravity
 func applyGravity(delta):

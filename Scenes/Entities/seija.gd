@@ -19,8 +19,10 @@ var currentState = state.Idle	# Current state of the character
 var currentMovementNode			# Tracks the current movement group that seija uses to navigate around
 var phaseIndex: int = 0			# Tracks current phase. Increases when damaged. ALSO WORKS AS A SORT OF HP COUNTER.
 var firingAmmo: int = 3			# Current instances bullets can be fired before returning to idle state
+var currentTargetPos: Vector2 = Vector2.ZERO	# Current position of character
 
 var basicProjectileScene: PackedScene = preload("res://Scenes/Entities/seija_basic_projectile.tscn")
+var bounceProjectileScene: PackedScene = preload("res://Scenes/Entities/seija_bounce_projectile.tscn")
 
 var checkpointFloorScene: PackedScene = preload("res://Scenes/Props/checkpoint_floor.tscn")
 
@@ -37,6 +39,7 @@ func _physics_process(delta: float) -> void:
 	if targetCharacter.get_child_count() > 0:
 		var currentCharacter = targetCharacter.get_child(0)
 		currentCharacter.checkpointResetPos = checkpointGroup.get_child(phaseIndex).position
+		currentTargetPos = currentCharacter.position
 
 	# General behaviour. Idle>Firing>Idle. Can be damaged in any one of these states.
 	# Damaged behaviour. Damaged>Fleeing1-2>Idle. 
@@ -70,7 +73,7 @@ func stateDamaged():
 func stateFleeing():
 	$AnimatedSprite2D.play("Idle")
 	moveToCurrentNode(flightSpeedFlee)
-	if position.distance_to(currentMovementNode.position) > 50:
+	if position.distance_to(currentMovementNode.position) < 50:
 		currentState = state.Idle
 		$CollisionShape2D.set_deferred("disabled", false)
 
@@ -124,11 +127,11 @@ func _on_idle_timer_timeout() -> void:
 			firingAmmo = 3
 			$Timers/FiringDelay.wait_time = 1
 		1: 
-			firingAmmo = 5
-			$Timers/FiringDelay.wait_time = 1
+			firingAmmo = 9
+			$Timers/FiringDelay.wait_time = .2
 		2: 
-			firingAmmo = 5
-			$Timers/FiringDelay.wait_time = .5
+			firingAmmo = 15
+			$Timers/FiringDelay.wait_time = .2
 		3: 
 			firingAmmo = 2
 			$Timers/FiringDelay.wait_time = 1
@@ -150,6 +153,8 @@ func _on_firing_delay_timeout() -> void:
 	# Match the phase to the desired firing pattern
 	match phaseIndex:
 		0: firePattern0()
+		1: firePattern1()
+		2: firePattern2()
 
 	# Return to idle
 	if firingAmmo <= 0:
@@ -165,6 +170,19 @@ func firePattern0():
 		fireBullet(baseFiringDirection.rotated(deg_to_rad(-60*i)), position, basicProjectileScene)
 		fireBullet(baseFiringDirection.rotated(deg_to_rad(-60*i)) * -1, mirroredForm.global_position, basicProjectileScene)
 
+func firePattern1():
+
+	var baseFiringDirection = Vector2(0, 1).rotated(deg_to_rad(10 * firingAmmo))
+	for i in 2:
+		fireBullet(baseFiringDirection.rotated(deg_to_rad(-25*i)), position, bounceProjectileScene)
+		fireBullet(baseFiringDirection.rotated(deg_to_rad(-25*i)) * -1, mirroredForm.global_position, bounceProjectileScene)
+
+func firePattern2():
+
+	var baseFiringDirection = (position - currentTargetPos).normalized().rotated(deg_to_rad(-2 * firingAmmo)) * -1
+	for i in 4:
+		fireBullet(baseFiringDirection.rotated(deg_to_rad(5*i)), position, basicProjectileScene)
+		fireBullet(baseFiringDirection.rotated(deg_to_rad(-25*i)) * -1, mirroredForm.global_position, basicProjectileScene)
 
 # General bullet firing function
 # direction is the base firing direction vector

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c2jgycsul45yr"]
+[gd_scene load_steps=40 format=3 uid="uid://c2jgycsul45yr"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/minamitsu.gd" id="1_7k5ee"]
 [ext_resource type="Texture2D" uid="uid://hhfpajg632ll" path="res://Graphics/Minamitsu/DownNew-Sheet.png" id="2_di1d6"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://c3e1bl8ca543v" path="res://Audio/Sound/murasa jump.ogg" id="4_jjjda"]
 [ext_resource type="Texture2D" uid="uid://co2c7ch733wnx" path="res://Graphics/Minamitsu/Walk_minamitsu-SheetNew.png" id="5_uymg6"]
 [ext_resource type="AudioStream" uid="uid://dfptxsbgypvku" path="res://Audio/Sound/murasa anchor throw.ogg" id="8_62o4x"]
+[ext_resource type="AudioStream" uid="uid://d4m30128stdy" path="res://Audio/Sound/anchor impact.ogg" id="10_1l7kw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n47jc"]
 size = Vector2(13, 15)
@@ -216,6 +217,11 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("8_62o4x")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_abbm1"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("10_1l7kw")
+
 [node name="Minamitsu" type="CharacterBody2D"]
 collision_mask = 31
 script = ExtResource("1_7k5ee")
@@ -277,6 +283,9 @@ bus = &"Sound"
 [node name="AnchorThrowSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_7q5td")
 bus = &"Sound"
+
+[node name="AnchorImpactSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_abbm1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -20)
