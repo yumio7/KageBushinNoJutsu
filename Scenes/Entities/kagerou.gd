@@ -24,6 +24,7 @@ var mirrorTransitioning = false												# Prevents multiple mirror activation
 var timeInDash: int = 0;
 var dashFXScene = preload("res://Scenes/Entities/kagerou_dash_fx.tscn")
 var dashParticleScene = preload("res://Scenes/Entities/kagerou_dash_particles.tscn")
+var checkpointResetPos = Vector2.ZERO # Designates a reset position
 
 # Runs once when the character is instantiated
 func _ready() -> void:
@@ -206,6 +207,8 @@ func specialCollision(directionToDash, _delta):
 				queue_free()
 			if collision.get_collider().name == "StageEnd":
 				end_level.emit()
+			if collision.get_collider().name == "Seija":
+				collision.get_collider().hitByPlayer()
 
 # Function to apply gravity
 func applyGravity(delta):
@@ -228,3 +231,22 @@ func setCameraLimits(left, right, bottom, top, newOffset):
 	$Camera2D.limit_bottom = bottom
 	$Camera2D.limit_top = top
 	$Camera2D.offset = newOffset
+
+# Function when hit by a projectile
+func bulletHit():
+	match currentState:
+		0, 1, 2, 3:
+			currentState = state.Pause
+			velocity = Vector2(0, -120)
+			$AnimatedSprite2D.modulate = Color(5, 0, 0, 1)
+			var tweenDeath = create_tween()
+			tweenDeath.tween_property($AnimatedSprite2D, "modulate", Color(1, 1, 1, 0), .5)
+			tweenDeath.tween_callback(checkpointReset)
+
+# Function to teleport back to checkpoint position
+func checkpointReset():
+	$AnimatedSprite2D.modulate = Color(5, 5, 5, 1)
+	var tweenReset = create_tween()
+	tweenReset.tween_property($AnimatedSprite2D, "modulate", Color(1, 1, 1, 1), .5)
+	position = checkpointResetPos
+	currentState = state.Idle

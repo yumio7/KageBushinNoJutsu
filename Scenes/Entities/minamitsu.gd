@@ -31,6 +31,7 @@ var timeInGrapple = 0;
 var grappleFXScene = preload("res://Scenes/Entities/minamitsu_grapple_fx.tscn");
 var grappleParticleScene = preload("res://Scenes/Entities/minamitsu_grapple_particles.tscn")
 var anchorDustState = 0;
+var checkpointResetPos = Vector2.ZERO # Designates a reset position. Gonna jump off a cliff with all these variables
 
 # Runs once when the character is instantiated
 func _ready() -> void:
@@ -269,6 +270,9 @@ func anchorHit(body):
 					$Timers/GrappleLimit.start()
 					grappledMirrorFlag = true
 					anchorHitObject = body
+				"Seija":
+					anchorCancel()
+					body.hitByPlayer()
 		if anchorCollideInteractible and body is Block:
 			anchorCancel()
 			body.onCollision()
@@ -323,3 +327,22 @@ func setCameraLimits(left, right, bottom, top, newOffset):
 	$Camera2D.limit_bottom = bottom
 	$Camera2D.limit_top = top
 	$Camera2D.offset = newOffset
+
+# Function when hit by a projectile
+func bulletHit():
+	match currentState:
+		0, 1, 2, 3:
+			currentState = state.Pause
+			velocity = Vector2(0, -120)
+			$".".modulate = Color(5, 0, 0, 1)
+			var tweenDeath = create_tween()
+			tweenDeath.tween_property($".", "modulate", Color(1, 1, 1, 0), .5)
+			tweenDeath.tween_callback(checkpointReset)
+
+# Function to teleport back to checkpoint position
+func checkpointReset():
+	$".".modulate = Color(5, 5, 5, 1)
+	var tweenReset = create_tween()
+	tweenReset.tween_property($".", "modulate", Color(1, 1, 1, 1), .5)
+	position = Vector2(480 -checkpointResetPos.x, checkpointResetPos.y) # GOD THIS IS SO HACKY IM GONNA AA Aa. Clean this up pls
+	currentState = state.Idle
