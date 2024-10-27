@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bml40bdytp3gb"]
+[gd_scene load_steps=10 format=3 uid="uid://bml40bdytp3gb"]
 
 [ext_resource type="Script" path="res://Scenes/mainmenu.gd" id="1_esexo"]
 [ext_resource type="Texture2D" uid="uid://dkuymm3ffyuc3" path="res://Graphics/Background/mainmenubg.png" id="1_m2dni"]
@@ -7,6 +7,8 @@
 [ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="5_10biw"]
 [ext_resource type="Texture2D" uid="uid://csc5k1pa5bqwn" path="res://Graphics/Dialogue/placeholder/s-l1200.jpg" id="5_tw8ms"]
 [ext_resource type="Texture2D" uid="uid://d2o5koo3lft3t" path="res://Graphics/UI/Selected.png" id="5_v812k"]
+[ext_resource type="AudioStream" uid="uid://cqci8yjv3doq2" path="res://Audio/Music/menu theme.ogg" id="8_m571t"]
+[ext_resource type="AudioStream" uid="uid://dtq3ekppfclge" path="res://Audio/Music/menu ambience.ogg" id="9_sgv6j"]
 
 [node name="Mainmenu" type="TextureRect"]
 anchors_preset = 15
@@ -154,7 +156,17 @@ layout_mode = 2
 texture = ExtResource("5_tw8ms")
 expand_mode = 1
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_m571t")
+autoplay = true
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_sgv6j")
+bus = &"Music"
+
 [connection signal="pressed" from="HBoxContainer/MenuButtons/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

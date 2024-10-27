@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bbdpyx6i2jae3"
+path="res://.godot/imported/nazrin rustle.ogg-98979ebbc1a95224001b2ff1f18c9fea.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/nazrin rustle.ogg"
+dest_files=["res://.godot/imported/nazrin rustle.ogg-98979ebbc1a95224001b2ff1f18c9fea.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
