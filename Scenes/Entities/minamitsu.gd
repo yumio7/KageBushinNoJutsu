@@ -180,6 +180,8 @@ func stateAbility():
 
 # During a paused state, the character will still be affected by gravity and will play an idle animation
 func statePause(delta):
+	if is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, (walkSpeed * 2))
 	$AnimatedSprite2D.play("Idle")
 	applyGravity(delta) # Gravity
 
