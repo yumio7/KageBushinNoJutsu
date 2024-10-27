@@ -36,7 +36,7 @@ func _ready() -> void:
 		camNewOffset = cameraSettingComponent.newOffset
 
 	trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
-	$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
+	$"../../GrayscaleShaderLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
 
 
 # Update the mirror drawing to match the player location
@@ -64,7 +64,7 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 		var minamitsuInstance = minamitsuScene.instantiate()
 		minamitsuInstance.currentState = 5  # Set her to pause state temporarily. The switchStunTimer will switch her back to idle state afterwards
 		$"../ControlledCharacter".add_child(minamitsuInstance)
-		$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", -1);
+		$"../../GrayscaleShaderLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", -1);
 		minamitsuInstance.position = Vector2(global_position.x, charPositionY)
 		minamitsuInstance.velocity = Vector2(charVelocity, 0)
 		minamitsuInstance.find_child("AnimatedSprite2D").flip_h = swapDirection
@@ -75,7 +75,7 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 		var kagerouInstance = kagerouScene.instantiate()
 		kagerouInstance.currentState = 5 # Set her to pause state temporarily. The switchStunTimer will switch her back to idle state afterwards
 		$"../ControlledCharacter".add_child(kagerouInstance)
-		$"../../ShaderCanvasLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
+		$"../../GrayscaleShaderLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
 		kagerouInstance.position = Vector2(global_position.x, charPositionY)
 		kagerouInstance.velocity = Vector2(charVelocity, 0)
 		kagerouInstance.find_child("AnimatedSprite2D").flip_h = swapDirection
@@ -89,12 +89,12 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 	# Start switchStunTimer
 	$switchStunTimer.start()
 
-func addSwitchParticles(direction, position):
+func addSwitchParticles(direction, dustPosition):
 	var particles: GPUParticles2D = switchParticleScene.instantiate();
 	self.add_child(particles);
 	particles.emitting = true;
 	particles.rotation_degrees = 0 if direction == -1 else 180;
-	particles.global_position = position;
+	particles.global_position = dustPosition;
 
 
 func _on_switch_stun_timer_timeout() -> void:

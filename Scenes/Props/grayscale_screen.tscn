@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1v5jnjdbs4wb"]
 
-[ext_resource type="Shader" path="res://Scenes/Props/screen_shader.gdshader" id="1_wl50c"]
+[ext_resource type="Shader" path="res://Scenes/Props/grayscale_screen.gdshader" id="1_wl50c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7h0e3"]
 shader = ExtResource("1_wl50c")
 shader_parameter/grayscaleHorizontal = -1
 shader_parameter/coordApply = null
 
-[node name="ShaderCanvasLayer" type="CanvasLayer"]
+[node name="GrayscaleShaderLayer" type="CanvasLayer"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_7h0e3")

@@ -177,7 +177,7 @@ func addDashParticles(directionToDash):
 	particles.emitting = true;
 	particles.rotation_degrees = 0 if directionToDash == -1 else 180;
 
-func specialCollision(directionToDash, delta):
+func specialCollision(directionToDash, _delta):
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collisionAngle = collision.get_angle()
