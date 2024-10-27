@@ -10,7 +10,7 @@ shader_parameter/width = 0.18
 shader_parameter/speed = 0.25
 shader_parameter/cycle = 1.0
 shader_parameter/ratio = 0.0
-shader_parameter/alpha = 1.0
+shader_parameter/alpha = 0.0
 
 [node name="BackgroundThunder" type="Node2D"]
 
