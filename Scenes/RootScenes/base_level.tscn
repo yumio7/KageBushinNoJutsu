@@ -19,6 +19,8 @@ script = ExtResource("1_c084h")
 
 [node name="ControlledCharacter" type="Node2D" parent="Entities"]
 
+[node name="Projectiles" type="Node2D" parent="Entities"]
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("1_xdkdm")
 

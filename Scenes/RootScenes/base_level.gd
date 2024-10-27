@@ -1,7 +1,8 @@
 extends Node2D
 # The base level will be responsible for pausing the player and unpausing the player for dialogue
 
-@export var initDialoguePause: bool = true	# Dictates whether the character should be paused for initial dialogue
+@export var initDialoguePause: bool = true		# Dictates whether the character should be paused for initial dialogue
+@export var bossEnemy: CharacterBody2D = null	# If there is a boss, they will be unpaused upon the end of dialogue
 var initialControlledCharacter: CharacterBody2D
 var musicLoop: AudioStreamPlayer = null
 
@@ -26,6 +27,8 @@ func _on_dialogue_end_dialogue() -> void:
 	initialControlledCharacter.currentState = 0
 	if musicLoop != null:
 		musicLoop.play()
+	if bossEnemy != null:
+		bossEnemy.currentState = 0	# Set to idle state after dialogue finishes
 
 func _process(_delta):
 

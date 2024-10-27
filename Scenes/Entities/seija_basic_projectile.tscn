@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://m4llveimdl6j"]
+
+[ext_resource type="Texture2D" uid="uid://cuw2v6uyd5nb8" path="res://Graphics/Seija/BasicBullet.png" id="1_n04pl"]
+[ext_resource type="Script" path="res://Scenes/Entities/seija_basic_projectile.gd" id="1_vrncn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfb1y"]
+radius = 4.0
+
+[node name="SeijaBasicProjectile" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_vrncn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_n04pl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nfb1y")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

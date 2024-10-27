@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://de1y8cnav6nps" path="res://Graphics/Placeholders/SeijaPlaceholder.png" id="1_sromp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orcnj"]
+size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hr4fp"]
 atlas = ExtResource("1_sromp")
@@ -36,12 +37,16 @@ animation = &"Idle"
 [node name="Timers" type="Node" parent="."]
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
-wait_time = 1.5
+wait_time = 2.0
+one_shot = true
 
 [node name="FiringDelay" type="Timer" parent="Timers"]
-wait_time = 0.5
 
 [node name="DamagedTimer" type="Timer" parent="Timers"]
 wait_time = 0.5
 
 [node name="Sounds" type="Node" parent="."]
+
+[connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="Timers/FiringDelay" to="." method="_on_firing_delay_timeout"]
+[connection signal="timeout" from="Timers/DamagedTimer" to="." method="_on_damaged_timer_timeout"]
