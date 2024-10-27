@@ -6,18 +6,15 @@ func _ready() -> void:
 
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/RootScenes/intro.tscn")
-	# TODO: play should boot to level select
-
-func _on_settings_pressed() -> void:
-	pass
-	# TODO: will load to settings menu
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_credits_pressed() -> void:
-	pass
-	# TODO: will change to credits scene, or open a popup on top of the main menu
+	get_tree().change_scene_to_file("res://Scenes/RootScenes/credits.tscn")
 
 func _on_music_finished() -> void:
 	$Ambience.play()
+
+func _on_levels_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/RootScenes/level_select.tscn")

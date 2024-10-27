@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6512bsyeu1om"]
+
+[ext_resource type="Texture2D" uid="uid://dkuymm3ffyuc3" path="res://Graphics/Background/mainmenubg.png" id="1_d4imv"]
+[ext_resource type="Texture2D" uid="uid://dctll3np6o6y4" path="res://Graphics/UI/Button.png" id="2_rc3ps"]
+[ext_resource type="Script" path="res://Scenes/RootScenes/level_select.gd" id="2_yl2ku"]
+[ext_resource type="Texture2D" uid="uid://p05poolegoqj" path="res://Graphics/UI/Pressed.png" id="3_tcaxw"]
+[ext_resource type="Texture2D" uid="uid://d2o5koo3lft3t" path="res://Graphics/UI/Selected.png" id="4_aaviq"]
+[ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="5_xjk53"]
+
+[node name="LevelSelect" type="TextureRect"]
+texture = ExtResource("1_d4imv")
+script = ExtResource("2_yl2ku")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+alignment = 1
+
+[node name="MenuButtons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="level1" type="TextureButton" parent="VBoxContainer/MenuButtons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../menu")
+focus_neighbor_bottom = NodePath("../level2")
+texture_normal = ExtResource("2_rc3ps")
+texture_pressed = ExtResource("3_tcaxw")
+texture_focused = ExtResource("4_aaviq")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MenuButtons/level1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -5.0
+offset_right = 40.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_xjk53")
+text = "MYOUREN TEMPLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="level2" type="TextureButton" parent="VBoxContainer/MenuButtons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../level1")
+focus_neighbor_bottom = NodePath("../level3")
+texture_normal = ExtResource("2_rc3ps")
+texture_pressed = ExtResource("3_tcaxw")
+texture_focused = ExtResource("4_aaviq")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MenuButtons/level2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -5.0
+offset_right = 27.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_xjk53")
+text = "MISTY LAKE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="level3" type="TextureButton" parent="VBoxContainer/MenuButtons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../level2")
+focus_neighbor_bottom = NodePath("../menu")
+texture_normal = ExtResource("2_rc3ps")
+texture_pressed = ExtResource("3_tcaxw")
+texture_focused = ExtResource("4_aaviq")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MenuButtons/level3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -5.0
+offset_right = 36.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_xjk53")
+text = "HUMAN VILLAGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="menu" type="TextureButton" parent="VBoxContainer/MenuButtons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../level3")
+focus_neighbor_bottom = NodePath("../level1")
+texture_normal = ExtResource("2_rc3ps")
+texture_pressed = ExtResource("3_tcaxw")
+texture_focused = ExtResource("4_aaviq")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MenuButtons/menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -5.0
+offset_right = 12.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_xjk53")
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/MenuButtons/level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButtons/level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButtons/level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButtons/menu" to="." method="_on_menu_pressed"]

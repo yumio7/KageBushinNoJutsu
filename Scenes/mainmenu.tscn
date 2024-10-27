@@ -35,7 +35,7 @@ clip_contents = true
 custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
 focus_neighbor_top = NodePath("../credits")
-focus_neighbor_bottom = NodePath("../settings")
+focus_neighbor_bottom = NodePath("../levels")
 texture_normal = ExtResource("2_h2lrw")
 texture_pressed = ExtResource("4_s1wx5")
 texture_focused = ExtResource("5_v812k")
@@ -59,7 +59,7 @@ text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="settings" type="TextureButton" parent="HBoxContainer/MenuButtons"]
+[node name="levels" type="TextureButton" parent="HBoxContainer/MenuButtons"]
 custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
 focus_neighbor_top = NodePath("../play")
@@ -69,7 +69,7 @@ texture_pressed = ExtResource("4_s1wx5")
 texture_focused = ExtResource("5_v812k")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/MenuButtons/settings"]
+[node name="Label" type="Label" parent="HBoxContainer/MenuButtons/levels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,14 +83,14 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_10biw")
-text = "SETTINGS"
+text = "LEVEL SELECT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="quit" type="TextureButton" parent="HBoxContainer/MenuButtons"]
 custom_minimum_size = Vector2(123, 49)
 layout_mode = 2
-focus_neighbor_top = NodePath("../settings")
+focus_neighbor_top = NodePath("../levels")
 focus_neighbor_bottom = NodePath("../credits")
 texture_normal = ExtResource("2_h2lrw")
 texture_pressed = ExtResource("4_s1wx5")
@@ -166,7 +166,7 @@ stream = ExtResource("9_sgv6j")
 bus = &"Music"
 
 [connection signal="pressed" from="HBoxContainer/MenuButtons/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButtons/levels" to="." method="_on_levels_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]
