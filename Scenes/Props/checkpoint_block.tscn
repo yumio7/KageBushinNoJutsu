@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bysx37h7656x0"]
+[gd_scene load_steps=14 format=3 uid="uid://bysx37h7656x0"]
 
 [ext_resource type="Script" path="res://Scenes/Props/checkpoint_block.gd" id="1_5ma6k"]
 [ext_resource type="Texture2D" uid="uid://c32dskiqfnbye" path="res://Graphics/Props/CheckpointBlock-Sheet.png" id="1_dmlcb"]
+[ext_resource type="AudioStream" uid="uid://c5tpildc85bvd" path="res://Audio/Sound/shock.ogg" id="3_j8hkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfya1"]
 size = Vector2(16, 16)
@@ -73,6 +74,11 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lqqr6"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_j8hkm")
+
 [node name="CheckpointBlock" type="StaticBody2D"]
 collision_layer = 4
 collision_mask = 9
@@ -85,6 +91,11 @@ shape = SubResource("RectangleShape2D_bfya1")
 sprite_frames = SubResource("SpriteFrames_ua65w")
 animation = &"Default"
 autoplay = "Default"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_lqqr6")
+pitch_scale = 1.8
+bus = &"Sound"
 
 [node name="ShineTimer" type="Timer" parent="."]
 wait_time = 2.5

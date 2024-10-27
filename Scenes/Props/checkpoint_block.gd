@@ -14,6 +14,8 @@ func onCollision():
 		blockActivated = true
 		$ShineTimer.stop()
 		$AnimatedSprite2D.play("Activated")
+		$AudioStreamPlayer2D.play()
+
 
 		if makeFloor:
 			var checkpointFloorInstance = checkpointFloorScene.instantiate()
