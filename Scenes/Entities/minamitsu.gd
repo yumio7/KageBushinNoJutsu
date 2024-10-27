@@ -336,6 +336,7 @@ func setCameraLimits(left, right, bottom, top, newOffset, flipFlag):
 func bulletHit():
 	match currentState:
 		0, 1, 2, 3:
+			$Sounds/HurtSFX.play()
 			currentState = state.Pause
 			velocity = Vector2(0, -120)
 			$".".modulate = Color(5, 0, 0, 1)

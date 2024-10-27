@@ -11,7 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")	# For wh
 
 @export var movementGroup: Node2D				# Designates container of node2Ds in which seija will move to after being hit
 @export var checkpointGroup: Node2D				# Designates container of node2Ds in which the checkpoint will update
-@export var limitCeilingGroup: Node2D			# Designates container of node2Ds in which there will be a ceiling preventing player progress before damaging seija
+@export var limitCeilingGroup: Array[StaticBody2D]	# Designates container of bodies in which there will be a ceiling preventing player progress before damaging seija
 @export var mirroredForm: Node2D				# Designates the mirrored form of seija that will fire danmaku alongside her
 @export var targetCharacter: Node2D				# Designates the container of targeted character
 
@@ -95,6 +95,15 @@ func statePaused():
 func hitByPlayer():
 	match currentState:
 		0, 1:
+			
+			$Sounds/HurtSFX.play()
+
+			# Remove ceiling
+			var ceilingTween = limitCeilingGroup[phaseIndex].create_tween()
+			ceilingTween.tween_property(limitCeilingGroup[phaseIndex], "modulate", Color(1, 1, 1, 0), .5)
+			ceilingTween.tween_callback(limitCeilingGroup[phaseIndex].queue_free)
+
+			# Check the phase index to see if Seija is damaged or dies
 			phaseIndex += 1
 			if phaseIndex < movementGroup.get_child_count(): 
 				$CollisionShape2D.set_deferred("disabled", true)
@@ -118,10 +127,12 @@ func hitByPlayer():
 				$"..".add_child(checkpointFloorInstance)
 			else:
 				# Upon death, flip the camera back
+				$Timers/IdleTimer.stop()
+				$Timers/FiringDelay.stop()
 				currentState = state.Dead
 				$"..".find_child("VerticalMirror").flipCamera(false)
 				velocity = Vector2(0, -300)
-				print("DEATH")
+				$CollisionShape2D.set_deferred("disabled", true)
 
 # Seija tries to move towards movement node
 func moveToCurrentNode(speedToMove):
@@ -170,6 +181,8 @@ func _on_damaged_timer_timeout() -> void:
 # Reduce ammo and fire depending on current phase
 func _on_firing_delay_timeout() -> void:
 	firingAmmo -= 1
+
+	$Sounds/DanmakuSFX.play()
 
 	# Match the phase to the desired firing pattern
 	match phaseIndex:

@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cih88yfpwocq8"]
+[gd_scene load_steps=15 format=3 uid="uid://cih88yfpwocq8"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/seija.gd" id="1_p0itx"]
 [ext_resource type="Texture2D" uid="uid://cwrxkyhwq62xk" path="res://Graphics/Seija/Idlespritesheet.png" id="2_hu3xj"]
+[ext_resource type="AudioStream" uid="uid://vuevkufbhkpe" path="res://Audio/Sound/danmaku 1.ogg" id="3_1w737"]
+[ext_resource type="AudioStream" uid="uid://cdvrvf4u348ua" path="res://Audio/Sound/boowomp.ogg" id="4_ecbpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orcnj"]
 size = Vector2(16, 16)
@@ -56,6 +58,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v6o5x"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_1w737")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dyiia"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_ecbpv")
+
 [node name="Seija" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 9
@@ -69,7 +81,7 @@ shape = SubResource("RectangleShape2D_orcnj")
 sprite_frames = SubResource("SpriteFrames_3xdol")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.391007
+frame_progress = 0.87907
 
 [node name="Timers" type="Node" parent="."]
 
@@ -84,6 +96,15 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Sounds" type="Node" parent="."]
+
+[node name="DanmakuSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_v6o5x")
+volume_db = -5.0
+bus = &"Sound"
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_dyiia")
+bus = &"Sound"
 
 [connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="Timers/FiringDelay" to="." method="_on_firing_delay_timeout"]

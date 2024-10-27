@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://it048b436dos"]
+[gd_scene load_steps=43 format=3 uid="uid://it048b436dos"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/kagerou.gd" id="1_obgcm"]
 [ext_resource type="Texture2D" uid="uid://c5wbii2af6f3k" path="res://Graphics/Kagerou/KagerouIdle.png" id="1_x8jmb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bsma534ob2ue" path="res://Graphics/Kagerou/KagerouWalk.png" id="5_moq2e"]
 [ext_resource type="AudioStream" uid="uid://dcxqrwpywlksd" path="res://Audio/Sound/kage jump.ogg" id="7_3w0h0"]
 [ext_resource type="AudioStream" uid="uid://dluf4lqiluq3l" path="res://Audio/Sound/kagerou dash new.ogg" id="9_ws1en"]
+[ext_resource type="AudioStream" uid="uid://u3r31brb5ing" path="res://Audio/Sound/kage hurt.ogg" id="10_xkbca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyuek"]
 size = Vector2(11, 15)
@@ -237,6 +238,11 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("9_ws1en")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3he68"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("10_xkbca")
+
 [node name="Kagerou" type="CharacterBody2D"]
 collision_mask = 31
 script = ExtResource("1_obgcm")
@@ -284,6 +290,10 @@ bus = &"Sound"
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_s0iv2")
+bus = &"Sound"
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_3he68")
 bus = &"Sound"
 
 [node name="Camera2D" type="Camera2D" parent="."]

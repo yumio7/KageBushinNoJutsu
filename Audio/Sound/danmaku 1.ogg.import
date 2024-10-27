@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vuevkufbhkpe"
+path="res://.godot/imported/danmaku 1.ogg-1c9e091806fa306a361b96096ac96d44.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/danmaku 1.ogg"
+dest_files=["res://.godot/imported/danmaku 1.ogg-1c9e091806fa306a361b96096ac96d44.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

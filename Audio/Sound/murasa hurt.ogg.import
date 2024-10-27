@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlaegubtv0g4g"
+path="res://.godot/imported/murasa hurt.ogg-67af977c13a9b3302279e27fbf71ea34.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound/murasa hurt.ogg"
+dest_files=["res://.godot/imported/murasa hurt.ogg-67af977c13a9b3302279e27fbf71ea34.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
