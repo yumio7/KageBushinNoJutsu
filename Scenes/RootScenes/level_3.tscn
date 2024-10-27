@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ddorfs6errhdq"]
+[gd_scene load_steps=14 format=4 uid="uid://ddorfs6errhdq"]
 
 [ext_resource type="PackedScene" uid="uid://bdlkrwqu8gwex" path="res://Scenes/RootScenes/base_level.tscn" id="1_2knpy"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="2_cax5b"]
@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://tx7prrtwyhuv" path="res://Graphics/Tilesets/HumanVillageTileset.png" id="3_3l4bi"]
 [ext_resource type="TileSet" uid="uid://c7cj114k7ovy2" path="res://Resources/HumanVillageTileset.tres" id="3_b4xej"]
 [ext_resource type="PackedScene" uid="uid://cnqv3pm4ay68m" path="res://Scenes/Props/vertical_mirror.tscn" id="3_oab56"]
-[ext_resource type="PackedScene" path="res://Scenes/Props/camera_settings_component.tscn" id="4_0uble"]
-[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="5_uwhns"]
+[ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="4_0uble"]
+[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/grayscale_screen.tscn" id="5_uwhns"]
+[ext_resource type="PackedScene" uid="uid://6dbtq6dhm3iw" path="res://Scenes/Props/block_kagerou.tscn" id="8_5j2f8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcm0q"]
 texture = ExtResource("3_3l4bi")
@@ -145,7 +146,6 @@ tile_set = SubResource("TileSet_drhsi")
 [node name="TileMapLayersRight2" type="Node2D" parent="Foreground" index="1"]
 
 [node name="CollisionLayer" type="TileMapLayer" parent="Foreground/TileMapLayersRight2" index="0"]
-position = Vector2(1, 0)
 tile_map_data = PackedByteArray("AAAAAA4AAAAQAAMAAAABAA4AAAAQAAMAAAACAA4AAAAQAAMAAAADAA4AAAAQAAMAAAAEAA4AAAAQAAMAAAAFAA4AAAAQAAMAAAAGAA4AAAAQAAMAAAAHAA4AAAAQAAMAAAAIAA4AAAAQAAMAAAAJAA4AAAAQAAMAAAAKAA4AAAAQAAMAAAALAA4AAAAQAAMAAAAMAA4AAAAQAAMAAAANAA4AAAAQAAMAAAAOAA4AAAAQAAMAAAD//w4AAAAQAAMAAAD+/w4AAAAPAAMAAAAOAA8AAAAQAAQAAAANAA8AAAAQAAQAAAAMAA8AAAAQAAQAAAALAA8AAAAQAAQAAAAKAA8AAAAQAAQAAAAJAA8AAAAQAAQAAAAIAA8AAAAQAAQAAAAHAA8AAAAQAAQAAAAGAA8AAAAQAAQAAAAFAA8AAAAQAAQAAAAEAA8AAAAQAAQAAAADAA8AAAAQAAQAAAACAA8AAAAQAAQAAAABAA8AAAAQAAQAAAAAAA8AAAAQAAQAAAD//w8AAAAQAAQAAAD+/w8AAAAPAAQAAAAOABAAAAAQAAQAAAANABAAAAAQAAQAAAAMABAAAAAQAAQAAAALABAAAAAQAAQAAAAKABAAAAAQAAQAAAAJABAAAAAQAAQAAAAIABAAAAAQAAQAAAAHABAAAAAQAAQAAAAGABAAAAAQAAQAAAAFABAAAAAQAAQAAAAEABAAAAAQAAQAAAADABAAAAAQAAQAAAACABAAAAAQAAQAAAABABAAAAAQAAQAAAAAABAAAAAQAAQAAAD//xAAAAAQAAQAAAD+/xAAAAAPAAQAAAAOABEAAAAQAAQAAAANABEAAAAQAAQAAAAMABEAAAAQAAQAAAALABEAAAAQAAQAAAAKABEAAAAQAAQAAAAJABEAAAAQAAQAAAAIABEAAAAQAAQAAAAHABEAAAAQAAQAAAAGABEAAAAQAAQAAAAFABEAAAAQAAQAAAAEABEAAAAQAAQAAAADABEAAAAQAAQAAAACABEAAAAQAAQAAAABABEAAAAQAAQAAAAAABEAAAAQAAQAAAD//xEAAAAQAAQAAAD+/xEAAAAPAAUAAAALAAwAAAAKAAYAAAAKAAwAAAAKAAYAAAAJAAwAAAAKAAYAAAADAAsAAAAKAAYAAAACAAsAAAAKAAYAAAABAAsAAAAKAAYAAAAGAAkAAAAKAAYAAAAHAAkAAAAKAAYAAAAOAAoAAAAKAAYAAAANAAoAAAAKAAYAAAAAAAYAAAAKAAYAAAABAAYAAAAKAAYAAAAAAAUAAAASAAMAAAAAAAQAAAASAAMAAAACAAYAAAALAAYAAAAHAPn/AAASAAMAAAAKAAQAAAAKAAYAAAAJAAQAAAAKAAYAAAALAAQAAAAKAAYAAAAKAAMAAAASAAMAAAAKAAIAAAASAAMAAAAEAAAAAAAKAAYAAAADAAAAAAAKAAYAAAACAAAAAAAKAAYAAAAMAP7/AAAKAAYAAAALAP7/AAAKAAYAAAANAP7/AAAKAAYAAAAOAP7/AAALAAYAAAANAP3/AAASAAMAAAANAPz/AAASAAMAAAAKAP7/AAAJAAYAAAA=")
 tile_set = ExtResource("3_b4xej")
 
@@ -182,7 +182,21 @@ limitLeft = 0.0
 limitRight = 480.0
 newOffset = Vector2(0, -15)
 
-[node name="ShaderCanvasLayer" parent="." index="4" instance=ExtResource("5_uwhns")]
+[node name="BlocksLeft" type="Node2D" parent="Entities" index="2"]
+
+[node name="BlockKagerou" parent="Entities/BlocksLeft" index="0" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("8_5j2f8")]
+position = Vector2(40, -8)
+mirroredForm = NodePath("../../BlocksRight/BlockKagerou")
+
+[node name="BlocksRight" type="Node2D" parent="Entities" index="3"]
+position = Vector2(480, 0)
+scale = Vector2(-1, 1)
+
+[node name="BlockKagerou" parent="Entities/BlocksRight" index="0" node_paths=PackedStringArray("mirroredForm") instance=ExtResource("8_5j2f8")]
+position = Vector2(40, -8)
+mirroredForm = NodePath("../../BlocksLeft/BlockKagerou")
+
+[node name="GrayscaleShaderLayer" parent="." index="4" instance=ExtResource("5_uwhns")]
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 dialogueComponents = [NodePath("CutsceneComponent")]

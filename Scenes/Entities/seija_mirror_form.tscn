@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgb68fc7bxmax"]
+
+[ext_resource type="Texture2D" uid="uid://bud55p5b5fnmu" path="res://Graphics/Seija/MirrorForm-Sheet.png" id="1_e32xm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdc30"]
+atlas = ExtResource("1_e32xm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0kxn"]
+atlas = ExtResource("1_e32xm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t16nh"]
+atlas = ExtResource("1_e32xm")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfv2n"]
+atlas = ExtResource("1_e32xm")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6d6k"]
+atlas = ExtResource("1_e32xm")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frnxv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdc30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0kxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t16nh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfv2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6d6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SeijaMirrorForm" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_frnxv")
+autoplay = "default"
+frame_progress = 0.00463928

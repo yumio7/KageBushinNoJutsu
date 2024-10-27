@@ -35,4 +35,13 @@ animation = &"Idle"
 
 [node name="Timers" type="Node" parent="."]
 
+[node name="IdleTimer" type="Timer" parent="Timers"]
+wait_time = 1.5
+
+[node name="FiringDelay" type="Timer" parent="Timers"]
+wait_time = 0.5
+
+[node name="DamagedTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+
 [node name="Sounds" type="Node" parent="."]
