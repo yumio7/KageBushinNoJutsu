@@ -1,20 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://cih88yfpwocq8"]
+[gd_scene load_steps=11 format=3 uid="uid://cih88yfpwocq8"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/seija.gd" id="1_p0itx"]
-[ext_resource type="Texture2D" uid="uid://de1y8cnav6nps" path="res://Graphics/Placeholders/SeijaPlaceholder.png" id="1_sromp"]
+[ext_resource type="Texture2D" uid="uid://cwrxkyhwq62xk" path="res://Graphics/Seija/Idlespritesheet.png" id="2_hu3xj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orcnj"]
 size = Vector2(16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hr4fp"]
-atlas = ExtResource("1_sromp")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgh8t"]
+atlas = ExtResource("2_hu3xj")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmqin"]
+atlas = ExtResource("2_hu3xj")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bobn4"]
+atlas = ExtResource("2_hu3xj")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vxvv"]
+atlas = ExtResource("2_hu3xj")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhyv3"]
+atlas = ExtResource("2_hu3xj")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwk0j"]
+atlas = ExtResource("2_hu3xj")
+region = Rect2(100, 0, 20, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3xdol"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hr4fp")
+"texture": SubResource("AtlasTexture_lgh8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmqin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bobn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vxvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhyv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwk0j")
 }],
 "loop": true,
 "name": &"Idle",
@@ -33,6 +68,8 @@ shape = SubResource("RectangleShape2D_orcnj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3xdol")
 animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.391007
 
 [node name="Timers" type="Node" parent="."]
 

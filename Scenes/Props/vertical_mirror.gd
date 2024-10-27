@@ -14,6 +14,7 @@ var camLimBottom = 1000000
 var camLimRight = 1000000
 var camLimLeft = -1000000
 var camNewOffset = Vector2(0, 0)
+var flipFlag = false	# For the seija fight. Flips the camera. heh
 
 # Preload the characters for faster switching
 var kagerouScene: PackedScene = preload("res://Scenes/Entities/kagerou.tscn")
@@ -35,7 +36,7 @@ func _ready() -> void:
 		camLimTop = cameraSettingComponent.limitTop
 		camNewOffset = cameraSettingComponent.newOffset
 
-	trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+	trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset, flipFlag)
 	$"../../GrayscaleShaderLayer/ColorRect".material.set_shader_parameter("grayscaleHorizontal", 1);
 
 
@@ -69,7 +70,7 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 		minamitsuInstance.velocity = Vector2(charVelocity, 0)
 		minamitsuInstance.find_child("AnimatedSprite2D").flip_h = swapDirection
 		trackedCharInstance = minamitsuInstance
-		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset, flipFlag)
 		addSwitchParticles(-1, minamitsuInstance.position);
 	elif currentCharName == "Minamitsu":
 		var kagerouInstance = kagerouScene.instantiate()
@@ -80,7 +81,7 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 		kagerouInstance.velocity = Vector2(charVelocity, 0)
 		kagerouInstance.find_child("AnimatedSprite2D").flip_h = swapDirection
 		trackedCharInstance = kagerouInstance
-		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset)
+		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset, flipFlag)
 		addSwitchParticles(1, kagerouInstance.position);
 
 	# connect end_level signal to properly de
@@ -88,6 +89,15 @@ func mirrorSwitch(charPositionY, charVelocity, currentCharName):
 
 	# Start switchStunTimer
 	$switchStunTimer.start()
+
+# Function to flip the camera. Seija fight only
+func flipCamera(setFlip: bool):
+	if setFlip:
+		flipFlag = true
+		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset, flipFlag)
+	else:
+		flipFlag = false
+		trackedCharInstance.setCameraLimits(camLimLeft, camLimRight, camLimBottom, camLimTop, camNewOffset, flipFlag)
 
 func addSwitchParticles(direction, dustPosition):
 	var particles: GPUParticles2D = switchParticleScene.instantiate();

@@ -225,12 +225,14 @@ func _on_dash_duration_timeout():
 	currentState = state.Idle
 
 # Function to set camera limits
-func setCameraLimits(left, right, bottom, top, newOffset):
+func setCameraLimits(left, right, bottom, top, newOffset, flipFlag):
 	$Camera2D.limit_left = left
 	$Camera2D.limit_right = right
 	$Camera2D.limit_bottom = bottom
 	$Camera2D.limit_top = top
 	$Camera2D.offset = newOffset
+	if flipFlag == true: $Camera2D.rotation_degrees = 180
+	else: $Camera2D.rotation_degrees = 0
 
 # Function when hit by a projectile
 func bulletHit():
