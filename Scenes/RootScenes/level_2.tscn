@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://liwsjvxophs5" path="res://Scenes/Props/stage_end.tscn" id="4_5djbw"]
 [ext_resource type="PackedScene" uid="uid://b8pijr12koksu" path="res://Scenes/Props/camera_settings_component.tscn" id="4_ep3oe"]
 [ext_resource type="PackedScene" uid="uid://brvxg82y1exes" path="res://Scenes/Dialogue/cutscene_component.tscn" id="5_04rd3"]
-[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/screen_shader.tscn" id="5_ag5au"]
+[ext_resource type="PackedScene" uid="uid://b1v5jnjdbs4wb" path="res://Scenes/Props/grayscale_screen.tscn" id="5_ag5au"]
 [ext_resource type="PackedScene" uid="uid://6dbtq6dhm3iw" path="res://Scenes/Props/block_kagerou.tscn" id="6_00lh4"]
 [ext_resource type="PackedScene" uid="uid://cy0lqrkrmvnqv" path="res://Scenes/Props/chain_block.tscn" id="6_68hn2"]
 [ext_resource type="PackedScene" uid="uid://db585pf7ne44l" path="res://Scenes/Props/block_minamitsu.tscn" id="7_3lphv"]
@@ -382,7 +382,7 @@ limitLeft = 0.0
 limitRight = 480.0
 newOffset = Vector2(0, -15)
 
-[node name="ShaderCanvasLayer" parent="." index="4" instance=ExtResource("5_ag5au")]
+[node name="GrayscaleShaderLayer" parent="." index="4" instance=ExtResource("5_ag5au")]
 
 [node name="Dialogue" parent="HUD" index="0" node_paths=PackedStringArray("dialogueComponents")]
 dialogueComponents = [NodePath("CutsceneComponent")]
