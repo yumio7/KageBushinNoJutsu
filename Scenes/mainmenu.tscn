@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dctll3np6o6y4" path="res://Graphics/UI/Button.png" id="2_h2lrw"]
 [ext_resource type="Texture2D" uid="uid://p05poolegoqj" path="res://Graphics/UI/Pressed.png" id="4_s1wx5"]
 [ext_resource type="Theme" uid="uid://evn1ieub8mq7" path="res://ourple.tres" id="5_10biw"]
-[ext_resource type="Texture2D" uid="uid://csc5k1pa5bqwn" path="res://Graphics/Dialogue/placeholder/s-l1200.jpg" id="5_tw8ms"]
 [ext_resource type="Texture2D" uid="uid://d2o5koo3lft3t" path="res://Graphics/UI/Selected.png" id="5_v812k"]
+[ext_resource type="Texture2D" uid="uid://xbaprho3tbw5" path="res://Graphics/UI/logooo.png" id="7_rgr0w"]
 [ext_resource type="AudioStream" uid="uid://cqci8yjv3doq2" path="res://Audio/Music/menu theme.ogg" id="8_m571t"]
 [ext_resource type="AudioStream" uid="uid://dtq3ekppfclge" path="res://Audio/Music/menu ambience.ogg" id="9_sgv6j"]
 
@@ -147,14 +147,12 @@ vertical_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 0
+size_flags_vertical = 4
 theme_override_constants/separation = 50
 
 [node name="logo" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture = ExtResource("5_tw8ms")
-expand_mode = 1
+texture = ExtResource("7_rgr0w")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_m571t")
